@@ -54,7 +54,7 @@ public class test extends HttpServlet {
 			if( myConn == null) out.println("Cannot connect the database");
 			else out.println("Connect database sucessfully");
 			//Step 3: Create a SQL statements
-			String sql = "select * from user";
+			String sql = "select * from account";
 			myStmt = myConn.createStatement();
 			
 			
