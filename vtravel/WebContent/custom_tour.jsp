@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 <title>Tuỳ chọn chuyến đi</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<!-- Thêm script của Bootstrap Modal -->
@@ -43,11 +43,13 @@
 	    <!-- Phần bên phải với form nhập thông tin -->
 	    <div class="col-md-7">
 	      <h3 class="mt-3" >Nhập thông tin chuyến đi của bạn</h3>
-	      <form>
+	      <form action="TourControllerServlet" method ="POST" >
+	       	<input type="hidden" name="command" value="REQUEST_CUSTOM_TOUR">
+	       	<input type="hidden" name= "userID" value="1"/>
 	        <!-- Thêm các trường nhập thông tin của bạn ở đây -->
 	        <div class="form-group">
 	          <label for="destination">Địa điểm:</label>
-	          <input type="text" class="form-control" id="destination" placeholder="VD: Nha Trang">
+	          <input type="text" class="form-control" id="destination" name="destination" placeholder="VD: Nha Trang"  required >
 	        </div>
 	         <div class="form-group">
 	            <label for="start_date">Ngày bắt đầu:</label>
@@ -60,7 +62,7 @@
 				    document.getElementById("start_date").setAttribute("min", currentDate);
 				</script>
           	</div>
-          	<div class="form-group">
+          	<div class="form-group" >
 	            <label for="end_date">Ngày kết thúc:</label>
 	            <input type="date" class="form-control" id="end_date" name="end_date"  
 	              title="Chọn ngày kết thúc sau ngày bắt đầu" required disabled>
@@ -85,20 +87,20 @@
           	</div>
 	        <div class="form-group">
 	                <label for="number_of_travaller" style="font-size:17px">Số lượng người</label>
-	                <input type="number" class="form-control" id="number_of_travaller" name="number_of_travaller" required min = "0">
+	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "0">
 		     </div>
 			<div class="form-group">
-				<label for="description">Mô tả:</label>
-				<textarea class="form-control" id="description" rows="5"
-					placeholder="Nhập nội dung"></textarea>
+				<label for="note">Mô tả:</label>
+				<textarea class="form-control" id="note" rows="5"
+					placeholder="Nhập nội dung" name="note"></textarea>
 			</div>
 			<div class="form-check form-group">
 				<input class="form-check-input" type="checkbox" value=""
-					id="agree"> <label class="form-check-label"
-					for="agree"> Tôi đồng ý với các điều khoản và chính sách </label>
+					id="agree" required> <label class="form-check-label"
+					for="agree" > Tôi đồng ý với các điều khoản và chính sách </label>
 			
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Gửi</button>
 	      </form>
 	    </div>
 	  </div>
