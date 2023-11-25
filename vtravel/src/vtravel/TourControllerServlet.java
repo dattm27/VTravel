@@ -79,6 +79,9 @@ public class TourControllerServlet extends HttpServlet {
 		//lấy các thông tin từ form đặt custom tour
 		int ordererID = Integer.parseInt(request.getParameter("userID"));
 		String destination =  request.getParameter("destination");
+		String otherDestination = request.getParameter("otherDestination");
+		//nếu như nhập địa điểm khác thì gán lại destination thành địa điểm khác 
+		if(otherDestination != "") destination = otherDestination;
 		String startDate = request.getParameter("start_date");
 		String endDate = request.getParameter("end_date");
 		int numberOfTravellers = Integer.parseInt(request.getParameter("number_of_traveller"));

@@ -46,11 +46,38 @@
 	      <form action="TourControllerServlet" method ="POST" >
 	       	<input type="hidden" name="command" value="REQUEST_CUSTOM_TOUR">
 	       	<input type="hidden" name= "userID" value="1"/>
-	        <!-- Thêm các trường nhập thông tin của bạn ở đây -->
+	        
 	        <div class="form-group">
-	          <label for="destination">Địa điểm:</label>
-	          <input type="text" class="form-control" id="destination" name="destination" placeholder="VD: Nha Trang"  required >
-	        </div>
+			    <label for="destination">Địa điểm:</label>
+			    <select class="form-control" id="destinationSelect" name="destination" required onchange="checkOtherOption()">
+			        <!-- Add your list of places as options -->
+			        <option value="Nha Trang">Nha Trang</option>
+			        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+			        <option value="Quảng Ninh">Quảng Ninh</option>
+			        <option value="Hà Nội">Hà Nội</option>
+			        <option value="other">Khác</option>
+			        <!-- Add more options as needed -->
+			    </select>
+			</div>
+			<!--Nhập địa điểm khác -->
+	        <div class="form-group" id="otherDestinationGroup" style="display: none;">
+	          <label for="otherDestination">Địa điểm khác:</label>
+	          <input type="text" class="form-control" id="otherDestination" name="otherDestination" placeholder="VD: Nha Trang"   >
+	        </div> 
+	        
+	        <!-- script xử lý ẩn hiện input địa điểm khác -->
+	        <script>
+			    function checkOtherOption() {
+			        var selectBox = document.getElementById("destinationSelect");
+			        var otherDestinationGroup = document.getElementById("otherDestinationGroup");
+			
+			        if (selectBox.value === "other") {
+			            otherDestinationGroup.style.display = "block";
+			        } else {
+			            otherDestinationGroup.style.display = "none";
+			        }
+			    }
+			</script>
 	         <div class="form-group">
 	            <label for="start_date">Ngày bắt đầu:</label>
 	            <input type="date" class="form-control" id="start_date" name="start_date"  
