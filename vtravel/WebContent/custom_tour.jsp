@@ -114,7 +114,7 @@
           	</div>
 	        <div class="form-group">
 	                <label for="number_of_travaller" style="font-size:17px">Số lượng người</label>
-	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "0">
+	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "1">
 		     </div>
 			<div class="form-group">
 				<label for="note">Mô tả:</label>
