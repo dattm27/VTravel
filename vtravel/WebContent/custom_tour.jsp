@@ -78,15 +78,19 @@
 			        }
 			    }
 			</script>
+	        
+	         <!-- Phần chọn ngày bắt đầu, kết thúc và xử lý ngày hợp lệ -->
 	         <div class="form-group">
 	            <label for="start_date">Ngày bắt đầu:</label>
 	            <input type="date" class="form-control" id="start_date" name="start_date"  
-	              title="Chọn ngày bắt đầu sau ngày hiện tại" required >
+	              title="Ngày bắt đầu sau hiện tại tối thiểu 1 tuần" required >
 	              
-	              <!-- chỉ cho phép chọn ngày sau ngày hiện tại -->
+	              <!-- chỉ cho phép chọn ngày sau ngày hiện tại 7 ngày -->
 	              <script>
-				    var currentDate = new Date().toISOString().split("T")[0];
-				    document.getElementById("start_date").setAttribute("min", currentDate);
+		              var currentDate = new Date();
+		              currentDate.setDate(currentDate.getDate() + 7); // Thêm 7 ngày
+		              var minDate = currentDate.toISOString().split("T")[0];
+		              document.getElementById("start_date").setAttribute("min", minDate);
 				</script>
           	</div>
           	<div class="form-group" >
@@ -114,7 +118,8 @@
           	</div>
 	        <div class="form-group">
 	                <label for="number_of_travaller" style="font-size:17px">Số lượng người</label>
-	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "1">
+	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "1"
+	                title = "Số lượng du khách tối thiểu là 1">
 		     </div>
 			<div class="form-group">
 				<label for="note">Mô tả:</label>
