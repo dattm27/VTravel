@@ -27,8 +27,8 @@ public class TourDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//chuẩn bị SQL
-			String sql = "insert into proposal_custom_tour(user_id, destination, start_date, end_date, number_of_travellers, note, status)"
-					+ " values (? , ? , ?, ? , ?, ?, ?) ";
+			String sql = "insert into proposal_custom_tour(user_id, destination, start_date, end_date, number_of_travellers, note, status, created_date)"
+					+ " values (? , ? , ?, ? , ?, ?, ?, ?) ";
 			
 			myStmt = myConn.prepareStatement(sql);
 			
@@ -40,7 +40,7 @@ public class TourDbUtil {
 			myStmt.setInt(5, proposalCustomTour.getNumberOfTravellers());
 			myStmt.setString(6, proposalCustomTour.getNote());
 			myStmt.setString(7, proposalCustomTour.getStatus());
-			
+			myStmt.setString(8,proposalCustomTour.getCreatedDate());
 			//thực thi truy vấn
 			myStmt.execute();
 			

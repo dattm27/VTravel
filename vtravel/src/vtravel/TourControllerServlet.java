@@ -3,6 +3,9 @@ package vtravel;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -86,8 +89,19 @@ public class TourControllerServlet extends HttpServlet {
 		String endDate = request.getParameter("end_date");
 		int numberOfTravellers = Integer.parseInt(request.getParameter("number_of_traveller"));
 		String note = request.getParameter("note");
+		
+		//tạo thời điểm tạo đơn đặt custom tour
+		// Tạo đối tượng Date đại diện cho thời điểm hiện tại
+        Date currentDate = new Date();
+
+        // Định dạng chuỗi theo yêu cầu (yyyy-MM-dd HH:mm:ss)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // Chuyển đối tượng Date thành chuỗi
+        String formattedDate = dateFormat.format(currentDate);
+		
 		//tạo đối tượng ProposalCustomTour mới với các thông tin trên
-		ProposalCustomTour proposalCustomTour = new ProposalCustomTour(ordererID, destination, startDate, endDate, numberOfTravellers, note, "pending" );
+		ProposalCustomTour proposalCustomTour = new ProposalCustomTour(ordererID, destination, startDate, endDate, numberOfTravellers, note, "pending" , formattedDate);
 		
 		//ghi proposal mới tạo vào cơ sở dữ liệu
 		tourDbUtil.addProposalCustomTour(proposalCustomTour);
