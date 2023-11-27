@@ -34,6 +34,9 @@ values ('dattran2003.ttn@gmail.com', 'Trần Mạnh Đạt', 'dattm03', 'dattm03
 
 select * from account;
 select * from proposal_custom_tour;
+-- thêm created_date cho proposal_custom_tour 
+ALTER TABLE proposal_custom_tour
+ADD column created_date DATETIME default CURRENT_TIMESTAMP;
 
 
 
