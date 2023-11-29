@@ -3,6 +3,7 @@ package vtravel;
 public class ProposalCustomTour {
 	private int ID;
 	private int ordererID;
+	private String ordererFullname;
 	private String destination;
 	private String note;
 	private String startDate;
@@ -11,7 +12,7 @@ public class ProposalCustomTour {
 	private String status;
 	private String createdDate;
 	
-	
+	//constructors
 	public ProposalCustomTour(int ordererID, String destination,  String startDate, String endDate,
 			int numberOfTravellers, String note, String status) {
 		super();
@@ -37,6 +38,24 @@ public class ProposalCustomTour {
 		this.status = status;
 		this.createdDate = createdDate;
 	}
+	
+	
+
+	public ProposalCustomTour(int iD, int ordererID, String ordererFullname, String destination,  String startDate,
+			String endDate, int numberOfTravellers, String note, String status, String createdDate) {
+		super();
+		ID = iD;
+		this.ordererID = ordererID;
+		this.ordererFullname = ordererFullname;
+		this.destination = destination;
+		this.note = note;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.numberOfTravellers = numberOfTravellers;
+		this.status = status;
+		this.createdDate = createdDate;
+	}
+
 
 	//getters and setters
 	public int getID() {
@@ -93,6 +112,18 @@ public class ProposalCustomTour {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+
+	public String getOrdererFullname() {
+		return ordererFullname;
+	}
+
+
+	public void setOrdererFullname(String ordererFullname) {
+		this.ordererFullname = ordererFullname;
+	}
+
+	
 	
 		
 }

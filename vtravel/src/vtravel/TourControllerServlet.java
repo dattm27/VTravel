@@ -2,11 +2,14 @@ package vtravel;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,15 +54,36 @@ public class TourControllerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		try {
+			String theCommand = request.getParameter("command");
+			switch(theCommand) {
+			//lấy danh sách tất cả các yêu cầu đặt custom tour lên trang quản lý của admin
+			case "LIST_ALL_CUSTOM_TOUR_REQUEST":
+				listProposalCustomTour(request, response);
+			}
+		} catch(Exception exc) {
+			throw new ServletException(exc);
+		}
+	}
+
+	private void listProposalCustomTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		//tạo danh sách các ProposalCustomTour lấy được từ cơ sở dữ liệu
+		List<ProposalCustomTour> proposalList = tourDbUtil.getAllProposalCustomTour();
+		
+		//thêm danh sách vừa tạo vào request
+		request.setAttribute("PROPOSAL_LIST", proposalList);
+		
+		//gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/custom_tour_management.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		try {
@@ -101,7 +125,7 @@ public class TourControllerServlet extends HttpServlet {
         String formattedDate = dateFormat.format(currentDate);
 		
 		//tạo đối tượng ProposalCustomTour mới với các thông tin trên
-		ProposalCustomTour proposalCustomTour = new ProposalCustomTour(ordererID, destination, startDate, endDate, numberOfTravellers, note, "pending" , formattedDate);
+		ProposalCustomTour proposalCustomTour = new ProposalCustomTour(ordererID, destination, startDate, endDate, numberOfTravellers, note, "Đang chờ" , formattedDate);
 		
 		//ghi proposal mới tạo vào cơ sở dữ liệu
 		tourDbUtil.addProposalCustomTour(proposalCustomTour);
