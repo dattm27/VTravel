@@ -21,11 +21,12 @@ create table proposal_custom_tour(
 	id int primary key auto_increment ,
     user_id int not null,
     destination varchar(200),
-    start_date DATETIME,
-    end_date DATETIME,
+    start_date DATE,
+    end_date DATE,
     number_of_travellers int,
     note TEXT,
     status varchar(10),
+    created_date DATETIME default CURRENT_TIMESTAMP,
     foreign key (user_id) references account(id)
 );
 -- thêm dữ liệu mẫu
@@ -34,9 +35,10 @@ values ('dattran2003.ttn@gmail.com', 'Trần Mạnh Đạt', 'dattm03', 'dattm03
 
 select * from account;
 select * from proposal_custom_tour;
--- thêm created_date cho proposal_custom_tour 
-ALTER TABLE proposal_custom_tour
-ADD column created_date DATETIME default CURRENT_TIMESTAMP;
+
+select cus_tour.id, user_id ,fullname, destination, start_date, end_date, number_of_travellers, note, cus_tour.status, created_date
+from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id;
+
 
 
 
