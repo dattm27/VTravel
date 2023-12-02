@@ -106,6 +106,49 @@ public class TourDbUtil {
 		
 	}
 	
+	public ProposalCustomTour getProposalCustomTour(int ID) throws SQLException {
+		ProposalCustomTour proposal = null;
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		try {
+			//thiết lập kết nối cơ sở dữ liệu
+			myConn = dataSource.getConnection();
+			
+			//viết sql 
+			String sql = "select * from proposal_custom_tour where ID = ?";
+			myStmt = myConn.prepareStatement(sql);
+			
+			//đặt tham số
+			myStmt.setInt(1, ID);
+			
+			//thực thi truy vấn
+			myRs = myStmt.executeQuery();
+			
+			while (myRs.next()) {
+				//lấy ra thông tin từ kết quả và tạo đối tượng ProposalCustomTour
+				String destination = myRs.getString("destination");
+				String startDate = myRs.getString("start_date");
+				String endDate = myRs.getString("end_date");
+				int numberOfTravellers = myRs.getInt("number_of_travellers");
+				String note = myRs.getString("note");
+				String status = myRs.getString("status");
+				String createdDate = myRs.getString("created_date");
+				
+				//tạo ra một đối tượng ProposalCustomTour
+				proposal = 
+						new ProposalCustomTour(ID,  destination, startDate, endDate, numberOfTravellers, note, status, createdDate);
+				
+				
+			}
+			
+			return proposal;
+		}
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+	}
+	
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
 			if (myRs != null) {
@@ -124,6 +167,8 @@ public class TourDbUtil {
 		}
 		
 	}
+
+	
 
 	
 	
