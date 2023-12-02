@@ -55,6 +55,22 @@ public class ProposalCustomTour {
 		this.status = status;
 		this.createdDate = createdDate;
 	}
+	
+	
+
+
+	public ProposalCustomTour(int iD, String destination, String note, String startDate, String endDate,
+			int numberOfTravellers, String status, String createdDate) {
+		super();
+		ID = iD;
+		this.destination = destination;
+		this.note = note;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.numberOfTravellers = numberOfTravellers;
+		this.status = status;
+		this.createdDate = createdDate;
+	}
 
 
 	//getters and setters
