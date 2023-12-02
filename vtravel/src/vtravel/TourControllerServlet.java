@@ -25,7 +25,8 @@ import javax.sql.DataSource;
 @WebServlet("/TourControllerServlet")
 public class TourControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TourDbUtil tourDbUtil; // tương tác với cơ sở dữ liệu 
+	private TourDbUtil tourDbUtil; // tương tác với cơ sở dữ liệu về tour
+	private AccountDbUtil accountDbUtil; // tương tác với cơ sở dữ liệu về tài khoản
 	//Define datasource/ connection pool for Resource Jnjection
 	@Resource(name="jdbc/web_travel_booking")
 	private DataSource dataSource;
@@ -44,6 +45,7 @@ public class TourControllerServlet extends HttpServlet {
 		super.init();
 		try {
 			tourDbUtil = new TourDbUtil(dataSource);
+			accountDbUtil = new AccountDbUtil(dataSource);
 		}
 		catch (Exception exc) {
 				throw new ServletException(exc);
@@ -59,12 +61,43 @@ public class TourControllerServlet extends HttpServlet {
 		try {
 			String theCommand = request.getParameter("command");
 			switch(theCommand) {
-			//lấy danh sách tất cả các yêu cầu đặt custom tour lên trang quản lý của admin
+			//lấy danh sách tất cả các yêu cầu đặt custom tour (proposal) lên trang quản lý của admin
 			case "LIST_ALL_CUSTOM_TOUR_REQUEST":
 				listProposalCustomTour(request, response);
+				break;
+			// khi admin bấm vào chi tiết một proposal
+			case "DETAIL_PROPOSAL":
+				getDetailProposal(request, response);
+				break;
+			default:
+				break;
 			}
 		} catch(Exception exc) {
 			throw new ServletException(exc);
+		}
+	}
+
+
+	private void getDetailProposal(HttpServletRequest request, HttpServletResponse response) {
+		//lấy ID người dùng gửi yêu cầu
+		int ordererID = Integer.parseInt(request.getParameter("ordererID"));
+		
+		//lấy ID Proposal Custom Tour
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		
+		//lấy thông tin người dùng có ordererID
+		try {
+			Account orderer = accountDbUtil.getGeneralInformation(ordererID);
+			ProposalCustomTour proposal = tourDbUtil.getProposalCustomTour(ID);
+			request.setAttribute("ORDERER", orderer);
+			request.setAttribute("PROPOSAL", proposal);
+			
+			//gửi đến JSP
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/detail_and_response_proposal.jsp");
+			dispatcher.forward(request, response);
+			
+		} catch (SQLException | ServletException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 
