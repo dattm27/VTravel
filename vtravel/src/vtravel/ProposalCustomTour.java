@@ -11,7 +11,7 @@ public class ProposalCustomTour {
 	private int numberOfTravellers;
 	private String status;
 	private String createdDate;
-	
+	private double price;
 	//constructors
 	public ProposalCustomTour(int ordererID, String destination,  String startDate, String endDate,
 			int numberOfTravellers, String note, String status) {
@@ -59,10 +59,11 @@ public class ProposalCustomTour {
 	
 
 
-	public ProposalCustomTour(int iD, String destination, String note, String startDate, String endDate,
-			int numberOfTravellers, String status, String createdDate) {
+	public ProposalCustomTour(int iD, int ordererID, String destination,  String startDate, String endDate,
+			int numberOfTravellers,String note, String status, String createdDate) {
 		super();
 		ID = iD;
+		this.ordererID = ordererID;
 		this.destination = destination;
 		this.note = note;
 		this.startDate = startDate;
@@ -70,6 +71,21 @@ public class ProposalCustomTour {
 		this.numberOfTravellers = numberOfTravellers;
 		this.status = status;
 		this.createdDate = createdDate;
+	}
+
+	
+	//khi admin xử lý custom tour và lưu lại thông tin custom tour mới 
+	public ProposalCustomTour(int ID, String destination,  String startDate, String endDate,
+			int numberOfTravellers,  double price, String note, String status) {
+		super();
+		this.ID = ID;
+		this.destination = destination;
+		this.note = note;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.numberOfTravellers = numberOfTravellers;
+		this.status = status;
+		this.price = price;
 	}
 
 
@@ -128,15 +144,22 @@ public class ProposalCustomTour {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
-
-
 	public String getOrdererFullname() {
 		return ordererFullname;
 	}
 
-
 	public void setOrdererFullname(String ordererFullname) {
 		this.ordererFullname = ordererFullname;
+	}
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	

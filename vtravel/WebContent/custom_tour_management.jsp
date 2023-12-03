@@ -16,13 +16,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   	
    <!-- script phân trang, tìm kiếm -->
- 	<!-- <script src="js/pagination_and_search.js"></script>   --> 
+ 	<script src="js/custom_tour_management.js"></script>   
 	
  
  
 </head>
 <body>
-	<div class= "ml-5">	<a href="index.html">Trang chủ</a></div>
+	<div class= "ml-5">	<a href="index.jsp">Trang chủ</a></div>
 	<!-- Phần pop up-->
 	<div id="popup" class="popup" style="display: none">
 		<div class="iframe-container">
@@ -95,38 +95,38 @@
 						<td>${tempProposal.startDate}</td>
 						<td>${tempProposal.endDate}</td>
 						<td>${tempProposal.createdDate}</td>
-						<td>${tempProposal.status}</td>
+						<td id="status_${tempProposal.ID}">${tempProposal.status}</td>
 			 			<!-- set up a link to delete a tour  -->
 			 			<c:url var="deleteLink" value ="TourControllerServlet">
 			 				<c:param name="command" value="DELETE"/>
 			 				<c:param name="tourID" value="${tempTour.id}"/>
 			 			</c:url>		 		
 						<td>
-							<!-- set up a link to delete a tour  -->
+							<!-- tạo link xem chi tiết và phản hồi yêu cầu custom tour  -->
 				 			<c:url var="DETAIL_PROPOSAL" value ="TourControllerServlet">
 				 				<c:param name="command" value="DETAIL_PROPOSAL"/>
 				 				<c:param name="ID" value="${tempProposal.ID}"/>
 				 				<c:param name ="ordererID" value = "${tempProposal.ordererID}"/>
 				 			</c:url>	
-							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_PROPOSAL}')">Chi tiết</a> 
-							<a  class="btn btn-success btn-sm"  onclick="showPopup('${updateLink}')">Đã xử lý</a> 
-							<a href="${deleteLink}" class="btn btn-secondary btn-sm" onclick= "return confirm('Bạn có chắc chắn muốn xoá chuyến ${tempTour.name} ? ')">Huỷ</a>
+							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_PROPOSAL}')">Xử lý</a> 
+							<a class="btn btn-success btn-sm" onclick="confirmAndPurchase('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Đã thanh toán</a>
+							<a  class="btn btn-danger btn-sm" onclick= "confirmAndCancel('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Huỷ</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		<!-- Nút phân trang -->
-		<div id="pagination">
+		 <div id="pagination">
 		    <button onclick="previousPage()" class="btn btn-sm btn-outline-primary">Previous Page</button>
 		    <span id="currentPage">1</span>
 		    <button onclick="nextPage()" class="btn btn-sm btn-outline-primary">Next Page</button>
-		</div>
+		</div> 
 		
 		<!-- Truyền giá trị PROPOSAL_LIST.size() vào một thuộc tính HTML -->
 		<div id="proposalListSize" data-size="${PROPOSAL_LIST.size()}"></div>
 		
-		<!-- Đường dẫn đến file JavaScript -->
+		<!-- Javascript xử lý phân trang và tìm kiếm -->
 		 <script src="js/pagination_and_search.js"></script>  
 	</div>
 </body>

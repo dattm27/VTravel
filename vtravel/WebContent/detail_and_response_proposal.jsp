@@ -49,6 +49,10 @@
 		</form>
 		<h4>2. Thông tin chuyến tuỳ chọn</h4>
 		<form  action="TourControllerServlet" method ="POST">
+			<!-- Những thông tin ẩn của form -->
+			<input type="hidden" name = "command" value ="REPONSE_TO_PROPOSAL">
+			<input type="hidden" name ="ID" value="${PROPOSAL.ID}">
+			
 			<div class = "row">
 				<div class="col-md-6">
 					<div class= "form-group">
@@ -86,7 +90,7 @@
 					<div class="form-group">
 			            <label for="price">Giá (VNĐ): </label>
 			            <input type="number" class="form-control" id="price" name="price" placeholder="VD: 5000000" required 
-			      		pattern="[0-9]" title="Vui lòng nhập giá chuyến du lịch " value = 0>
+			      		 title="Vui lòng nhập giá chuyến du lịch ">
 		          </div>
 				</div>
 				<div class="col-md-6">
@@ -113,15 +117,11 @@
 			<!-- Phần nút  -->
 			<div class="btn-toolbar justify-content-end" style ="position: fixed; bottom: 20px; right: 50px">
 
-				<!-- Nếu muốn sửa tiếp -->
-
-				<c:url var="updateLink" value="TourControllerServlet">
-					<c:param name="command" value="LOAD" />
-					<c:param name="tourID" value="${TOUR.id}" />
-				</c:url>
+				<!-- Đóng form lại -->
 
 				<a class="btn btn-secondary mr-2" onclick="window.parent.hidePopup()">Đóng</a>
 				
+				<!-- Gửi submit form -->
 				<button type="submit" class="btn btn-success ml-1" id="updateBtn" >Phản hồi</button>
 			
 			

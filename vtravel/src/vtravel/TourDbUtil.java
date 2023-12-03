@@ -127,6 +127,7 @@ public class TourDbUtil {
 			
 			while (myRs.next()) {
 				//lấy ra thông tin từ kết quả và tạo đối tượng ProposalCustomTour
+				int ordererID = myRs.getInt("user_id");
 				String destination = myRs.getString("destination");
 				String startDate = myRs.getString("start_date");
 				String endDate = myRs.getString("end_date");
@@ -137,7 +138,7 @@ public class TourDbUtil {
 				
 				//tạo ra một đối tượng ProposalCustomTour
 				proposal = 
-						new ProposalCustomTour(ID,  destination, startDate, endDate, numberOfTravellers, note, status, createdDate);
+						new ProposalCustomTour(ID,ordererID,  destination, startDate, endDate, numberOfTravellers, note, status, createdDate);
 				
 				
 			}
@@ -148,7 +149,87 @@ public class TourDbUtil {
 			close(myConn, myStmt, myRs);
 		}
 	}
+	//khi admin xử lý và chấp nhận một yêu cầu customTour 
+	//-> thay đổi thông tin trong cơ sở dữ liệu để trở thành customTour chính thức
+	public void acceptCustomTour(ProposalCustomTour customTour) throws SQLException {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị SQL
+			String sql = "update proposal_custom_tour "
+					+ "set destination = ?, start_date = ?, end_date = ?, number_of_travellers = ?, note = ? , status = ? , price = ? "
+					+ "where id = ?";
+			myStmt = myConn.prepareStatement(sql);
+			
+			//đặt tham số
+			myStmt.setString(1, customTour.getDestination());
+			myStmt.setString(2, customTour.getStartDate());
+			myStmt.setString(3, customTour.getEndDate());
+			myStmt.setInt(4, customTour.getNumberOfTravellers());
+			myStmt.setString(5, customTour.getNote());
+			myStmt.setString(6, customTour.getStatus());
+			myStmt.setDouble(7, customTour.getPrice());
+			myStmt.setInt(8, customTour.getID());
+			
+			//thực thi truy vấn
+			myStmt.execute();
+			
+		}
+		finally {
+			close (myConn, myStmt, null);
+		}
+		
+	}
 	
+	//cập nhật trạng thái cho một custom tour là đã thanh toán
+	public void confirmPurchasedCustomTour(int ID) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị SQL
+			String sql = "update proposal_custom_tour "
+					+ "set status = 'Đã thanh toán' "
+					+ "where ID = " + ID;
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn
+			myStmt.execute(sql);
+		}
+		finally {
+			close (myConn, myStmt, null);
+		}
+		
+	}
+	
+	//cập nhật trạng thái một custom tour là đã bị huỷ
+	public void cancelCustomTour(int ID) throws SQLException{
+		Connection myConn = null;
+		Statement myStmt = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị SQL
+			String sql = "update proposal_custom_tour "
+					+ "set status = 'Đã huỷ' "
+					+ "where ID = " + ID;
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn
+			myStmt.execute(sql);
+		}
+		finally {
+			close (myConn, myStmt, null);
+		}
+		
+	}
+
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
 			if (myRs != null) {
@@ -167,6 +248,10 @@ public class TourDbUtil {
 		}
 		
 	}
+
+	
+
+	
 
 	
 

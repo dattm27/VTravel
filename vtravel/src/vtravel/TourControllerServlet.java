@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
+import java.util.logging.Logger;
 
 
 /**
@@ -27,6 +27,7 @@ public class TourControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TourDbUtil tourDbUtil; // tương tác với cơ sở dữ liệu về tour
 	private AccountDbUtil accountDbUtil; // tương tác với cơ sở dữ liệu về tài khoản
+	private static final Logger logger = Logger.getLogger(TourControllerServlet.class.getName());
 	//Define datasource/ connection pool for Resource Jnjection
 	@Resource(name="jdbc/web_travel_booking")
 	private DataSource dataSource;
@@ -122,9 +123,21 @@ public class TourControllerServlet extends HttpServlet {
 		try {
 			String theCommand = request.getParameter("command");
 			switch (theCommand) {
-			// xử lý yêu cầu đặt custom tour
+			// xử lý yêu cầu đặt custom tour mà khách gửi
 			case "REQUEST_CUSTOM_TOUR":	
 				save_proposal_custom_tour(request, response);
+				break;
+			//admin sắp xếp, phản hồi lại yêu cầu đặt tour của khách
+			case "REPONSE_TO_PROPOSAL":
+				accept_custom_tour(request, response);
+				break;
+			//khi admin xác nhận một đơn custom tour đã được thanh toán
+			case "PURCHASED_CUSTOM_TOUR":
+				purchased_custom_tour(request, response);
+				break;
+			case "CANCEL_CUSTOM_TOUR":
+				cancel_custom_tour(request, response);
+				break;
 			default:
 				break;
 			}
@@ -134,6 +147,53 @@ public class TourControllerServlet extends HttpServlet {
 		}
 	}
 	
+	private void cancel_custom_tour(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		//lấy ID của proposal custom tour cần huỷ
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		tourDbUtil.cancelCustomTour(ID);
+		logger.info("Cancelled tour" + ID);
+	}
+
+	//cập nhật trạng thái custom Tour thành đã được thanh toán
+	private void purchased_custom_tour(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//lấy ID tour được thanh toán
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		tourDbUtil.confirmPurchasedCustomTour(ID);
+		logger.info("Purchased tour" + ID);
+	}
+
+	//admin xử lý yêu cầu đặt custom tour, sắp xếp, chỉnh sửa lại proposal và lưu thông tin custom tour chính thức
+	private void accept_custom_tour(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//lấy thông tin từ form xử lý custom tour của admin 
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		String destination =  request.getParameter("destination");
+		String startDate = request.getParameter("start_date");
+		String endDate = request.getParameter("end_date");
+		int numberOfTravellers = Integer.parseInt(request.getParameter("number_of_traveller"));
+		double price = Integer.parseInt(request.getParameter("price"));
+		String description = request.getParameter("description");
+		
+		//tạo ra đối tượng customTour (ProposalCustomTour sau khi được xử lý)
+		ProposalCustomTour customTour = new ProposalCustomTour(ID, destination, startDate, endDate, numberOfTravellers, price, description, "Chờ thanh toán");
+		//thay đổi thông tin vào cơ sở dữ liệu
+		tourDbUtil.acceptCustomTour(customTour);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/plain;charset=UTF-8");
+		out.println(ID);
+		out.println(destination);
+		out.println(startDate);
+		out.println(endDate);
+		out.println(customTour.getNumberOfTravellers());
+		out.println(customTour.getPrice());
+		out.println(customTour.getNote());
+		out.println(customTour.getStatus());
+		out.close();
+		//gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/custom_tour_management.jsp");
+		dispatcher.forward(request, response);
+	}
+
 	//lưu đơn đặt custom tour vào cơ sở dữ liệu
 	private void save_proposal_custom_tour(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		//lấy các thông tin từ form đặt custom tour
