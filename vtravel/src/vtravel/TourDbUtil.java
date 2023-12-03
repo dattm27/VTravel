@@ -69,7 +69,7 @@ public class TourDbUtil {
 			//viết sql
 			String sql = "select cus_tour.id, user_id ,fullname, destination, start_date, end_date,"
 					+ " number_of_travellers, note, cus_tour.status, created_date"
-					+ " from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id";
+					+ " from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id order by created_date desc";
 			myStmt = myConn.createStatement();
 			
 			//thực thi truy vấn 
