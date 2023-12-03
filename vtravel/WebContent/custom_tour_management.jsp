@@ -48,7 +48,7 @@
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
 		    <!-- Chọn số bản ghi mỗi trang -->
-		    <div class="input-group col-md-4 mb-3 input-group-sm">
+		    <div class="input-group col-md-4 mb-3 ">
 			    <div class="input-group-prepend">
 			        <label for="recordsPerPage" class="input-group-text">Số bản ghi/trang:</label>
 			        <select class="custom-select" id="recordsPerPage" onchange="changeRecordsPerPage()">
@@ -60,7 +60,21 @@
 			        </select>
 			    </div>
 			  </div>
-		
+			
+			<div class="input-group col-md-3 mb-3  ">
+			  <div class="input-group-prepend">
+			    <label class="input-group-text" for="Filter">Lọc</label>
+			  </div>
+			  <select class="custom-select" id="Filter" onchange="filterByStatus()">
+			    <option selected value="Chọn trạng thái" disabled>Chọn trạng thái</option>
+			    <option value="Đang chờ">Đang chờ</option>
+			    <option value="Chờ thanh toán">Chờ thanh toán</option>
+			    <option value="Đã thanh toán">Đã thanh toán</option>
+			    <option value="Đã huỷ">Đã huỷ</option>
+			    <option value ="Chọn trạng thái">Tất cả </option>
+			  </select>
+			</div>
+			
 		    <div class="input-group mb-3 col-md-4 ml-auto " >
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" >Tìm kiếm</span>
@@ -87,7 +101,7 @@
 			</thead>
 			<tbody id="InfoBody">
 				<c:forEach items="${PROPOSAL_LIST}" var="tempProposal" varStatus="loopStatus">
-					<tr class="row-item" data-search-1="${tempProposal.ordererFullname}" data-search-2="${tempProposal.destination}">
+					<tr class="row-item" data-search-1="${tempProposal.ordererFullname}" data-search-2="${tempProposal.destination}" status="${tempProposal.status}">
 						<td>${loopStatus.index + 1}</td>
 						<td>${tempProposal.destination}</td>
 						<td>${tempProposal.ordererFullname}</td>
@@ -109,8 +123,9 @@
 				 				<c:param name ="ordererID" value = "${tempProposal.ordererID}"/>
 				 			</c:url>	
 							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_PROPOSAL}')">Xử lý</a> 
+							<!-- Thực hiện thao tác sẽ làm thay đổi trạng thái nên cần cập nhật lại chức năng lọc -->
 							<a class="btn btn-success btn-sm" onclick="confirmAndPurchase('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Đã thanh toán</a>
-							<a  class="btn btn-danger btn-sm" onclick= "confirmAndCancel('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Huỷ</a>
+							<a class="btn btn-danger btn-sm" onclick="confirmAndCancel('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Huỷ</a>
 						</td>
 					</tr>
 				</c:forEach>

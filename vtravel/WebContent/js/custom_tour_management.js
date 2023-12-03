@@ -28,6 +28,7 @@ function markAsPurchased(ID) {
             alert("Đã xác nhận thanh toán thành công");
             // Đặt giá trị mới cho status
 			document.getElementById("status_" + ID).innerHTML = "Đã thanh toán";
+		
         }
        
     };
@@ -60,6 +61,7 @@ function markAsCancelled(ID) {
             alert("Đã huỷ yêu cầu thành công");
             // Cập nhật cột trạng thái  sau khi huỷ
             document.getElementById("status_" + ID).innerHTML = "Đã huỷ";
+      
             
         }
     };

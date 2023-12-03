@@ -15,36 +15,40 @@ function searchData(attribute1, attribute2) {
         // Thiết lập giá trị của thuộc tính style display
         rows[i].style.display = displayStyle;
     }
+    // Reset về trang đầu tiên khi thực hiện tìm kiếm
+    currentPage = 1;
+    //Cập nhật lại bảng
     updateTable();
   }
 
   
 
-/*function updateTable() {
-    // Xác định phạm vi bản ghi hiện tại
-    var startIndex = (currentPage - 1) * recordsPerPage;
-    var endIndex = recordsPerPage === 'all' ? totalRecords : startIndex + recordsPerPage;
 
-    // Hiển thị các bản ghi trong phạm vi
-    var rows = document.querySelectorAll('#InfoBody tr.row-item');
-    for (var i = 0; i < rows.length; i++) {
-        if (i >= startIndex && i < endIndex) {
-            rows[i].style.display = 'table-row';
-        } else {
-            rows[i].style.display = 'none';
-        }
+
+/*Lọc theo trạng thái các tour custom */
+function filterByStatus() {
+    var selectedStatus = document.getElementById('Filter').value.toLowerCase();
+    const rows = document.querySelectorAll('#InfoBody tr.row-item');
+    for (let i = 0; i < rows.length; i++) {
+        const statusColumn = rows[i].querySelector('td[id^="status_"]').innerText.toLowerCase();
+        const displayStyle = selectedStatus === 'chọn trạng thái' || statusColumn === selectedStatus ? '' : 'none';
+        // Thiết lập giá trị của thuộc tính style display
+        rows[i].style.display = displayStyle;
     }
 
-    // Cập nhật trang hiện tại
-    document.getElementById('currentPage').innerText = currentPage;
-}*/
+    // Reset về trang đầu tiên khi thực hiện lọc
+    currentPage = 1;
+    // Cập nhật lại bảng
+    updateTable();
+}
+
 
 function updateTable() {
     var rows;
     const input = document.getElementById('searchInput').value.toLowerCase();
-
+	 const selectedStatus = document.getElementById('Filter').value.toLowerCase();
     // Kiểm tra xem có đang tìm kiếm hay không
-    if (input.trim() === '') {
+    if (input.trim() === '' &&  selectedStatus === 'chọn trạng thái') {
         // Nếu không tìm kiếm, sử dụng tất cả các dòng
         rows = document.querySelectorAll('#InfoBody tr.row-item');
     } else {
@@ -54,7 +58,13 @@ function updateTable() {
         for (var i = 0; i < allRows.length; i++) {
             const att1 = allRows[i].getAttribute('data-search-1').toLowerCase();
             const att2 = allRows[i].getAttribute('data-search-2').toLowerCase();
-            if (att1.includes(input) || att2.includes(input)) {
+            const statusColumn = allRows[i].querySelector('td[id^="status_"]').innerText.toLowerCase();
+            
+            const isSearchMatch = att1.includes(input) || att2.includes(input);
+            const isStatusMatch = selectedStatus === 'chọn trạng thái' || statusColumn === selectedStatus;
+
+            if (isSearchMatch && isStatusMatch) {
+               
                 rows.push(allRows[i]);
             }
         }
