@@ -25,7 +25,7 @@ create table proposal_custom_tour(
     end_date DATE,
     number_of_travellers int,
     note TEXT,
-    status varchar(10),
+    status varchar(20),
     created_date DATETIME default CURRENT_TIMESTAMP,
     price double default 0,
     foreign key (user_id) references account(id)
