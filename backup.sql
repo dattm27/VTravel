@@ -27,6 +27,7 @@ create table proposal_custom_tour(
     note TEXT,
     status varchar(10),
     created_date DATETIME default CURRENT_TIMESTAMP,
+    price double default 0,
     foreign key (user_id) references account(id)
 );
 -- thêm dữ liệu mẫu
@@ -38,6 +39,7 @@ select * from proposal_custom_tour;
 
 select cus_tour.id, user_id ,fullname, destination, start_date, end_date, number_of_travellers, note, cus_tour.status, created_date
 from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id;
+
 
 
 
