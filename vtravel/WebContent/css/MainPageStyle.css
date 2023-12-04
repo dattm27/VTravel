@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Doppio One', sans-serif;
+}
+
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #2F1893;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+}
+
+.Logo {
+    font-size: 45px;
+    font-family: 'Doppio One';
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+}
+
+nav a {
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 100px;
+}
+
+nav a:hover {
+    background-color: #177EC8;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#LoginButton {
+    padding: 20px 50px 20px 50px;
+    text-decoration: none;
+    text-align: center;
+    color: #2F1893;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    border-radius: 40px;
+    background-color: white;
+}
+
+#LoginButton:hover {
+    background-color: rgb(246, 245, 250, 0.7);
+}
+
+.FirstImage {
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    position: relative;
+}
+
+#image1 {
+    width: 100%;
+    opacity: 0.7;
+    position: absolute;
+}
+
+#welcome {
+    position: absolute;
+    height: 70px;
+    top: 60vh;
+    left: 96px;
+    font-size: 58px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: white;
+}
+
+#introduce {
+    position: absolute;
+    width: 685.71px;
+    top: 70vh;
+    left: 96px;
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+}
+
+#SearchBar {
+    top: 40vh;
+    left: 5%;
+    width: 85%;
+    height: 118px;
+    border-radius: 100px;
+    position: absolute;
+    border: 2px solid rgba(217, 217, 217, 0.2);
+    background-color: rgba(217, 217, 217, 0.2);
+    opacity: 0.7;
+
+    padding: 20px;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: black;
+}
+
+::placeholder{
+    color: rgba(217, 217, 217);
+}
+
+.advertisement {
+    width: 100%;
+    height: 315px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.HotTour {
+    margin-top: 40px;
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.HotTour h3 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: 1.2px;
+    text-align: left;
+    position: relative;
+}
+
+.Discount {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.Discount p {
+    margin: 5px 10px;
+    padding: 0 10px 0 10px;
+    background-color: #E93A7D;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.SeeMore {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 2px;
+    text-align: left;
+    color: #177EC8;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.SeeMore:hover {
+    text-decoration: underline;
+}
+
+.AllHotTours {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Work1 {
+    width: 25%;
+    border: solid;
+    border-radius: 10px;
+    border-color: #EBEAED;
+    padding: 15px 25px 0 25px;
+    margin: 0 10px 0 25px;
+    text-decoration: none;
+}
+
+.Work1:hover {
+    text-decoration: underline;
+}
+
+.Work1 img {
+    width: 100%;
+}
+
+.Work1 h1 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #1E0E62;
+}
+
+.Work1 h3 {
+    font-size: 16px;
+    padding-bottom: 10px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgba(15, 14, 39, 0.4);
+}
+
+.News {
+    margin-top: 40px;
+    width: 100%;
+    padding: 25px;
+    display: block;
+}
+
+.News h1 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: 1.2px;
+    text-align: left;
+    position: relative;
+}
+
+.HotNews {
+    width: 100%;
+    margin-bottom: 1%;
+    display: flex;
+    justify-content: start;
+    align-items: stretch;
+    background-color: rgba(44, 135, 184, 0.36);
+    padding: 0 7%;
+    border-radius: 30px;
+}
+
+.HotNews img {
+    border-radius: 25%;
+    max-width: 5%;
+    padding: 10px 0px 10px 0px;
+}
+
+.HotNewsText {
+    display: inline;
+    text-align: start;
+    padding: 15px 2%;
+}
+
+.HotNews h2 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.HotNews h3 {
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 2px;
+    color: rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}
+
+footer {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(206, 204, 204);
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding-left: 20px;
+}
+
+footer .Logo {
+    color: #2F1893;
+    font-size: 70px;
+    padding-top: 20px;
+}
+
+.socialIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.socialIcon a {
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.socialIcon a i {
+    font-size: 2em;
+    color: black;
+    opacity: 0.7;
+}
+
+.footerNav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.footerNav ul li {
+    padding: 10px;
+}
+
+.footerNav ul a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+.footerBottom {
+    margin: 20px 20px;
+}
