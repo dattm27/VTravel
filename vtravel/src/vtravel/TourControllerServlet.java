@@ -70,6 +70,10 @@ public class TourControllerServlet extends HttpServlet {
 			case "DETAIL_PROPOSAL":
 				getDetailProposal(request, response);
 				break;
+			//lấy danh sách tất cả các tour phổ thông hiển thị lên trang chủ
+			case "LIST_ALL_TOUR":
+				listAllTour(request, response);
+				break;
 			default:
 				break;
 			}
@@ -78,6 +82,18 @@ public class TourControllerServlet extends HttpServlet {
 		}
 	}
 
+
+	private void listAllTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		// lay danh sach tour tu co so du lieu 
+		List<Tour> tourList = tourDbUtil.getAllTour();
+		
+		//them danh sach vua lay duoc vao request
+		request.setAttribute("TOUR_LIST", tourList);
+		
+		//gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+		dispatcher.forward(request, response);
+	}
 
 	private void getDetailProposal(HttpServletRequest request, HttpServletResponse response) {
 		//lấy ID người dùng gửi yêu cầu

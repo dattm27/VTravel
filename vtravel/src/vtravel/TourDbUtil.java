@@ -229,7 +229,49 @@ public class TourDbUtil {
 		}
 		
 	}
-
+	
+	
+	
+	public List<Tour> getAllTour() throws SQLException {
+		List<Tour> tourList = new ArrayList<>();
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql
+			String sql = "select * from available_tour limit 8";
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn
+			myRs = myStmt.executeQuery(sql);
+			
+			while (myRs.next()) {
+				int ID = myRs.getInt("id");
+				String name = myRs.getString("tour_name");
+				String startDate = myRs.getString("start_date");
+				String endDate = myRs.getString("end_date");
+				int price = myRs.getInt("price");
+				
+				///tao ra mot doi tuong Tour
+				Tour tour = new Tour(ID, name, startDate, endDate, price);
+				//them vao danh sach
+				tourList.add(tour);	
+			}
+				
+			return tourList;
+		}
+		
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+	
+	}
+	
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
 			if (myRs != null) {
@@ -248,6 +290,8 @@ public class TourDbUtil {
 		}
 		
 	}
+
+	
 
 	
 

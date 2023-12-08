@@ -121,6 +121,35 @@
 			
        	</div>
        <!-- Hết các tour -->
+       
+       <!-- dịch vụ tour phổ thông -->
+    <div class="container" style= "margin-top: 50px">
+       
+       	<!-- chứa các tour -->
+       
+		<c:url var="LIST_ALL_TOUR" value="TourControllerServlet">
+			<c:param name="command" value="LIST_ALL_TOUR" />
+		</c:url>
+       	<div class="d-flex mb-3 align-items-center">
+       	 	<h3 class="">Các tour nổi bật </h3> 
+       		 <a class="ml-auto" href="${LIST_ALL_TOUR}">Xem tất cả </a>
+       	</div>
+       	<div class = "d-flex justify-content-around flex-wrap">	 
+       	   <c:forEach items="${TOUR_LIST}" var="tour">
+		        <div class="card mb-3" style="width: 16rem;">
+				  <img class="card-img-top" src="images/tour/Halong-bay.jpeg" alt="Card image cap">
+				  <div class="card-body">
+				    <h5 class="card-title">${tour.name}</h5>
+				    <div class="card-text text-info" style="font-size:20px">${tour.price}</div>
+				    <div class="card-text">${tour.startDate}</div>
+				    <div class = "card-text">Đã đặt: 20</div>
+				    <a href="#" class="btn btn-primary mt-3">Đặt vé ngay</a>
+				  </div>
+				</div>
+			</c:forEach>
+       	</div>
+       <!-- Hết các tour -->
+       
 		 <div class = "d-flex"> 
 		 	<a class="ml-auto">Xem tất cả </a>    
 		 </div>
