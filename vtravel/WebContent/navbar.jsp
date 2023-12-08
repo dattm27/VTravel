@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top"  >
-	<a class="navbar-brand" href="#">VietTravel</a>
+	<a class="navbar-brand" href="index.jsp">VietTravel</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -11,12 +11,12 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link" href="#">Đặt tour <span
+			<a class="nav-item nav-link" href="#">Tours <span
 				class="sr-only">(current)</span></a> 
 			<a class="nav-item nav-link" href="#">Features</a> 
-			<a class="nav-item nav-link  active" href="#">Đặt tour theo ý thích</a>
+			<a class="nav-item nav-link " href="custom_tour.jsp">Đặt tour theo ý thích</a>
 			<a class="nav-item nav-link" href="#">Thông tin cá nhân</a>
-			<a class="nav-item nav-link" href="#">Mạng xã hội</a>
+			<a class="nav-item nav-link" href="#">Bài viết</a>
 		</div>
 		<a class="nav-item nav-link ml-auto" href="#">Đăng nhập</a>
 	</div>

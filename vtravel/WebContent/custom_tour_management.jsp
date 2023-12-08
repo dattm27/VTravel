@@ -22,7 +22,9 @@
  
 </head>
 <body>
-	<div class= "ml-5">	<a href="index.jsp">Trang chủ</a></div>
+	<!-- <div class= "ml-5">	<a href="index.jsp">Trang chủ</a></div> -->
+	<!--Thêm navbar -->
+	<jsp:include page="navbar.jsp" />
 	<!-- Phần pop up-->
 	<div id="popup" class="popup" style="display: none">
 		<div class="iframe-container">

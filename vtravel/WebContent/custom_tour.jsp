@@ -11,25 +11,7 @@
 </head>
 <body>
 	<!-- Phần nav-bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top"  >
-		<a class="navbar-brand" href="#">VietTravel</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="#">Đặt tour <span
-					class="sr-only">(current)</span></a> 
-				<a class="nav-item nav-link" href="#">Features</a> 
-				<a class="nav-item nav-link  active" href="#">Đặt tour theo ý thích</a>
-				<a class="nav-item nav-link" href="#">Thông tin cá nhân</a>
-				<a class="nav-item nav-link" href="#">Mạng xã hội</a>
-			</div>
-			<a class="nav-item nav-link ml-auto" href="#">Đăng nhập</a>
-		</div>
-	</nav>
+	<jsp:include page="navbar.jsp" />
 	<!-- Hết phần navbar -->
 	
 	<!-- Phần thân trang -->
@@ -84,7 +66,7 @@
 	            <label for="start_date">Ngày bắt đầu:</label>
 	            <input type="date" class="form-control" id="start_date" name="start_date"  
 	              title="Ngày bắt đầu sau hiện tại tối thiểu 1 tuần" required >
-	              
+	              <small class="form-text text-muted">Nhập ngày bắt đầu trước ngày đặt tối thiểu 7 ngày</small>
 	              <!-- chỉ cho phép chọn ngày sau ngày hiện tại 7 ngày -->
 	              <script>
 		              var currentDate = new Date();
@@ -123,7 +105,7 @@
 		     </div>
 			<div class="form-group">
 				<label for="note">Mô tả:</label>
-				<textarea class="form-control" id="note" rows="5"
+				<textarea class="form-control" id="note" rows="4"
 					placeholder="Nhập nội dung" name="note"></textarea>
 			</div>
 			<div class="form-check form-group">
