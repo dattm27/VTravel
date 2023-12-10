@@ -41,7 +41,8 @@ CREATE TABLE custom_tour (
   start_date date not null,
   end_date date,
   affordable_price int,
-  tourist_number int not null,
+  number_children int,
+  number_adult int,
   status varchar(5),
   price int,
   PRIMARY KEY (id),
@@ -61,6 +62,8 @@ CREATE TABLE event (
 CREATE TABLE post (
   id int auto_increment,
   user_id int not null,
+  post_name varchar(100) character set utf8mb4 not null,
+  short_description text,
   content text,
   image text,
   post_date datetime not null,
@@ -1006,162 +1009,309 @@ VALUES ('admin', 'admin', 'ADMIN', 'admin@gmail.com', 0123456789, 'admin', 'on')
     ('theanh', 'theanh', 'Thế Anh', 'theanh@gmail.com', 0683948389, 'user', 'on');
     
 -- Example data for post 
-INSERT INTO post(user_id, content, post_date)
-VALUES (3, '<pre><h1>Du lịch Đà Lạt, mùa nào đẹp?</h1>
-Nổi tiếng với khí hậu mát mẻ, ôn hòa và thêm chút se se lạnh của mình, Đà Lạt dường như là điểm chẳng bao giờ lọt ra khỏi danh sách du lịch của các bạn trẻ. Nhưng không hẳn, bất cứ ai, bất cứ thời gian nào Đà Lạt cũng đều mang đến cho bạn những tấm ảnh đẹp. Vậy du lịch Đà Lạt, mùa nào đẹp đây? Mùa nào thì mới cho bạn những tấm ảnh đẹp nhỉ?
-    
-<h2>1. Thời tiết của thành phố Đà Lạt:</h2>
-Là một thành phố thuộc tỉnh Lâm Đồng, Đà Lạt tọa lạc trên cao nguyên Langbiang, phía Nam cao nguyên Lâm Viên. Nên nơi đây cũng sẽ mang những đặc tính khí hậu khác với nhiều nơi.
-Mặc dù cùng một khu vực đi nữa thì thời tiết Đà Lạt cũng có sự khác biệt so với các tỉnh trong khu vực Tây Nguyên. Nguyên nhân được cho rằng là bởi vì Đà Lạt nằm trên địa hình cao, có khí hậu ôn hòa, mát mẻ.
-Đà Lạt có lạnh nhưng không lạnh rét buốt như ở miền Bắc, mà nó se se lạnh một chút mang lại cảm giác rất dễ chịu.
-Có lẽ vì thế nên Đà Lạt luôn tràn ngập những loài hoa, những loại rau khác nhau.
-    
-<h2>2. Du lịch Đà Lạt, mùa nào đẹp?</h2><h3>- Du lịch Đà Lạt mùa xuân: từ tháng 1-> tháng 4</h3>
-Mùa xuân ở Đà Lạt rơi vào khoảng thời gian từ tháng 1 đến tháng 4 hàng năm, đến đây vào dịp này bạn sẽ có cơ hội chiêm ngưỡng những loài hoa đặc trưng của thành phố. Đặc biệt, mọi con đường ở Đà Lạt vào thời gian này đều rực rỡ sắc màu của hoa mai anh đào.
-Địa điểm bạn có thể ngắm hoa mai anh đào: Đường Trần Hưng Đạo hoa mai anh đào nở rộ hai bên đường dọc theo dãy biệt thự cổ Cadasa; Đường Lê Đại Hành ngay trung tâm thành phố đường ven Hồ Xuân Hương và Thiền Viện Trúc Lâm,...
-<h3>- Du lịch Đà Lạt mùa hạ: từ tháng 3 đến tháng 5</h3>
-Đà Lạt vào mùa hạ lại tràn ngập sắc màu của hoa phượng tím, khoảng thời gian từ tháng 3 đến tháng 5. Không chỉ mang một màu tím ấn tượng, loài hoa này còn mang đến cho Đà Lạt một không gian thơ mộng đầy sự lãng mạn, có những lúc lại thêm một chút man mác buồn.
-Khoảng thời gian từ tháng 8 đến tháng 10 thì Đà Lạt thường có mưa to. Bạn cũng có thể ngồi nhâm nhi ly cà phê nóng, hoặc ngồi trong những căn Homestay xinh xắn, view toàn cảnh Đà Lạt trong cơn mưa, cũng lãng mạn phết đấy chứ nhỉ.
-<h3>- Du lịch Đà Lạt mùa cuối thu đầu đông: từ tháng 10-> tháng 12</h3>
-Vào khoảng thời gian từ tháng 10 đến tháng 12, Đà Lạt đang vào dịp cuối thu đầu đông, không khí se se lạnh. Đặc biệt, khoảng thời gian này có loài hoa dã quỳ nở rộ tuyệt đẹp.
-Bạn có thể chiêm ngưỡng loài hoa này ở: Đường đi Tà Nung, Suối Thông hoa, đường đi Hàm Thuận (Bảo Lộc, Lâm Đồng), đèo Hiệp Phú (Di Linh, Lâm Đồng),...
-Tùy vào sở thích, bạn có thể tự lựa chọn thời gian du lịch cho bản thân. Chắc bạn cũng có câu trả lời cho câu hỏi DU LỊCH ĐÀ LẠT, MÙA NÀO ĐẸP rồi phải không?
-Du lịch Đà Lạt, mùa nào đẹp? Phải kể đến đó chính là khoảng thời gian đầu tháng 11 tới tháng 3, khi mà cuối thu chớm đông và mùa xuân bắt đầu. Khi đó, vào cuối tháng 10, đầu tháng 11 hoa dã quỳ nở, tiếp đó tháng 1-2 mùa xuân hoa mai anh đảo nở, cùng nhiều loại hoa khác nhau nữa.
-Đặc biệt, 2 năm Đà Lạt sẽ tổ chức một kì Festival hoa tổ chức hai năm một lần vào các năm chẵn tại các dịp giáp Tết. Nếu thích không khí sôi động thì bạn nên lui tới Đà Lạt vào dịp cuối tuần, vào dịp diễn ra Festival ấy.
-    
-<h2>3. Vậy du lịch Đà Lạt, không nên đi mùa nào?</h2>
-Nhưng cũng là mùa hè, nếu lên Đà Lạt vào khoảng thời gian từ tháng 8 đến tháng 10 thì bạn sẽ thường xuyên gặp phải những cơn mưa to. Nếu không muốn kế hoạch đi chơi bị hủy kèo, hoặc bị ướt đồ thì bạn nên né khoảng thời gian này ra nhé.
-Với những mốc thời gian chính, kèm với vẻ đẹp của từng mùa chi tiết trên này, chắc bạn biết nên Du lịch Đà Lạt, mùa nào đẹp rồi chứ.
-</pre>', '2023-12-14 12:32:40'),
+INSERT INTO post(user_id, post_name, short_description, content, post_date)
+VALUES (3, "Kinh nghiệm du lịch Hà Nội", "Thành phố Hà Nội là Thủ đô ngàn năm văn hiến với những di tích cổ xưa, cuộc sống yên bình.
+Nếu đã một lần du lịch Hà Nội, chắc chắn bạn không thể nào quên không khí đặc trưng nơi đây, với Hồ Gươm, Hồ Tây, những
+quán cafe trầm mặc, những con đường nhỏ và những gánh hàng rong.","
+<pre>
+    <h1>  Kinh nghiệm du lịch Hà Nội</h1>
+    Thành phố Hà Nội là Thủ đô ngàn năm văn hiến với những di tích cổ xưa, cuộc sống yên bình. Nếu đã một lần du lịch Hà
+    Nội, chắc chắn bạn không thể nào quên không khí đặc trưng nơi đây, với Hồ Gươm, Hồ Tây, những quán cafe trầm mặc,
+    những con đường nhỏ và những gánh hàng rong.
 
-(4, '<pre><h1>KINH NGHIỆM SĂN HOA MAI ANH ĐÀO ĐÀ LẠT</h1>
-Mai anh đào ở Đà Lạt rất đặc biệt, thân cây tựa như giống đào mân còn hoa thì giống hoa mai. Theo một số nghiên cứu thì Mai anh đào có nguồn gốc từ nước ngoài và được trồng tại Đà Lạt. Và Đà Lạt tháng 1 là thời điểm Mai anh đào bung nở đẹp nhất, kinh nghiệm săn mai anh đào Đà Lạt sau đây sẽ gợi ý giúp bạn thưởng thức 1 mùa Mai anh đào đang đến.
+    <h3>    Phương tiện đi lại</h3>
+    Từ TP.HCM, Đà Nẵng hay Cần Thơ thì phương tiện thuận tiện và tiết kiệm thời gian nhất bạn nên chọn là máy bay, bởi
+    hiện nay các hãng hàng không Vietjet, Jestar hay Vietnam Airlines luôn có nhiều chương trình khuyến mãi hấp dẫn, bạn
+    nên đăng ký địa chỉ mail để các hãng hàng không gởi thông tin khuyến mãi nhé. Ngoài ra, bạn có thể chọn xe lửa tàu
+    Thống Nhất Bắc Nam tuy nhiên lưu ý bạn chỉ nên chọn khi có nhiều thời gian tham quan.
 
-<h2>MÙA MAI ANH ĐÀO NỞ ĐẸP NHẤT</h2>
-Hoa mai anh đào Đà Lạt có nguồn gốc rất đặc biệt với thân cây thì giống đào mận còn hoa thì lại có năm cánh giống hoa mai. Chính vì nửa mai nửa đào như vậy nên cái tên Mai Anh Đào ra đời.
-Theo các nhà nghiên cứu thì mai anh đào có nguồn gốc từ Đà Lạt tuy nhiên cũng có một số ý kiến cho rằng đây là loài hoa được nhập từ nước ngoài và chỉ trồng ở khu vực thành phố Đà Lạt.
-Mai anh đào ở Đà Lạt vào đầu mùa khô (tháng 10 hằng năm) lá vàng dần và rụng, trơ trội cành lá khẳng khiu ngủ đông. Mãi cho đến khi đất trời Đà Lạt chuyển mùa, tầm giữa tháng 1 thì lúc ấy cây Mai anh đào mới “bừng dậy” nở hoa mạnh mẽ nhất báo hiệu xuân đang về.
-Vào mùa Mai anh đào nở, Mai anh đào thường nở đồng loạt, chi chít từ gốc đến ngọn. Lúc này cả Đà Lạt như ngập tràn trong sắc hồng của Mai anh đào. tại sức cuốn hút, ngất ngây đến lạ.
+    Từ sân bay Nội Bài về trung tâm khoảng 30km, bạn có thể đi taxi nếu đi đông hay chọn xe bus trung chuyển của hai
+    hãng hàng không nội địa là Jetstar và VietJet Air với giá mềm hơn. Trong trung tâm Hà Nội để tham quan bạn nên thuê
+    xe máy để di chuyển, ngoài ra còn 2 phương tiện cũng khá độc đáo để thăm thủ đô là xích lô và xe điện.
+    Nên đi Hà Nội mùa nào?
+    Thời gian thích hợp nhất để du lịch Hà Nội là vào tháng 9 đến tháng 11 hoặc từ tháng 3 đến tháng 4, đó là lúc chuyển
+    mùa thời tiết ấm áp và dễ chịu, không quá nắng gắt hay hanh khô. Tuyệt vời nhất là vào mùa thu, Hà Nội như khoác một
+    chiếc áo mới, dịu dàng và lãng mạng nhất trong năm.
+    Những điểm nào nên tham quan khi đến Hà Nội
+    Hà Nội có rất nhiều điểm tham quan di tích lịch sử - văn hóa để bạn tham quan tìm hiểu, ngay khu vực trung tâm thủ
+    đô bạn hãy ghé tham quan Hồ Hoàn Kiếm, ngắm tháp Rùa, đền Ngọc Sơn, cầu Thê Húc. Chiêm ngưỡng và chụp hình tại Nhà
+    thờ lớn Hà Nội, Nhà hát lớn Hà Nội, khu phố Cổ. Xa hơn một chút tầm 3km bạn hãy viếng Lăng Bác (lưu ý Lăng không mở
+    thứ 2, 6 hàng tuần) thăm quan Bảo tàng Hồ Chí Minh, nhà sàn Bác Hồ, chùa Một Cột, quảng trường Ba Đình; tiếp tục
+    tham quan Văn Miếu - Quốc Tử Giám - nơi thờ Khổng Tử và các bậc hiền triết của Nho Giáo, Hoàng Thành Thăng Long.
 
-<h2>NHỮNG CUNG ĐƯỜNG NGẮM MAI ANH ĐÀO TẠI ĐÀ LẠT</h2><h3>+ Đường Mai anh đào - Trần Hưng Đạo:</h3>
-Đường Trần Hưng Đạo còn được gọi là đường hoa Mai anh đào của Đà Lạt. Đoạn đường kéo dài hơn 500m được trồng hai hàng hoa Mai anh đào hai bên đường. Sự kết hợp hài hòa giữa hàng thông già nghiêm bóng, những dãy biệt thự cổ kính hai bên cùng với màu hồng thắm của sắc hoa Đào đã tạo nên một con đường thật quyến rũ.
-<h3>+ Mai anh đào Đà Lạt quanh Hồ Xuân Hương:</h3>
-Hồ Xuân Hương có vị trí nằm ngay trung tâm thành phố nên hầu như ai cũng biết điểm này. Đoạn có nhiều Mai anh đào Đà Lạt nhất là đoạn đường gần với nhà hàng Thủy Tạ và đoạn gần nhà hàng – cafe Bích Câu. Hiện nay, người ta đang trồng thêm rất nhiều cây Mai anh đào, chỉ vài năm nữa thôi, hoa Mai anh đào Đà Lạt sẽ nở hồng một vùng hồ.
-<h3>+ Rừng Mai anh đào Hồ Tuyền Lâm:</h3>
-Đoạn này hơi khó tìm chút xíu, nên bạn phải để ý kĩ. Trên đường đi đường hầm điêu khắc, đi qua khỏi cây cầu sắt, bạn chạy chậm và để ý nhìn xuống phía hồ bạn sẽ thấy một cụm hoa Mai anh đào lớn.
-<h3>+ Mai anh đào Dốc Đa Quý:</h3>
-Đây hứa hẹn là điểm hấp dẫn nhất và “rực rỡ nhất” đó chính là Dốc Đa Quý ở Trại Mát. Đây là đoạn đường hoa Mai anh đào nở nhiều và đẹp, được nhiều người săn đón. Vào mùa Mai anh đào nở, khi đến đây bạn sẽ thấy rất nhiều người.
-Mai anh Đào không chỉ là niềm tự hào của mọi con người Đà Lạt mà nó còn là những kỷ niệm không thể nào phai nhạt của du khách khi may mắn được đặt chân tới thành phố Đà Lạt đúng mùa hoa nở.
-Mùa Mai anh đào Đà Lạt đang kéo đến, cũng trùng vào dịp Tết Nguyên Đán tại Việt Nam, dắt tay người yêu, bạn bè hay gia đình để làm ngay một album ảnh chuẩn style Nhật Bản hay Hàn Quốc tại ngay Đà Lạt nào, và đừng quên mang theo máy ảnh hay điện thoại để ghi lại những khoảnh khắc Mai anh đào nở tuyệt đẹp.
-</pre>', '2023-12-14 15:40:03'),
+    Ngày hôm sau tại Hà Nội bạn hãy ghé khu vực Hồ Tây, tham quan Đền Quán Thánh, chùa Trấn Quốc. Thích tìm hiểu về văn
+    hóa các dân tộc thì bạn ghé tham quan Bảo tàng dân tộc học Việt Nam, nếu còn thời gian tại Hà Nội bạn hãy ghé các
+    khu vực lân cận như làng gốm Bát Tràng (cách trung tâm 20km), làng cổ Đường Lâm (cách trung tâm 45km) nơi còn lưu
+    giữ những nét cổ xưa của một làng quê miền Bắc.
+    <h3>    Hà Nội có lễ hội gì đặc sắc?</h3>
+    Lễ hội Chùa Hương là lễ hội đặc sắc nhất ở Hà Nội, được diễn ra từ mùng 6 tháng Giêng đến hết tháng 3 âm lịch, tuy
+    nhiên trong giai đoạn lễ hội thường rất đông nên bạn có thể đi dịp trước tết dương lịch và nguyên đán. Ngoài ra, Hà
+    Nội còn có các lễ hội như Hội gò Đống Đa mùng 5 Tết tại gò Đống Đa, lễ hội đền Gióng Sóc Sơn ngày 6/1 âm lịch, lễ
+    hội Cổ Loa diễn ra từ ngày 6 đến 16 tháng giêng âm lịch (chính hội ngày 6).
+    Khách sạn và ẩm thực địa phương
+    Hà nội có rất nhiều khách sạn để bạn lựa chọn, để tham khảo các khách sạn hợp với túi tiền và vị trí gần trung tâm
+    phố cổ bạn nên tham khảo trước trên các web tư vấn khách sạn như Agoda hay Tripadvisor rất hữu ích. Ngoài ra, mình
+    tư vấn cho bạn một số khách sạn như Asian Star, Chaerry 2, Crysral 2 sao hay khách sạn 3 sao như Boss, ATS, Church
+    Boutique.
 
-(5,	'<pre><h1>Hành trình 3 ngày 2 đêm lênh đênh trên đảo Cô Tô</h1>
-ĐI CÔ TÔ ĂN - CHƠI - Ở ĐÂU?
-Hành trình 3 ngày 2 đêm lênh đênh trên đảo ?
-Mình đã từng ao ước được ra Cô Tô khi còn là một cậu học sinh ngồi trên ghế nhà trường qua bài kí của Nguyễn Tuân. Một chuyến đi mà tưởng chừng như sẽ mãi nằm trên sách vở, và sau nhiều trắc trở cuối cùng mình cũng đã đạt mục tiêu đặt chân lên đảo.
-Lịch trình và chi phí của tụi mình như sau, các bạn cùng tham khảo nhé:
-? Ở đâu
-    Tụi mình ở nhà nghỉ Khang Tính, điểm cộng là cô chủ nhà cực kì niềm nở, phòng ốc thì sạch sẽ, bình nóng lạnh hay điều hòa cũng đầy đủ luôn nha.
-    Nhà nghỉ tụi mình ở ngay sát trung tâm. Cách bãi Tình Yêu có hơn 1km, Vàn Chảy khoảng 5km. Còn Hồng Vàn thì xa nhất, khoảng hơn 7km. Bãi Hồng Vàn là xa trung tâm thị trấn nhất.
-    + Nhà nghỉ: 250k/phòng 2 giường/ngày x 2
-    => Tổng: 500k
-? Về di chuyển
-1/ Từ Hải Phòng - cảng Cái Rồng (mọi người cứ gg mapp là ra)
-    Tụi mình đi 2 người và di chuyển bằng xe máy. Xuất phát lúc 8h và 11h tụi mình đã có mặt tại cảng Cái Rồng. Đường quốc lộ 18 khá dễ đi, tuy nhiên sẽ có chốt bắn tốc độ ở gần trạm thu phí Đại Yên nên mọi người cứ nhẹ tay lái thôi nha.
-    + Xăng: 250k (cả đi và về)
-2/ Từ cảng Cái Rồng - Cô Tô
-    Có hai loại tàu để chọn lựa khi di chuyển từ cảng Cái Rồng, Vân Đồn ra đảo Cô Tô: Tàu gỗ và tàu cao tốc.
-    Tụi mình chọn đi tàu cao tốc của hãng Quang Minh (30p sẽ có một chuyến). Tàu chạy rất êm và đúng giờ, khoang hành khách sạch sẽ. Theo mình mọi người nên ra ngoài đuôi tàu cho thoáng vì bên trong khoang khá nóng. Tàu chạy khoảng chừng 1 tiếng rưỡi là đến nơi.
-    + Vé tàu: 250k/người/chiều x2
-3/ Di chuyển trên đảo
-    Tụi mình thuê xe máy của nhà nghỉ Khang Tính luôn, ngoài ra nếu các bạn đi đông thì có thể thuê xe điện. Các cô chú đều rất nhiệt tình, hầu như gọi chỉ cần vài phút là có mặt.
-    + Xe máy: 100k/ngày x2
-    + Xăng: 50k
-    => Tổng: 1.000k
-? Ăn uống - ngày 1
-1/ Ăn sáng:
-    + Tự túc ở nhà: free
-2/ Ăn trưa:
-    + Sandwich (mua ở Aeon Mall): 40k
-    + Bánh ngọt: 20k
-    + Bánh mỳ trứng: 15k
-3/ Ăn tối:
-    + Cơm niêu: 40k/người x2
-4/ Ăn vặt, cà phê:
-    + Kem xôi: 30k/cốc x2
-    Cơm niêu ở đây ngon, rẻ, nhưng không đặc biệt, kiểu như cơm nhà thôi. Ăn vặt, cafe ở CoTo rất chất lượng mà siêu rẻ, chả bù cho ly nhựa Highlands vừa tăng giá ?.
-    ?Note: Cafe ở CoTo hay đóng cửa “ngủ sớm”, mn tìm chỗ cà kê thì nhớ check kĩ nha. Ngoài ra ở đây cũng không có bar hay pub, sau 10h đường sẽ rất vắng (nhưng đây lại là một điểm mình khá thích)
-? Ăn uống - ngày 2
-1/ Ăn sáng:
-    + Mì hộp: 10k/người x2
-2/ Ăn trưa
-    + Cơm rang: 35k/người x2
-3/ Ăn tối
-    + Cơm hàng: 40k/người x2
-4/ Ăn vặt, cà phê:
-    + Coctail: 60k/cốc x2 (bù lại được ngắm biển đêm, khá chill)
-    Các bữa trưa và tối tụi mình đều ăn ở quanh thị trấn. Nói chung là đầy đủ nhưng khá chán. Có buổi trưa ở tụi mình ăn no để đi chơi, nhưng no quá lúc xuống bãi biển không đi nổi luôn.
-? Ăn uống - ngày 3
-1/ Ăn sáng:
-    + Bánh mỳ thịt: 20k/người (bạn mình tiếp tục ăn mỳ hộp)
-2/ Ăn trưa:
-    + Phở bò: 30k/bát
-    + Cơm rang: 40k/đĩa
-    => Tổng: 595k
-?Lịch trình
-?NGÀY 1: Bãi Hồng Vàn - Cầu Gỗ - phố đi bộ Ký Con
-    - Bọn mình đến nhà nghỉ lúc 13h30: được cô chú cho check in sớm. Tụi mình nghỉ ngơi chút, chiều lấy xe máy và đi tham quan các điểm.
-    + Bãi Hồng Vàn:
-    Tụi mình ra bãi Hồng Vàn tắm biển, nước có màu xanh ngọc, cát mịn, tắm rất thích, mình đi hôm mùng 2/5 thì bãi khá vắng, hầu như không có ai ngoài 2 đứa tụi mình. Với một tay nghiện sống ảo như tui thì đây đúng là điều tuyệt vời.
-    + Cầu gỗ:
-    Đường tới cầu gỗ khá xa nhưng bù lại cảnh đẹp, bình yên cực. Ở đây chụp đẹp nhất là nên đi buổi chiều sẽ săn được hoàng hôn, nếu đi buổi sáng ảnh chụp sẽ bị ngược sáng và không lấy được view biển. Vì là cầu gỗ nên đi trên cầu khá chông chênh, mọi người nên đi vào giữa cầu tránh bám vào thành cầu kẻo ngã xuống biển nha.
-?NGÀY 2: Bãi đá Móng Rồng - Hải Đăng Cô Tô - Âu Cảng - con đường tình yêu - bãi Vàn Chảy - bãi biển tình yêu
-    Sáng bọn mình đón bình minh trên biển Hồng Vàn, khoảng từ 5h30-6h mặt trời lên, tầm này có chút se lạnh nên bạn nào có ý định tắm biển thì lưu ý nha.
-    + Bãi đá Móng Rồng:
-    Muốn ra bãi đá Móng Rồng các bạn nên đi từ rất sớm nhé. Vì mình không muốn bỏ lỡ khoảng khắc đẹp nhất trong ngày này nên đã xuất phát từ ... 6h sáng (do tối hôm trước tụi mình thức muộn tâm sự về cuộc đời) . Chỗ này cách trung tâm khoảng 3km thôi mà ai đã ra Cô Tô nhất định đều phải ghé qua.
-    Ở đây vẫn còn chưa hoàn thiện nên rất hoang sơ, nhưng bạn nào muốn một lần ngắm nhìn trọn vẹn đảo thì nên chịu khó trèo lên nhưng mỏm đá cao. Nhưng đi cẩn thận vì đá hơi trơn, đừng để bị cứa vào chân như mình.
-    Gửi xe: 5k/xe
-    + Hải Đăng Cô Tô:
-    Hải Đăng Cô Tô có thể nói là một nơi tuyệt vời nhất nếu muốn ngắm trọn hòn đảo xinh đẹp này. Đường lên đây tương đối dốc, mọi người nên chọn phóng thẳng xe máy lên hoặc đi xe điện. Đây không phải điểm tham quan du lịch mà là nơi làm việc nên khi chụp ảnh chú ý đi lại nhẹ nhàng để tránh làm phiền tới mọi người
-    xung quanh.
-    Gửi xe: 10k/xe
-    + Âu Cảng:
-    Ở đây cảnh khá đẹp, tuy nhiên mình thấy khá giống đê chắn sóng ở Cát Hải. Vì có ảnh tựa như thế rồi nên mình chỉ ghé qua rồi sang con đường tình yêu luôn.
-    + Con đường tình yêu:
-    Gọi là con đường tình yêu vì ở đây có một lối đi bên là hàng cây thông, bên còn lại là bãi biển Tình yêu. Điểm trừ là ở đây người ta xả hơi nhiều rác, chung lại là không mộng mơ như các bạn tưởng tượng đâu. Chớ dắt bồ ra đây để rồi mất công chửi nhau :v
-    + Bãi Vàn Chảy:
-    Cá nhân mình thích nhất bãi này, sóng đánh cực to, to nhất trong các bãi mình từng đi luôn, thích hợp cho một đứa thích va chạm với cuộc đời như mình :v
-    + Bãi biển tình yêu:
-    Trên đường về khách sạn mình có dừng lại để ngắm hoàng hôn, đối với mình đây là khoảnh khắc đẹp nhất của chuyến đi.
-?NGÀY 3: Tạm biệt hòn đảo và ra về
-    Mình check out lúc 7h30 sáng và tạm biệt mọi người để quay lại đất liền, kết thúc một chuyến đi hơn cả sự mong đợi.
-    + Vé tàu: 250k/chiều về/người/ x2
-    => Tổng: 565k
-? TỔNG CỘNG: 2.660k (chia ra mỗi người 1.330k)
-Lưu ý nhỏ trước khi đi Cô Tô:
-    + Cân nhắc thời gian khi ra đảo, nên đi 3n2d vì nếu đi 2n1d sẽ rất gấp và mệt. Đặc biệt lưu ý thời tiết, nếu đi vào đúng ngày biển động sẽ rất dễ bị mắc kẹt lại trên đảo.
-    + Chuẩn bị mọi loại thuốc chống say tàu vì tàu sẽ đi rất nhanh khiến bạn không kịp trở tay thay quần áo luôn.
-    + Hải sản Cô Tô khá tươi và rẻ, mọi người có thể mua về làm quà hoặc ăn tại chỗ đều rất ok.
-    + Đặc biệt lưu ý giờ tàu về, ngày thường chỉ có 2 đợt là 8h và 13h30, còn cuối tuần sẽ có chuyến tăng cường. Mọi người lưu ý nếu không muốn kẹt lại đảo như tụi mình.
-    + Theo cảm nhận của riêng cá nhân mình, Cô Tô vẫn còn mang những nét hoang sơ, du lịch chưa được phát triển nhiều, phù hợp cho những ai muốn trải nghiệm và tìm một nơi để tĩnh dưỡng, không phù hợp lắm với những bạn thích ồn ào, bay lắc :v
-MỌI NGƯỜI CÒN CHẦN CHỪ GÌ NỮA, HÈ NÀY ĐI CÔ TÔ THÔI!
-</pre>', '2023-12-10 20:30:00'),
+    Ẩm thực Hà Nội luôn hấp dẫn với những món ăn đậm chất riêng. Một số món ăn không thể bỏ qua khi du lịch Hà Nội: phở
+    gánh Hàng Trống, chả cá Lã Vọng, bún chả, bún thang, bánh cốm, bánh cuốn, bún đậu mắm tôm.
+    <h3>    Đến Hà Nội mua gì về làm quà?</h3>
+    Hà Nội có khá nhiều sản phẩm để bạn mua về làm quà cho người thân như các sản phẩm sơn mài, thủ công, đồ lưu niệm
+    như đồ trang trí bằng bạc, gốm sứ và đồ trang sức dọc phố Hàng Khay, Tràng Tiền; sản phẩm lụa cũng khá đẹp bạn có
+    thể mua tại phố Hàng Gai, phố Nha Thờ. Ngoài ra, các đặc sản mua về ăn như Ô Mai (hàng Đường), bánh cốm (Hàng Than)
+    hay bánh đậu xanh (hàng Điếu) rất được du khách ưu chuộng khi mua về.
+    <h3>    Những điều lưu ý</h3>
+    Miền Bắc có bốn mùa rõ rệt trong năm, chính vì vậy thời tiết là điều bạn cần quan tâm khi đi du lịch Hà Nội. Mùa hè
+    trời thường rất nắng nóng, mùa đông thì rất lạnh, mùa xuân thì hay mưa phùn, ẩm ướt. Hãy có một tấm bản đồ để xác
+    định quãng đường đi, tránh việc bị người khác (xe ôm, taxi) đưa đi lòng vòng rồi tính tiền. Hãy hỏi về giá cả trước
+    khi sử dụng bất cứ dịch vụ nào. Cách tốt nhất là bạn nên nhờ lễ tân tại khách sạn mình ở tư vấn, giúp đỡ khi cần
+    thông tin. Để thưởng thức hết vẻ đẹp thiên nhiên, kiến trúc kỳ vĩ ở các chùa lớn thì không nên đi các chùa vào mùa
+    lễ hội.
+    </pre>", "2023-12-14 12:32:40"),
+    (4, "Kinh nghiệm du lịch Hạ Long", "Hạ Long là điểm đến du lịch bạn nên đến một lần trong đời, bởi ngoài thưởng ngoạn phong
+cảnh thiên nhiên tuyệt đẹp của Vịnh Hạ Long cùng với hệ thống các hang động, bạn còn trải nghiệm những hoạt động như ngủ
+đêm trên du thuyền, chèo kayak, tham quan những điểm đến linh thiêng như Yên Tử, Chùa Ba Vàng và không thể cưỡng lại với
+những món ăn làm mê hoặc lòng người như chả mực, hàu nướng, sá sùng…","
+<pre>
+    <h1>  Kinh nghiệm du lịch Hạ Long</h1>
+    Hạ Long là điểm đến du lịch bạn nên đến một lần trong đời, bởi ngoài thưởng ngoạn phong cảnh thiên nhiên tuyệt đẹp
+    của Vịnh Hạ Long cùng với hệ thống các hang động, bạn còn trải nghiệm những hoạt động như ngủ đêm trên du thuyền,
+    chèo kayak, tham quan những điểm đến linh thiêng như Yên Tử, Chùa Ba Vàng và không thể cưỡng lại với những món ăn
+    làm mê hoặc lòng người như chả mực, hàu nướng, sá sùng…
 
-(6,	'<pre><h1>Bình minh trên biển Quan Lạn</h1>
-? Săn bình minh trên biển : 
-    - Địa điểm: Đảo Minh Châu - Quan Lạn, Quảng Ninh 
-    - Thời gian : mình đi từ lúc 4h30 - 5h30 sáng. 
-Đây là khoảng thời gian thích hợp để bạn có thể ngắm trọn khung cảnh mặt trời mọc và vẻ đẹp bình yên của nơi đây do thiên nhiên ban tặng. Nếu bạn đang tìm một điểm đến bình yên, trốn deadline một vài ngày hay đơn giản là khám phá trải nghiệm thì Quan Lạn là một cái tên rất đáng để bạn bỏ túi. Và nếu có dịp ghé nơi đây, bạn đừng bỏ lỡ khoảnh khắc ngắm bình minh trên biển nhé. Nó thật sự rất tuyệt ?
-</pre>', '2023-12-05 19:37:43'),
+    <h3>    Phương tiện đi lại</h3>
+    Hạ Long cách Hà Nội khoảng 150km, bạn có thể ra bến xe Lương Yên, Mỹ Đình để bắt xe đi Hạ Long, có nhiều nhà xe và
+    chạy liên tục trong ngày, xe chạy khoảng 4 tiếng. Với những chuyến đi 2 ngày 1 đêm với dịch vụ ngủ đêm trên du
+    thuyền thì bạn an tâm là du thuyền đón bạn tại khách sạn nên sẽ không lo vận chuyển xuống Hạ Long. Từ miền Trung hay
+    miền Nam đến Hạ Long thì bạn có thể lựa chọn bay trực tiếp đến Hà Nội hoặc Hải Phòng sau đó bắt xe đi Hạ Long, riêng
+    miền Tây thì chỉ có bay trực tiếp đến Hà Nội thôi nhé.
+    <h3>    Nên đi Hạ Long mùa nào?</h3>
+    Thời điểm tốt nhất để tham quan Hạ Long là vào mùa hè (tháng 4 – 10), lưu ý tháng 6 – 7 thường có mưa bão nên hạn
+    chế thời gian này. Mùa đông ở Hạ Long rất lạnh (tháng 11 – 3 năm sau), nên bạn lưu ý mang theo áo ấm nhé.
+    <h3>    Những điểm nào nên tham quan khi đến Hạ Long</h3>
+    Trên đường ra Hạ Long nếu đi bằng xe máy bạn có thể ghé tham quan núi Yên Tử, cách thành phố Hạ Long 73km, núi Yên
+    Tử khá rộng và phải di chuyển bằng cáp treo 2 lượt nên nếu tham quan cả Chùa Đồng bạn sẽ mất một ngày. Chiều trên
+    đường về Hạ Long bạn tiếp tục ghé tham quan Chùa Ba Vàng, cách Yên Tử 35km và cách Hạ Long 40km. Ngày hôm sau bắt
+    đầu chuyến hành trình khám phá Vịnh bạn có thể lựa chọn tuyến tham quan Động Thiên Cung và Hang Dấu Gỗ (4 tiếng)
+    hoặc Hang Sửng Sốt và Đảo Ti Tốp (6 tiếng), trên đường đi bạn sẽ được nhìn thấy Hòn Đỉnh Hương, Hòn Gà Chọi…
 
-(7, '<pre><h1>KHÁM PHÁ LÀNG LỤA VẠN PHÚC (HÀ ĐÔNG) HÀ NỘI</h1>
-Lần đầu tiên đươc khám phá làng lụa Vạn phúc Hà Đông tôi thật sự ấn tượng về không giản rực rở sắc màu được làm từ các loại tơ tầm độc đáo...
-Làng lua Vạn Phúc cách trung tâm Hà Nội 10km , không chỉ là một làng nghề truyền thống dệt lụa tơ tầm có lịch sử hàng nghìn năm mà nơi đây còn là một điểm du lịch nổi tiếng thu hút du khách trong và ngoài nước tấp nập tham quan mua sắm tạo nên một săc thái đậc trưng riêng
-Đến làng Vạn Phúc bạn còn có thể ngắm nhìn lại những nét cổ kính như cổng làng, cây đa, giếng nước bụi tre ... thật là bình yên & thơ mộng .
-Đến đây các bạn tha hồ lưa chọn các loại áo vải thời trang bằng lụa đủ màu, đủ kiểu hoàn toàn bằng chất liệu tơ tầm tuyệt đẹp về diện quanh năm nhé.
-Nếu các bạn muốn chọn cho người thân một món quà xinh xắn và giá trị thì tại làng lụa Vạn phúc này sẽ có đủ loại cho các bạn chọn lựa vậy.
-Nếu có dịp đi Hà Nội các bạn đừng quên ghé thăm làng Lụa Vạn Phúc nhé. Ngày nay có phương tiện tàu điện trên không từ Cát Lái đến Hà Đông cũng thật là tiện lợi vô cùng các bạn ạ.
-</pre>', '2023-12-20 07:45:32');
+    Nếu còn thời gian tại Hạ Long bạn có thể ghé tham quan Làng chải Cửa Vạn để tìm hiểu cuộc sống của ngư dân miền biển
+    và tham gia vào những cuộc đánh bắt cá, câu cá, mực, chèo thuyền với ngư dân. Muốn tắm biển thì ghé đảo Ti Tốp, biển
+    Tuần Châu hay Bãi Cháy. Hay tìm hiểu về di tích lịch sử Hạ Long thì bạn nên ghé núi Bài Thơ, đền thờ Trần Quốc
+    Nghiễm, chùa Cửa Ông, bảo tàng Quảng Ninh. Ngoài ra, Đảo Cô Tô cũng là một điểm đến thú vị mà du khách Hà Nội thường
+    lựa chọn vào dịp hè (cách Hạ Long 60km), đảo hiện tại vẫn còn giữ nét hoang sơ nên biển rất xanh và êm ả.
+    <h3>    Hạ Long có lễ hội gì đặc sắc?</h3>
+    Lễ Hội đặc sắc nhất tại Hạ Long mà du khách hay quan tâm là Carnaval Hạ Long thường tổ chức định kỳ tháng 4 hàng năm
+    tại Quảng Trường thành phố Hạ Long. Trong tháng 4 còn có lễ hội Hoa Anh Đào Hạ Long với hàng trăm cành đào đến từ
+    Nhật Bản. Ngoài ra, tại Hạ Long còn có lễ hội Yên Tử được tổ chức thường niên, bắt đầu từ ngày 10 tháng giêng và kéo
+    dài hết tháng 3 (âm lịch), lễ hội Đền Cửa Ông diễn ra từ 2/1 – 30/3 âm lịch, lễ hội Bạch Đằng được tổ chức vào ngày
+    mùng 8 tháng 3 (âm lịch) hàng năm.
+    <h3>    Khách sạn và ẩm thực tại địa phương</h3>
+    Hạ Long được phân ra làm 2 khu: Hòn Gai và Bãi Cháy, được nối với nhau bởi cây cầu Bãi Cháy. Khu du lịch chính là
+    Bãi Cháy, với bờ biển chạy dài và các cảng du lịch. Khu Hòn Gai là khu trung tâm hành chính. Bạn nên ở khu Bãi Cháy
+    cho thuận tiện đi lại và ăn uống. Tại Bãi Cháy có rất nhiều khách sạn để bạn lựa chọn, trước khi quyết định đặt
+    khách sạn nào bạn nên tham khảo đánh giá của các khách ở trước trên web Agoda hay Tripadviser để có thêm thông tin
+    tham khảo. Một vài khách sạn gợi ý cho bạn các khách sạn 3 sao như Blue Sky, BMC Thăng Long, Golden Lotus, City Bay
+    Palace. Ngoài ra, bạn nên trải nghiệm một đêm trên du thuyền Hạ Long sẽ rất thú vị, các du thuyền mình hay ngủ đêm
+    như Bài Thơ, Pelican, Halong Emotion.
+
+    Hạ Long là thiên đường của hải sản nên đến đây bạn không nên bỏ qua món chả Mực, hàu nướng, Sam xào chua ngọt, Sá
+    Sùng, bún tôm, bún xào Ngán, tu hài Vân Đồn. Ngoài ra các món nem chua và canh hà Quảng Yên Cà Sáy (vịt lai nga)
+    cũng rất hấp dẫn.
+    <h3>    Đến Hạ Long mua gì về làm quà?</h3>
+    Hạ Long có khá nhiều mặt hàng để bạn mua về làm quà cho người thân như đồ hải sản gồm mực khô, sá sùng khô, chả mực
+    được bán nhiều tại các chợ Cái Dăm, chợ Hạ Long 1, Hạ Long 2. Đồ lưu niệm được chế tác từ vỏ sinh vật biển, than đá,
+    gỗ, khảm trai, ngọc trai, các sản phẩm này bạn có thể mua tại cửa hàng lưu niệm Hòn Gai hoặc chợ đêm Hạ Long. Ngoài
+    ra, còn có rượu Ngán Hạ long nem chua Quảng Yên, Cà sáy (vịt lai ngan) bạn có thể mua về để cả gia đình cùng thưởng
+    thức.
+    <h3>    Những điều lưu ý</h3>
+    Mua hàng tại Hạ Long thì bạn lưu ý dò hỏi giá ở nhiều cửa hàng để so sánh trước khi quyết định mua vì đa số các cửa
+    hàng đều nói thách. Khi ngủ đêm trên du thuyền lưu ý giữ gìn vệ sinh cảnh quan môi trường biển. Nếu đi đảo Cô Tô bạn
+    nên tránh lúc thời tiết gió bão vì tàu thuyền sẽ không được phép chạy nếu sóng quá lớn.
+    </pre>", "2023-12-14 15:40:03"),
+    (5, "Kinh nghiệm du lịch Ninh Bình", "Ninh Bình là một trong ba điểm đến hấp dẫn nhất ở miền Bắc (sau Hạ Long và Sa Pa), bởi
+nơi đây có nhiều thắng cảnh hùng vĩ và tráng lệ, đó là các danh thắng đất ngập nước Tràng An, Tam Cốc, Vân Long hay
+những công trình kiến trúc đẹp và đồ sộ như Chùa Bái Đính, nhà thờ Phát Diệm, Cố Đô Hoa Lư và vườn quốc gia Cúc Phương
+dành cho những ai thích thiên nhiên và khám phá. Vùng đất Ninh Bình còn nổi tiếng với nhiều danh nhân đất Việt tiêu biểu
+như anh hùng dân tộc Đinh Bộ Lĩnh, Lê Hoàn, Lê Đại Hành,", "
+<pre>
+    <h1>  Kinh nghiệm du lịch Ninh Bình</h1>
+    Ninh Bình là một trong ba điểm đến hấp dẫn nhất ở miền Bắc (sau Hạ Long và Sa Pa), bởi nơi đây có nhiều thắng cảnh
+    hùng vĩ và tráng lệ, đó là các danh thắng đất ngập nước Tràng An, Tam Cốc, Vân Long hay những công trình kiến trúc
+    đẹp và đồ sộ như Chùa Bái Đính, nhà thờ Phát Diệm, Cố Đô Hoa Lư và vườn quốc gia Cúc Phương dành cho những ai thích
+    thiên nhiên và khám phá. Vùng đất Ninh Bình còn nổi tiếng với nhiều danh nhân đất Việt tiêu biểu như anh hùng dân
+    tộc Đinh Bộ Lĩnh, Lê Hoàn, Lê Đại Hành,
+
+    <h3>    Phương tiện đi lại</h3>
+    Cách Hà Nội chỉ 100km nên bạn có thể tham quan Ninh Bình bằng xe máy hoặc xe khách, nhưng mình khuyên bạn nên đi xe
+    khách vì thuận tiện và sức khỏe. Các bến xe khách đi Ninh Bình đó là Giáp Bát và Mỹ Đình, hàng ngày đều có các
+    chuyến xe khách Bắc Nam chạy liên tục. Nếu đi Open Bus bạn có thể đi của hãng The Sinh Tourist hoặc Hưng Thành. Vì
+    các điểm tham quan ở Ninh Bình cách xa nhau nên đến Ninh Bình bạn nên thuê xe máy để thuận tiện di chuyển. Các bạn
+    từ TP.HCM, miền Tây hay miền Trung thì nên đặt vé máy bay giá rẻ để đến Hà Nội trước, sau đó kết hợp tham quan Ninh
+    Bình.
+    <h3>    Nên đi Ninh Bình mùa nào?</h3>
+    Nếu muốn đi viếng chùa Bái Đính thì nên đến vào những ngày đầu năm (từ mùng 6 đến tháng 3 âm lịch), còn đam mê chụp
+    ảnh mùa vàng Tam Cốc thì bạn nên đến vào tháng 5 – 6.
+    Những điểm nào nên tham quan khi đến Ninh Bình
+    Để tham quan hết các điểm đặc sắc tại Ninh Bình bạn mất 2 – 3 ngày. Ngày đầu tiên đến Ninh Bình bạn hãy ghé thăm
+    Chùa Bái Đính và Khu du lịch Tràng An – di sản thiên nhiên và địa chất thế giới, Tràng An khá rộng nên mất khoảng 3
+    tiếng ngồi thuyền, các hang động tại Tràng An khá dài và rộng hang Hang Cả, Hang Hai, Hang Ba.
+
+    Ngày thứ 2 tại Ninh Bình bạn hãy ghé thăm nhà thờ Phát Diệm cách trung tâm Ninh Bình 30km, trưa về ghé tham quan Cố
+    Đô Hoa Lư – đền thờ vua Đinh, vua Lê. Ngoài ra nếu còn thời gian tại Ninh Bình bạn hãy ghé tham quan Tam Cốc, hệ
+    thống hang động ít và ngắn hơn Tràng An nhưng tuyệt đẹp vào mùa lúa (tháng 5 – 6), chùa Bích Động (cùng hướng Tam
+    Cốc). Khu bảo tồn thiên nhiên Vân Long - khu bảo tồn thiên nhiên ngập nước lớn nhất đồng bằng Bắc Bộ, tại đây còn có
+    suối nước nóng Kênh Gà, động Vân Trình, Kẽm Trống và nhiều núi hang đẹp khác. Ngoài ra còn có động Thiên Hà và Vườn
+    Quốc Gia Cúc Phương cho những yêu thiên nhiên và khám phá.
+    <h3>    Ninh Bình có lễ hội gì đặc sắc</h3>
+    Nếu đến vào dịp đầu năm bạn sẽ tham quan Lễ hội chùa Bái Đính là một lễ hội xuân được tổ chức hàng năm, diễn ra từ
+    ngày mùng 6 Tết đến hết tháng 3 âm lịch. Ngoài ra trong tháng 3 (mồng 10 tháng 3 âm lịch) còn có lễ hội Hoa Lư,
+    tương truyền là ngày vua Đinh lên ngôi hoàng đế, nhân dân Trường Yên lại mở hội tưởng nhớ Đinh Tiên Hoàng.
+    <h3>    Khách sạn và ẩm thực địa phương</h3>
+    Trước khi quyết định đặt phòng bạn hãy tham khảo thêm các đánh giá của những người từng ở trước trên các trang web
+    như Agoda hay Tripadvisor để lựa chọn khách sạn mình thích và hợp túi tiền. Một số khách sạn gợi ý mình đánh giá tốt
+    như Tuấn Ngọc 1 sao, Canh Dieu Moutain, Ngọc Anh & Kinh Đô 2 sao, còn 3 sao thì có Bái Đính và khách sạn Queen.
+
+    Nhắc đến Ninh Bình là nhắc đến dê núi, vì vậy bạn không quên thưởng thức món dê núi (được chế biến gần 20 món) ăn
+    kèm cơm cháy, ngoài ra còn có những món đặc sắc như gỏi cá nhệch Kim Sơn, ốc núi, nem Yên Mạc, canh chua cá rô, miến
+    lươn chắc chắc sẽ làm bạn hài lòng.
+    <h3>    Đến Ninh Bình mua gì về làm quà?</h3>
+    Gợi ý một số sản vật Ninh Bình bạn có thể mua về là quà cho người thân là rượu cần Nho Quan, hàng mỹ nghệ từ cói
+    Ninh Bình (như thảm, khay, túi xách, cốc, mũ) và món ăn đặc sản cơm cháy chà bông.
+    <h3>    Những điều lưu ý</h3>
+    Mùa mưa ở Ninh Bình từ tháng 5 – tháng 9 nên bạn nhớ mang theo dù khi đi du lịch, còn mùa đông (tháng 12 – tháng 1)
+    thì nên mang theo áo ấm vì mua đông miền Bắc khá lạnh và buốt.
+    </pre>", "2023-12-10 20:30:00"),
+    (6, "Kinh nghiệm du lịch Huế", "Thành phố Huế nằm trên dải đất miền Trung được biết đến với Quần thể Di tích Cố đô Huế - Di
+sản Văn hóa Thế giới và Nhã nhạc Cung đình Huế - Kiệt tác phi vật thể và truyền miệng của nhân loại. Ngoài ra, Huế còn
+nổi tiếng với những lăng tẩm, món ăn ngon và làng nghề truyền thống lâu đầu.", "
+<pre>
+    <h1>  Kinh nghiệm du lịch Huế</h1>
+    Thành phố Huế nằm trên dải đất miền Trung được biết đến với Quần thể Di tích Cố đô Huế - Di sản Văn hóa Thế giới và
+    Nhã nhạc Cung đình Huế - Kiệt tác phi vật thể và truyền miệng của nhân loại. Ngoài ra, Huế còn nổi tiếng với những
+    lăng tẩm, món ăn ngon và làng nghề truyền thống lâu đầu.
+
+    <h3>    Phương tiện đi lại</h3>
+    Để đến Huế bạn có thể lựa chọn nhiều phương tiện như xa khách, tàu hỏa, máy bay. Nhưng tốt nhất mình khuyên bạn nên
+    chọn máy bay để tiết kiếm thời gian nếu di chuyển từ TP.HCM và Hà Nội, và vì các hãng hàng không của Việt Nam
+    (Vietjet, Jestar, Vietnam Airlines) thường có nhiều chương trình khuyến mãi, bạn lưu ý đăng ký mail để có thông tin
+    khuyến mãi của hàng không. Còn từ Cần Thơ bạn nên bay trực tiếp đến Đà Nẵng, sau đó kết hợp chuyến hành trình tham
+    quan Huế, chỉ cách 100km.
+
+    Tại thành phố Huế thì bạn nên lựa chọn phượng tiện phổ biến là thuê xe máy dể dạo quanh phố phường, bạn có thể dễ
+    dàng thuê tại các khách sạn mình ở. Ngoài ra, bạn có thể thuê xích lô tham quan cố đô và trong khu Đại Nội Huế cũng
+    rất thú vị.
+    <h3>    Nên đi Huế mùa nào?</h3>
+    Bạn nên đến Huế vào mùa khô từ tháng 3 – tháng 8, có khi nhiệt độ lên tới 35-400C tuy nhiên đây là mùa khô ráo nên
+    bạn có thể tham quan và khám phá trọn vẹn cố đô Huế. Ngoài ra, để hiểu về bản sắc văn hóa Huế bạn nên đến vào dịp
+    Festival Huế (được tổ chức 2 năm 1 lần vào các năm chẵn vào cuối dịp tháng 4.
+    <h3>    Những điểm nào nên tham quan khi đến Huế</h3>
+    Ngày đầu đến Huế bạn nên ghé tham quan Hoàng Cung Huế, cách trung tâm tầm 6km, điểm tham quan này khá rộng nên mất
+    gần 1 buổi, tại đây có lễ đổi gác từ 9h00 – 9h30 hàng ngày nên bạn chú ý xem để biết hoạt động đổi gác ngày xưa dưới
+    thời vua chúa như thế nào nhé. Nếu còn thời gian buổi sáng bạn có thể ghé tham quan Chùa Thiên Mụ, cách Hoàng Cung
+    Huế 6km. Buổi chiều thì bạn nên tham quan lăng của các vua Triều Nguyễn như Minh Mạng, Tự Đức, Khải Định, Gia Long,
+    Thiệu Trị, Đồng Khánh trong phạm vị bán kính tầm 7 – 12km.
+
+    Nếu còn thời gian ở lại Huế bạn có thể đi thuyền trên sông Hương tham quan ghé Điện Hòn Chén, làng hoa giấy Thanh
+    Tiên. Tắm biển Thuận An cách trung tâm Huế 18km, ghé Phá Tam Giang ngắm hoàng hôn hay thư giãn tại Suối khoáng nóng
+    Thanh Tân (cách Huế 31km). Buổi tối ở Huế bạn hãy đi thuyền trên sông Hương, thả đèn hoa đăng và thưởng thức ca hò
+    Huế sẽ rất thú vị.
+    <h3>    Huế có lễ hội gì đặc sắc?</h3>
+    Tại Huế định kỳ 2 năm 1 lần vào các năm chẵn sẽ tổ chức Festival Huế, thường vào dịp cuối tháng 4. Hay đến vào dịp
+    2/9 bạn sẽ được hòa mình vào lễ hội đua ghe được tổ chức bên bờ sông Hương. Nếu thích xem đấu vật bạn có thể ghé Huế
+    vào mồng mười tháng giêng âm lịch hàng năm để xem lễ hội Vật Làng Sình (huyện Phú Vang).
+    <h3>    Khách sạn và ẩm thực địa phương</h3>
+    Tại Huế có rất nhiều khách sạn để bạn lựa chọn, bạn nên tham khảo trước giá và các đánh giá của những du khách đã
+    từng ở trước trên các website như Agoda hay Tripadvisor để có lựa chọn tốt nhất theo khả năng chi trả của mình. Giá
+    khách sạn tại Huế tương đối mềm hơn so với Đà Nẵng hay Hội An, nên bạn đừng ngần ngại lựa chọn dòng khách sạn 3-4
+    sao tại đây.
+
+    Huế là vùng đất của ẩm thực cung đình, nên khi đến đây bạn có thể ghé vào các nhà hàng như Cung Đình để vừa thưởng
+    thức các món ăn cung đình như nem công, chả phụng, cơm cung đình, súp hạt sen, tôm ngự thuyền rồng... vừa được nghe
+    nhã nhạc Huế trong trang phục hoàng tộc và không gian cung đình Huế. Ngoài ra còn có những món ăn quen thuộc mà dân
+    dã như cơm Hến Huế, bún bò Huế (nổi tiếng nhất ở số 13 Lý Thường Kiệt), nem lụi Huế, các loại bánh như Bánh bèo,
+    bánh bột lọc, bánh khoái. Cơm chay Huế tại số 3 Lê Quý Đôn, và những bạn là tín đồ của chè thì không nên bỏ qua quán
+    chè hẻm nằm sâu tít trong đường Hùng Vương với 19 loại chè cực ngon.
+    <h3>    Đến Huế mua gì về làm quà?</h3>
+    Mè xửng, hạt sen, bưởi Thanh Trà, các loại mắm Huế (mắm cá cơm, tôm chua, mắm ruốc, mắm rò), mứt gừng Huế. Và những
+    sản phẩm tô điểm thêm cho ngôi nhà của bạn như hoa giấy Thanh Tiên hay nón Bài Thơ là những đặc sản của xứ Huế mà
+    bạn có thể mua về làm quà cho người thân, bạn bè.
+    <h3>    Những điều lưu ý</h3>
+    Bạn nên hạn chế đến Huế vào mùa mưa từ tháng 9 – 12, đặc biệt tháng 10 là mùa lũ lụt. Và mùa đông ở Huế thường rất
+    lạnh và buốt, có khi nhiệt độ xuống đến 90C (tháng 1 – 2). Nhớ nhé, thời tiết huế khá thất thường, ngay cả khi trời
+    nắng bạn cũng có thể gặp những cơn mưa bất chợt. Bởi thế lúc nào cũng phải mang theo 1 chiếc ô.
+    </pre>", "2023-12-05 19:37:43"),
+    (7, "Kinh nghiệm du lịch Đà Nẵng", "Đà Nẵng là thành phố thuộc vùng duyên hải Nam Trung Bộ, thành phố vừa hiện đại, sạch đẹp
+vừa yên bình này nổi tiếng với những tên gọi như thành phố đáng sống nhất Việt Nam, thành phố của những chiếc cầu hay
+thành phố của những bãi biển. Với chiều dài hơn 60km, biển Đà Nẵng được tạp chí Forbes của Mỹ bình chọn là 1 trong 6 bãi
+biển quyến rũ nhất hành tinh, đến đây du khách còn được tham quan những thắng cảnh ấn tượng như bán đảo Sơn Trà, khu du
+lịch Bà Nà Hills, danh thắng Ngũ Hành Sơn… Ngoài ra", "
+<pre>
+    <h1>  Kinh nghiệm du lịch Đà Nẵng</h1>
+    Đà Nẵng là thành phố thuộc vùng duyên hải Nam Trung Bộ, thành phố vừa hiện đại, sạch đẹp vừa yên bình này nổi tiếng
+    với những tên gọi như thành phố đáng sống nhất Việt Nam, thành phố của những chiếc cầu hay thành phố của những bãi
+    biển. Với chiều dài hơn 60km, biển Đà Nẵng được tạp chí Forbes của Mỹ bình chọn là 1 trong 6 bãi biển quyến rũ nhất
+    hành tinh, đến đây du khách còn được tham quan những thắng cảnh ấn tượng như bán đảo Sơn Trà, khu du lịch Bà Nà
+    Hills, danh thắng Ngũ Hành Sơn… Ngoài ra
+
+    <h3>    Phương tiện đi lại</h3>
+    Hiện nay có rất nhiều phương tiện đến Đà Nẵng cho bạn lựa chọn là máy bay, tàu hỏa hay xe khách. Tuy nhiên mình
+    khuyên bạn nếu sắp xếp được thời gian và lên lịch cho kỳ nghỉ rồi thì nên đặt vé máy bay sẽ thuận tiện hơn, cách
+    hãng hàng không VietJetAir, Jetstar hay Vietnam Airlines thường xuyên có chương trình khuyến mãi với giá cả rất hấp
+    dẫn từ 3 đầu Tp.HCM, Hà Nội và Cần Thơ. Từ sân bay Đà Nẵng về thành phố tầm 6km nên bạn đi xe taxi sẽ rất thuận
+    tiện.
+
+    Ngoài ra, nếu không đặt được vé máy bay bạn có thể đi tàu hỏa với giá cả cũng rất hợp lý tùy theo bạn lựa chọn ghế
+    ngồi hay giường nằm, đặc biệt ga Đà Nẵng nằm ngay trung tâm nên bạn thuận tiện đi lại. Còn nếu chọn xe khách thì bạn
+    dễ dàng mua vé từ bến xe tại TP.HCM hay Hà Nội. Tại thành phố Đà Nẵng bạn nên thuê xe máy đi tham quan vì khoảng
+    cách các điểm không quá xa nên bạn thuận tiện tham quan trong thời gian ở lại đây.
+    <h3>    Nên đi Đà Nẵng mùa nào?</h3>
+    Nếu muốn có cảm giác se lạnh thì đến Đà Nẵng từ tháng 1-3, tuy nhiên cũng không phải quá lạnh mà nhiệt độ chỉ ở
+    ngưỡng vừa phải. Còn đến vào tháng 4-5 thì tuy đã chuyển sang hè nhưng đôi khi vẫn còn sương mù. Thời điểm đẹp nhất
+    để đến Đà Nẵng sẽ là tháng 6-9 bởi bước vào mùa hè của miền Trung, trời nắng ráo và biển trong xanh, thích hợp cho
+    chuyến vui chơi dạo biển của bạn.
+    <h3>    Những điểm nào nên tham quan khi đến Đà Nẵng</h3>
+    Thành phố Đà Nẵng nổi tiếng với những bãi biển đẹp nên đến đây bạn không nên bỏ qua việc ngâm mình trong các bãi
+    biển như biển Mỹ Khê, bãi tắm Xuân Thiều, bãi tắm ở Bán Đảo Sơn Trà hoặc bãi tắm Non Nước. Ngay khu vực trung tâm Đà
+    Nẵng bạn nên ghé tham quan bảo tàng Đà Nẵng trưng bày những cổ vật của Chămpa hay tham quan công viên Châu Á với
+    những trò chơi hấp dẫn cùng vòng quay mặt trời Sun Wheel hiện là 1 trong 10 vòng quay lớn nhất thế giới. Đi xa chừng
+    16km bạn sẽ đến với Bán đảo Sơn Trà, viếng Chùa Linh Ứng, tham quan đỉnh Bàn Cờ, Bãi Bụt, Bãi Bắc, khu du lịch Bãi
+    Cát Vàng và sân bay trực thăng Sơn Trà.
+
+    Ngày hôm sau tại Đà Nẵng bạn tiếp tục tham quan danh thắng Ngũ Hành Sơn cách trung tâm thành phố Đà Nẵng khoảng 12km
+    hướng về Hội An, sau đó về lại thành phố Đà Nẵng và tiếp tục hành trình khám phá Bà Nà Hills, cách Đà Nẵng 30km. Đến
+    Bà Nà bạn không quên trải nghiệm dịch vụ đi tàu lửa, tham quan vườn hoa Le Jardin D'Amour và khu Làng Pháp xinh đẹp.
+    Buổi tối tại Đà Nẵng thì đừng quên trải nghiệm dịch vụ di thuyền trên sông Hàn về đêm và chiêm ngưỡng những cây cầu
+    làm nên tên tuổi của thành phố Đà Nẵng đó là cầu sông Hàn, cầu Rồng, cầu Trần Thị Lý, cầu Thuận Phước.
+    <h3>    Đà Nẵng có lễ hội gì đặc sắc?</h3>
+    Đà Nẵng nổi tiếng với Lễ hội pháo hoa Đà Nẵng được tổ chức 2 năm một lần, thường được tổ chức vào năm lẻ, hoạt động
+    diễn ra vào cuối tháng 4. Ngoài ra, Đà Nẵng còn có Lễ hội đua thuyền diễn ra vào tháng Giêng âm lịch hàng năm, lễ
+    hội Cầu Ngư tổ chức sau khi ăn Tết và lễ hội Quan Thế Âm vào ngày 19.2 Âm lịch hàng năm.
+    <h3>    Khách sạn và ẩm thực địa phương</h3>
+    Là một thành phố du lịch nổi tiếng nên Đà Nẵng được đầu tư rất nhiều về hệ thống giao thông, dịch vụ du lịch như
+    khách sạn, nhà hàng. Vì vậy bạn dễ dàng tìm thấy những khách sạn với mức giá phải chăng đến những khách sạn cao cấp,
+    resort 4-5 sao dọc bãi biển. Để có những lựa chọn tối ưu bạn nên tham khảo thông tin đánh giá trên Agoda hay
+    Tripadvisor. Ngoài ra, nếu muốn thức dậy trong khi khí se lạnh và trải nghiệm cảm giác thiên nhiên thì bạn nên đặt 1
+    đêm phòng trên Bà Nà Hilss tại khách sạn Lệ Nim hay khu Làng Pháp, mình tin cảm giác sẽ rất khác bởi không gian ở
+    đây rất lãng mạng và nên thơ.
+
+    Đà Nẵng có thể được xem là thiên đường của ẩm thực, bởi đến đây bạn không chỉ thưởng thức hải sản tươi sống mà còn
+    ăn được những món ăn độc đáo của miền Trung như Mỳ Quảng, bánh tráng cuốn thịt heo, bún mắm, bê thui Cầu Mống, bún
+    chả cá, gỏi cá Nam Ô, nem lụi, bánh xèo, bánh bèo – nậm lọc, bún bò.... Ngoài ra, nếu muốn ngắm phong cảnh về đêm
+    của Đà Nẵng thì bạn nên đến Sky Bar cao nhất Việt Nam tại tầng 36 của khách sạn Novotel Đà Nẵng, giá cả cũng rất
+    phải chăng với nhiều loại thức uống được phục vụ.
+    <h3>    Đến Đà Nẵng mua gì về làm quà?</h3>
+    Bạn có thể mua các loại hải sản tươi sống hoặc khô như mực, tôm, cá khô tẩm tại chợ Cồn hay chợ Hàn…Các loại bánh
+    tré Bà Đệ, rong biển Mỹ Khê, nước nắm Nam Ông…là những món quà đặc sản du khách thường mua về làm quà khi tới Đà
+    Nẵng.
+    <h3>    Những điều lưu ý</h3>
+    Tháng 10-12 Đà Nẵng (và miền Trung) bắt đầu vào mùa mưa, bão nên không thuận lợi cho các bạn di chuyển, nếu đến Đà
+    Nẵng lúc này gần như chỉ có thể trải nghiệm cảm giác mưa bão miền Trung kết hợp với tour khám phá ẩm thực Đà Nẵng mà
+    thôi. Nhớ là mưa miền Trung khá dai bạn nhé có thể kéo dài từ sáng đến chiều và từ tháng này qua tháng nọ. Và bạn
+    nên nhớ là người dân Đà Nẵng rất nhiệt tình và hiếu khách nên muốn hỏi đường đi thì bạn đừng ngần ngại nhé, họ rất
+    sẵn lòng và chỉ dẫn tận tình.
+    </pre>", "2023-12-20 07:45:32");
 
 -- Example data for comment
 INSERT INTO comment(user_id, post_id, content, reply_date)
