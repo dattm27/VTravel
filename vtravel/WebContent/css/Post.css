@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', 'Doppio One', sans-serif;
+}
+
+.Header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 15px;
+	background-color: #2F1893;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	z-index: 100;
+}
+
+.Logo {
+	font-size: 45px;
+	font-family: 'Doppio One';
+	text-decoration: none;
+	font-weight: 500;
+	color: white;
+}
+
+nav a {
+	font-size: 25px;
+	color: white;
+	text-decoration: none;
+	font-weight: 500;
+	margin-left: 100px;
+}
+
+nav a:hover {
+	background-color: #177EC8;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+#LoginButton {
+	padding: 20px 50px 20px 50px;
+	text-decoration: none;
+	text-align: center;
+	color: #2F1893;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 22px;
+	border-radius: 40px;
+	background-color: white;
+}
+
+#LoginButton:hover {
+	background-color: rgb(246, 245, 250, 0.7);
+}
+
+main {
+	position: relative;
+	top: 15vh;
+	left: 0;
+	width: 100%;
+}
+
+main h1 {
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 10vh;
+}
+
+.Post {
+	position: relative;
+	max-width: 100%;
+	margin: 5vh 5% 5vh 5%;
+	display: flex;
+	align-items: stretch;
+	justify-content: start;
+	border-top: 2px #2F1893 solid;
+	border-radius: 2%;
+	padding: 1rem;
+}
+
+.ImageLink {
+	max-width: 20%;
+	display: flex;
+	justify-content: center;
+}
+
+.Post img {
+	width: 100%;
+	border-radius: 10%;
+}
+
+.PostContent {
+	max-width: 80%;
+	padding: 2rem;
+}
+
+.PostContent a {
+	max-width: 100%;
+	justify-content: start;
+	text-decoration: none;
+}
+
+.PostContent h2 {
+	padding-bottom: 2rem;
+	font-size: 2rem;
+	color: #2F1893;
+}
+
+.PostContent h2:hover {
+	color: #177EC8;
+}
+
+.PostContent p {
+	font-size: 1rem;
+	hyphens: auto;
+}
+
+footer {
+	position: relative;
+	left: 0;
+	top: 20vh;
+}
+
+.Footer {
+	width: 100%;
+	background-color: rgb(206, 204, 204);
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	padding-left: 20px;
+}
+
+footer .Logo {
+	color: #2F1893;
+	font-size: 70px;
+	padding-top: 20px;
+}
+
+.socialIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 20px;
+}
+
+.socialIcon a {
+	padding: 10px;
+	text-decoration: none;
+	border-radius: 50%;
+}
+
+.socialIcon a i {
+	font-size: 2em;
+	color: black;
+	opacity: 0.7;
+}
+
+.footerNav ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.footerNav ul li {
+	padding: 10px;
+}
+
+.footerNav ul a {
+	text-decoration: none;
+	font-size: 20px;
+	color: black;
+}
+
+.footerBottom {
+	margin: 20px 20px;
+}
