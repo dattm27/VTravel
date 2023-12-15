@@ -35,10 +35,12 @@ insert into account(email, fullname, username, password, status, role, phone_num
 values ('dattran2003.ttn@gmail.com', 'Trần Mạnh Đạt', 'dattm03', 'dattm03', 'active', 'admin' , '0827666910');
 
 select * from account;
+use vtravel;
 select * from proposal_custom_tour;
-
+select * from available_tour;
 select cus_tour.id, user_id ,fullname, destination, start_date, end_date, number_of_travellers, note, cus_tour.status, created_date
 from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id;
+
 
 
 
