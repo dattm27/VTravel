@@ -104,7 +104,7 @@ public class TourControllerServlet extends HttpServlet {
 		
 		//lấy thông tin người dùng có ordererID
 		try {
-			Account orderer = accountDbUtil.getGeneralInformation(ordererID);
+			Account orderer = accountDbUtil.getAccountInf(ordererID);
 			ProposalCustomTour proposal = tourDbUtil.getProposalCustomTour(ID);
 			request.setAttribute("ORDERER", orderer);
 			request.setAttribute("PROPOSAL", proposal);
