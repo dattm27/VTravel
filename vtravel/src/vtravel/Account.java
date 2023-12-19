@@ -21,6 +21,18 @@ public class Account {
 		this.email = email;
 	}
 	
+	
+	public Account(int iD, String fullname, String username, String phoneNumber, String email, String role) {
+		super();
+		ID = iD;
+		this.fullname = fullname;
+		this.username = username;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.role = role;
+	}
+
+
 	public int getID() {
 		return ID;
 	}

@@ -17,7 +17,7 @@ public class AccountDAO {
 
             while (resultSet.next()) {
                 Account account = new Account();
-                account.setId(resultSet.getInt("id_user"));
+                account.setId(resultSet.getInt("id"));
                 account.setUsername(resultSet.getString("username"));
                 account.setEmail(resultSet.getString("email"));
                 account.setPhoneNumber(resultSet.getString("phone_number"));

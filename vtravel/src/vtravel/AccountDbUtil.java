@@ -17,7 +17,7 @@ public class AccountDbUtil {
 	}
 
 	//lấy những thông tin chung của người dùng (bao gồm ID, tên, số điện thoại, địa chỉ email)
-	public Account getGeneralInformation(int ID) throws SQLException {
+	public Account getAccountInf(int ID) throws SQLException {
 		Account account = null;
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -27,7 +27,7 @@ public class AccountDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//viết SQL
-			String sql = "select ID, fullname, phone_number, email from account where ID = ?";
+			String sql = "select ID, username, fullname, phone_number, email, role from account where ID = ?";
 			myStmt = myConn.prepareStatement(sql);
 			
 			//đặt tham số
@@ -42,8 +42,9 @@ public class AccountDbUtil {
 				String fullname = myRs.getString("fullname");
 				String phonenumber = myRs.getString("phone_number");
 				String email = myRs.getString("email");
-				
-				account = new Account(ID, fullname, phonenumber, email);
+				String username = myRs.getString("username");
+				String role = myRs.getString("role");
+				account = new Account(ID,  fullname,username, phonenumber, email, role);
 				
 			}
 			//trả về đối tượng là người dùng có ID là ID
@@ -54,6 +55,36 @@ public class AccountDbUtil {
 			close(myConn, myStmt, myRs);
 		}
 	}
+	public int checkLoginInf(String username, String password) throws SQLException {
+			
+			Connection myConn = null;
+			PreparedStatement myStmt = null;
+			ResultSet myRs = null;
+			try {
+				//thiết lập kết nối cơ sở dữ liệu
+				myConn = dataSource.getConnection();
+				
+				//chuẩn bị sql
+				String sql = "SELECT id from account where username = ? AND password = ?";
+				myStmt = myConn.prepareStatement(sql);
+				
+				//đặt tham số
+				myStmt.setString(1, username);
+				myStmt.setString(2, password);
+				
+				//thực thi truy vấn
+				myRs = myStmt.executeQuery();
+				int result = -1;
+				while(myRs.next()) {
+					result = myRs.getInt("id");
+				}	
+				return result;
+			}
+			finally {
+				close(myConn, myStmt, myRs);
+				
+			}
+		}
 	
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
@@ -73,6 +104,8 @@ public class AccountDbUtil {
 		}
 		
 	}
+
+	
 	
 	
 }
