@@ -119,7 +119,7 @@ public class SessionControllerServlet extends HttpServlet {
 			session.setAttribute("role" ,account.getRole());
 			session.setMaxInactiveInterval(30*60);
 			//gửi lại jsp
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("WelcomeControllerServlet");
 		}
 		else {
 			request.setAttribute("logInMessage", "fail");
