@@ -170,40 +170,29 @@
 				<div class = "mt-3"> <i>Du lịch theo nhóm cùng dịch vụ tour tuỳ ý của VietTravel</i></div>
 			</div>
 			
-			<h3 class="mt-3">Bài viết nổi bật</h3>
-			<div class="media mt-3 mb-3">
-			  <img src="images/tour/Halong-bay.jpeg" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
-			  <div class="media-body">
-			    <h5 class="mt-0">Center-aligned media</h5>
-			    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-			    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-			  </div>
-			</div>
-			<div class="media mt-3 mb-3">
-			  <img src="images/tour/Halong-bay.jpeg" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
-			  <div class="media-body">
-			    <h5 class="mt-0">Center-aligned media</h5>
-			    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-			    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-			  </div>
-			</div>
-			<div class="media mt-3 mb-3">
-			  <img src="images/tour/Halong-bay.jpeg" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
-			  <div class="media-body">
-			    <h5 class="mt-0">Center-aligned media</h5>
-			    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-			    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-			  </div>
-			</div>
-			<div class="media mt-3 mb-3">
-			  <img src="images/tour/Halong-bay.jpeg" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
-			  <div class="media-body">
-			    <h5 class="mt-0">Center-aligned media</h5>
-			    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-			    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-			  </div>
-			</div>
-			
+			<!-- Phần bài viết nổi bật -->
+			<div class="d-flex mb-3 align-items-center">
+	       	 	<h3 class="">Bài viết nổi bật </h3> 
+	       	 	<c:url var="LIST_NEW_POSTS" value = "PostController">
+	       	 		<c:param name="command" value= "LIST_NEW_POSTS"/>
+	       	 	</c:url>
+	       		 <a class="ml-auto" href="${LIST_NEW_POSTS}">Xem tất cả </a>
+	       	</div>
+			<!-- Vòng lặp for hiển thị các bài viết nổi bật -->
+			<c:forEach items="${POST_LIST}" var="post">
+				<div class="media mt-3 mb-3">
+				  <img src="images/tour/Halong-bay.jpeg" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
+				  <div class="media-body">
+				    <h5 class="mt-0">${post.name}</h5>
+				    <p>${post.shortDescription}</p>
+				   
+				  </div>
+				</div>
+			</c:forEach>
+			<!-- Hết phần bài viết -->
+			 <div class = "d-flex"> 
+			 	<a class="ml-auto">Xem tất cả </a>    
+			 </div>
 	    </div>
     </div>
 	</body>
