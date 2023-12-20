@@ -68,7 +68,7 @@ public class PostControllerServlet extends HttpServlet {
 	//hiển thị 8 bài viết mới lên trang chủ 
 	private void listNewPosts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		logger.info("listNewPosts called");
-		//lấy các 8 bài viết trong cơ sở dữ liệu
+		//lấy các 5 bài viết trong cơ sở dữ liệu
 		List<Post> postList = postDbUtil.getPostList();
 		
 		//thêm danh sách bài viết vào request
