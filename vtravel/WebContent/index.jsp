@@ -127,12 +127,12 @@
 	       
 	       	<!-- chứa các tour -->
 	       
-			<c:url var="LIST_ALL_TOUR" value="TourControllerServlet">
-				<c:param name="command" value="LIST_ALL_TOUR" />
+			<c:url var="LIST_HOT_TOURS" value="TourControllerServlet">
+				<c:param name="command" value="LIST_HOT_TOURS" />
 			</c:url>
 	       	<div class="d-flex mb-3 align-items-center">
 	       	 	<h3 class="">Các tour nổi bật </h3> 
-	       		 <a class="ml-auto" href="${LIST_ALL_TOUR}">Xem tất cả </a>
+	       		 <a class="ml-auto" href="${LIST_HOT_TOURS}">Xem tất cả </a>
 	       	</div>
 	       	<div class = "d-flex justify-content-around flex-wrap">	 
 	       	   <c:forEach items="${TOUR_LIST}" var="tour">
