@@ -70,9 +70,12 @@ public class TourControllerServlet extends HttpServlet {
 			case "DETAIL_PROPOSAL":
 				getDetailProposal(request, response);
 				break;
-			//lấy danh sách tất cả các tour phổ thông hiển thị lên trang chủ
-			case "LIST_ALL_TOUR":
-				listAllTour(request, response);
+			//lấy danh sách tất cả các tour phổ thông hiển thị lên trang tour
+			case "LIST_ALL_TOURS":
+				listAllTours(request, response);
+				break;
+			case "LIST_HOT_TOURS":
+				listHotTours(request, response);
 				break;
 			default:
 				break;
@@ -82,10 +85,24 @@ public class TourControllerServlet extends HttpServlet {
 		}
 	}
 
-
-	private void listAllTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	// lấy tất cả các tours từ cơ sở dữ liệu hiển thị lên trang tour
+	private void listAllTours(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		// lay danh sach tour tu co so du lieu 
-		List<Tour> tourList = tourDbUtil.getAllTour();
+		List<Tour> tourList = tourDbUtil.getAllTour(false);
+		
+		//them danh sach vua lay duoc vao request
+		request.setAttribute("TOUR_LIST", tourList);
+		
+		//gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/tours_page.jsp");
+		dispatcher.forward(request, response);
+		
+	}
+	
+	// lấy 8 tour từ cơ sở dữ liệu hiển thị lên trang chủ 
+	private void listHotTours(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		// lay danh sach tour tu co so du lieu 
+		List<Tour> tourList = tourDbUtil.getAllTour(true);
 		
 		//them danh sach vua lay duoc vao request
 		request.setAttribute("TOUR_LIST", tourList);

@@ -232,7 +232,7 @@ public class TourDbUtil {
 	
 	
 	
-	public List<Tour> getAllTour() throws SQLException {
+	public List<Tour> getAllTour(boolean limmited) throws SQLException {
 		List<Tour> tourList = new ArrayList<>();
 		
 		Connection myConn = null;
@@ -244,7 +244,7 @@ public class TourDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//chuẩn bị sql
-			String sql = "select * from available_tour limit 8";
+			String sql = "select * from available_tour";
 			myStmt = myConn.createStatement();
 			
 			//thực thi truy vấn
@@ -261,6 +261,7 @@ public class TourDbUtil {
 				Tour tour = new Tour(ID, name, startDate, endDate, price);
 				//them vao danh sach
 				tourList.add(tour);	
+				if (limmited ==true && tourList.size() >= 8) break;
 			}
 				
 			return tourList;
