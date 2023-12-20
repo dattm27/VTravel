@@ -28,14 +28,7 @@
             <button class="search-button">Tìm kiếm</button>
         </div>
     </div>
-	<!-- dịch vụ tour phổ thông -->
-    <div class="container" style= "margin-top: 50px">
-       
-       	<!-- chứa các tour -->
-       	<div class="d-flex mb-3 align-items-center">
-       	 	<h3 class="">Các tour nổi bật </h3> 
-       		 <a class="ml-auto">Xem tất cả </a>
-       	</div>
+
        <!-- dịch vụ tour phổ thông -->
 	    <div class="container" style= "margin-top: 50px">
 	       
