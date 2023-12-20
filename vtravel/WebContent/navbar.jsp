@@ -16,7 +16,10 @@
 			<li class="nav-item "><a class="nav-link" href="index.jsp">Trang chủ
 					<span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Tour phổ
+			<c:url var = "LIST_ALL_TOURS" value = "TourControllerServlet">
+				<c:param name="command" value = "LIST_ALL_TOURS"/>
+			</c:url> 
+			<li class="nav-item"><a class="nav-link" href="${LIST_ALL_TOURS}">Tour phổ
 					thông</a></li>
 			<li class="nav-item"><a class="nav-link" href="custom_tour.jsp">Tour tuỳ
 					chọn</a></li>
