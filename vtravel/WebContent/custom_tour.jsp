@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-<title>Tuỳ chọn chuyến đi</title>
+<title>VTravel - Tuỳ chọn chuyến đi</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<!-- Thêm script của Bootstrap Modal -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
