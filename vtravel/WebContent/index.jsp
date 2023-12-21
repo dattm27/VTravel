@@ -24,8 +24,8 @@
             <p>Slogan của bạn ở đây</p>
         </div>
         <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Tìm kiếm tour du lịch của bạn">
-            <button class="search-button">Tìm kiếm</button>
+            <input type="text" class="search-input" placeholder="Tìm kiếm tour du lịch của bạn" name="diemmuonden">
+            <button class="search-button" onclick="search()">Tìm kiếm</button>
         </div>
     </div>
 
@@ -103,4 +103,18 @@
 	    </div>
     </div>
 	</body>
+	<script>
+		function search() {
+			  /// xu li input
+			  var diemminhden = document.querySelector('input[name="diemmuonden"]').value;
+			  var tmp = diemminhden.split(" ");
+			  var newString = tmp.join("+");
+
+			  // Tạo một tham số URL
+			  var url = "/vtravel/TourControllerServlet?command=LIST_ALL_TOURS&kieu_sap_xep=Giá+tăng+dần&diemmuonden="+newString+"&ngay_bat_dau=&gia_mong_muon=#";
+			  
+			  // Chuyển sang trang đích
+			  window.location.href = url;
+		}
+	</script>
 </html>
