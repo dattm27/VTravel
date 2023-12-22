@@ -60,7 +60,7 @@
 					    <div class = "card-text">Đã đặt: 20</div>
 					  </div>
 					  <div class="card-footer">
-					    	<a href="#" class="btn btn-primary">Đặt vé ngay</a>
+					    	<a href="/vtravel/tours?id=<c:out value = "${ tour.getID() }"/>" class="btn btn-primary">Đặt vé ngay</a>
 					    </div>
 					</div>
 				</c:forEach>

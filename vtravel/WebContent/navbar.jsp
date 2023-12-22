@@ -27,7 +27,7 @@
 					thông</a></li>
 			<li class="nav-item"><a class="nav-link" href="custom_tour.jsp">Tour tuỳ
 					chọn</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Bài viết</a> <!-- Check if the user is logged in -->
+			<li class="nav-item"><a class="nav-link" href="/vtravel/PostList">Bài viết</a> <!-- Check if the user is logged in -->
 				<c:if test="${empty sessionScope.username}">
 					<!-- Display Đăng nhập link if not logged in -->
 					<li class="nav-item"><a class="nav-link" href="login.jsp"
@@ -39,7 +39,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							${sessionScope.username} </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Tour của tôi</a> <a
+							<a class="dropdown-item" href="/vtravel/BookedTour?ID=<c:out value = "${sessionScope.ID}"/>">Tour của tôi</a> <a
 								class="dropdown-item" href="#">Chức năng 2</a>
 							<div class="dropdown-divider"></div>
 							<!-- tạo xử lý yêu cầu đăng xuất  -->

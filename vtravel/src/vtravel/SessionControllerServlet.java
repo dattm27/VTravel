@@ -18,7 +18,7 @@ import javax.sql.DataSource;
  * Servlet implementation class SessionControllerServlet
  */
 @WebServlet("/SessionControllerServlet")
-public class SessionControllerServlet extends HttpServlet {
+public class SessionControllerServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private AccountDbUtil accountDbUtil; // tương tác với cơ sở dữ liệu về tài khoản
 	//Define datasource/ connection pool for Resource Jnjection
