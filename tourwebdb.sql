@@ -1324,4 +1324,6 @@ SELECT * FROM account;
 SELECT * FROM post;
 SELECT * FROM comment;
 
+-- cap nhat anh 
+UPDATE `vtravel`.`available_tour` SET `image` = 'images/tour/Ninh-Binh.jpg' WHERE (`id` = '5');
 
