@@ -23,18 +23,25 @@
                 <h5>Lọc tour</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                       
 						  <form class="row align-items-center">
 								<input type = "hidden" name = "command" value = "LIST_ALL_TOURS">
-								<div class="input-group mb-3 ml-3">
+								<%-- <div class="input-group  mb-3 ml-3">
 								  
-								  <select class="form-select" id="inputGroupSelect01" style="" name = "kieu_sap_xep" >
+								  <select class="form-select"   id="inputGroupSelect01" style="" name = "kieu_sap_xep" >
 								    <option selected style="margin-left: 30px;"> <%= request.getParameter("kieu_sap_xep") == null ? "Giá tăng dần" : (request.getParameter("kieu_sap_xep").equals("1") ? "Giá tăng dần" : (request.getParameter("kieu_sap_xep").equals("2") ? "Giá giảm dần" : "Ngày xuất phát")) %> </option>
 								    <option value="1">Giá tăng dần</option>
 								    <option value="2">Giá giảm dần</option>
 								    <option value="3">Ngày xuất phát</option>
 								  </select>
-								</div>	
+								</div>	 --%>
+								 <select class="custom-select ml-3 mr-3 mb-3" id="inputGroupSelect01" name = "kieu_sap_xep" >
+								    <option selected value="Chọn bộ lọc" disabled><%= request.getParameter("kieu_sap_xep") == null ? "Chọn bộ lọc" : (request.getParameter("kieu_sap_xep").equals("1") ? "Giá tăng dần" : (request.getParameter("kieu_sap_xep").equals("2") ? "Giá giảm dần" : "Ngày xuất phát")) %> </option>
+								    <option value="1">Giá tăng dần</option>
+								    <option value="2">Giá giảm dần</option>
+								    <option value="3">Ngày xuất phát</option>
+								  </select>
+								
 								
 								<div class="col-auto">
 									<label class="visually" for="autoSizingInput">Điểm đến</label> <input
@@ -54,10 +61,10 @@
 								
 								
 								<div class="col-auto mt-auto" >
-									<button type="submit" class="btn btn-primary" style="margin-top: 20px;">Search</button>
+									<button type="submit" class="btn btn-primary" style="margin-top: 20px;">Lọc</button>
 								</div>
 							</form>
-                        </a>
+                   
                     </li>
                     <!-- Add more links as needed -->
                 </ul>
@@ -95,5 +102,6 @@
         </main>
     </div>
 </div>
+	
 </body>
 </html>
