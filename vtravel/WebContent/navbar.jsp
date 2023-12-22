@@ -58,7 +58,11 @@
 							${sessionScope.username} </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="user-management.jsp">Quản lý user</a>
-							<a class="dropdown-item" href="#">Quản lý tour</a>
+							<!-- tạo link xử lý yêu cầu quản lý tour phổ thông -->
+							<c:url var="TOURS_MANAGEMENT" value="TourControllerServlet">
+								<c:param name="command" value="TOURS_MANAGEMENT" />
+							</c:url>
+							<a class="dropdown-item" href="${TOURS_MANAGEMENT}">Quản lý tour</a>
 							<!-- tạo link xử lý yêu cầu quản lý custom tour   -->
 							<c:url var="LIST_ALL_CUSTOM_TOUR_REQUEST" value="TourControllerServlet">
 								<c:param name="command" value="LIST_ALL_CUSTOM_TOUR_REQUEST" />
