@@ -87,7 +87,11 @@
 			        <div class="card mb-3" style="width: 16rem;">
 					  <img class="card-img-top" src="images/tour/Halong-bay.jpeg" alt="Card image cap">
 					  <div class="card-body">
-					    <h5 class="card-title">${tour.name}</h5>
+					  <c:url var="DETAIL_TOUR_PAGE" value ="TourControllerServlet">
+					  	<c:param name="command" value = "DETAIL_TOUR_PAGE"/>
+					  	<c:param name="ID" value = "${tour.ID}"/>
+ 					  </c:url>
+					    <h5 class="card-title"><a href="${DETAIL_TOUR_PAGE}">${tour.name}</a></h5>
 					    <div class="card-text text-info" style="font-size:20px"><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /> VNĐ</div>
 					    <div class="card-text">Ngày bắt đầu: ${tour.startDate}</div>
 					    <div class="card-text">Ngày kết thúc: ${tour.endDate}</div>

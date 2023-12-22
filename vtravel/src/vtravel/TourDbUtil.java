@@ -330,6 +330,44 @@ public class TourDbUtil {
 	
 	}
 	
+	public Tour getDetailTour(int ID) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql 
+			String sql = "select * from available_tour where ID = " + ID;
+			myStmt = myConn.createStatement();
+			
+			//execute query
+			myRs = myStmt.executeQuery(sql);
+			
+			while (myRs.next()) {
+				String name = myRs.getString("tour_name");
+				String startDate = myRs.getString("start_date");
+				String endDate = myRs.getString("end_date");
+				int price = myRs.getInt("price");
+				int maxNumOfTourists = myRs.getInt("max_number_tourist");
+				String startPlace = myRs.getString("start_place");
+				String description = myRs.getString("description");
+				String image =  myRs.getString("image");
+				
+				//tạo ra đối tượng tour mưới
+				Tour tour = new Tour(ID, name,  startDate,  endDate,  description, price,  startPlace, image);
+				return tour;
+			}
+		}
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+		return null;
+	}
+
+	
+	
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
 			if (myRs != null) {
@@ -349,7 +387,7 @@ public class TourDbUtil {
 		
 	}
 
-	
+
 
 	
 

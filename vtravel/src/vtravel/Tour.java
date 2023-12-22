@@ -7,21 +7,36 @@ public class Tour {
 	private String endDate;
 	private String description;
 	private int price;
-	
+	private String startPlace;
+	private String image;
 //	constructor
-	
 	
 	public int getID() {
 		return ID;
 	}
+
 	public Tour(int iD, String name, String startDate, String endDate, int price) {
-	super();
-	ID = iD;
-	this.name = name;
-	this.startDate = startDate;
-	this.endDate = endDate;
-	this.price = price;
-}
+		super();
+		ID = iD;
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.price = price;
+	}
+	
+	public Tour(int iD, String name, String startDate, String endDate, String description, int price, String startPlace,
+			String image) {
+		super();
+		ID = iD;
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.description = description;
+		this.price = price;
+		this.startPlace = startPlace;
+		this.image = image;
+	}
+
 	public void setID(int iD) {
 		ID = iD;
 	}
@@ -54,6 +69,18 @@ public class Tour {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getStartPlace() {
+		return startPlace;
+	}
+	public void setStartPlace(String startPlace) {
+		this.startPlace = startPlace;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

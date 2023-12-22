@@ -82,12 +82,26 @@ public class TourControllerServlet extends HttpServlet {
 			case "LIST_HOT_TOURS":
 				listHotTours(request, response);
 				break;
+			case "DETAIL_TOUR_PAGE":
+				detailTourPage(request, response);
 			default:
 				break;
 			}
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void detailTourPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		//lấy ID gửi từ yêu cầu
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		//Lấy tour từ ID
+		Tour tour = tourDbUtil.getDetailTour(ID);
+		//thêm vào request
+		request.setAttribute("tour", tour);
+		//Gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/detail_tour_page.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void listAllTourAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
