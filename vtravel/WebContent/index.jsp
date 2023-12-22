@@ -101,9 +101,10 @@
 			 	<a class="ml-auto">Xem tất cả </a>    
 			 </div>
 	    </div>
-    </div>
 	</body>
+	<!-- script for searching tour by destination -->
 	<script>
+		
 		function search() {
 			  /// xu li input
 			  var diemminhden = document.querySelector('input[name="diemmuonden"]').value;
