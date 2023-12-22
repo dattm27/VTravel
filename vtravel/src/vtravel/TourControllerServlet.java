@@ -67,6 +67,10 @@ public class TourControllerServlet extends HttpServlet {
 			case "LIST_ALL_CUSTOM_TOUR_REQUEST":
 				listProposalCustomTour(request, response);
 				break;
+			//tải danh sách các tour lên trang quản lý của admin
+			case "TOURS_MANAGEMENT":
+				listAllTourAdmin(request, response);
+				break;
 			// khi admin bấm vào chi tiết một proposal
 			case "DETAIL_PROPOSAL":
 				getDetailProposal(request, response);
@@ -84,6 +88,18 @@ public class TourControllerServlet extends HttpServlet {
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void listAllTourAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		//lấy danh sách các tour từ cơ sở dữ liệu
+		List<Tour> tourList = tourDbUtil.getAllTour(false);
+		
+		// them danh sach vua lay duoc vao request
+		request.setAttribute("TOUR_LIST", tourList);
+		
+		// gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/tours_management.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	// lấy tất cả các tours từ cơ sở dữ liệu hiển thị lên trang tour
@@ -299,11 +315,12 @@ public class TourControllerServlet extends HttpServlet {
 		tourDbUtil.addProposalCustomTour(proposalCustomTour);
 
 		// thông báo đặt tour thành công
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/plain;charset=UTF-8");
-
-		out.println("Đặt tour thành công");
-		out.println(destination);
+//		PrintWriter out = response.getWriter();
+//		response.setContentType("text/plain;charset=UTF-8");
+//
+//		out.println("Đặt tour thành công");
+//		out.println(destination);
+		response.sendRedirect("WelcomeControllerServlet"); 
 	}
 
 }

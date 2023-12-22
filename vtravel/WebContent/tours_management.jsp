@@ -17,7 +17,7 @@
   	<link rel="stylesheet" href="css/pop-up.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   	
-   <!-- script phân trang, tìm kiếm -->
+   <!-- script xử lý các thao tác của custom tour-->
  	<script src="js/custom_tour_management.js"></script>   
 	
 </head>
@@ -94,8 +94,9 @@
 					<th>Tên chuyến</th>
 					<th>Ngày bắt đầu</th>
 					<th> Ngày kết thúc</th>
+					<th>Điểm khởi hành</th>
 					<th>Giá vé</th>
-					<th>Trạng thái</th>
+					<th>Đã đặt</th>
 					<th>Hành động</th>
 				</tr>
 			</thead>
@@ -103,12 +104,12 @@
 				<c:forEach items="${TOUR_LIST}" var="tour" varStatus="loopStatus">
 					<tr class="row-item" data-search-1="${tempProposal.ordererFullname}" data-search-2="${tempProposal.destination}" status="${tempProposal.status}">
 						<td>${loopStatus.index + 1}</td>
-						<td>${tour.name}</td>
+						<td style="max-width: 200px">${tour.name}</td>
 						<td>${tour.startDate}</td>
 			 			<td>${tour.endDate}</td>
-					
+						<td></td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /></td>
-						<td id="status_${tempProposal.ID}">${tempProposal.status}</td>
+						<td>20</td>
 			 			<!-- set up a link to delete a tour  -->
 			 			<c:url var="deleteLink" value ="TourControllerServlet">
 			 				<c:param name="command" value="DELETE"/>
@@ -121,10 +122,11 @@
 				 				<c:param name="ID" value="${tempProposal.ID}"/>
 				 				<c:param name ="ordererID" value = "${tempProposal.ordererID}"/>
 				 			</c:url>	
-							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_PROPOSAL}')">Xử lý</a> 
+							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_PROPOSAL}')">Chi tiết/ Sửa</a> 
 							<!-- Thực hiện thao tác sẽ làm thay đổi trạng thái nên cần cập nhật lại chức năng lọc -->
-							<a class="btn btn-success btn-sm" onclick="confirmAndPurchase('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Đã thanh toán</a>
-							<a class="btn btn-danger btn-sm" onclick="confirmAndCancel('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Huỷ</a>
+							<a class="btn btn-success btn-sm" onclick="confirmAndPurchase('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Danh sách đặt</a>
+							<a class="btn btn-warning btn-sm">Khoá</a>
+							<a class="btn btn-danger btn-sm" onclick="confirmAndCancel('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Xoá</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -138,10 +140,11 @@
 		</div> 
 		
 		<!-- Truyền giá trị PROPOSAL_LIST.size() vào một thuộc tính HTML -->
-		<div id="proposalListSize" data-size="${PROPOSAL_LIST.size()}"></div>
+		<div id="proposalListSize" data-size="${TOUR_LIST.size()}"></div>
 		
 		<!-- Javascript xử lý phân trang và tìm kiếm -->
 		 <script src="js/pagination_and_search.js"></script>  
 	</div>
+	
 </body>
 </html>
