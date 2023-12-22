@@ -272,6 +272,63 @@ public class TourDbUtil {
 		}
 	
 	}
+	public List<Tour> getFitlerTour(String diemmuonden, int orderFeature, int minMoney, 
+			 int maxMoney, String date_start) throws SQLException {
+		List<Tour> tourList = new ArrayList<>();
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		// khoi tao gia tri cho sql
+		String minMoneyString = Integer.toString(minMoney);
+		String maxMoneyString = Integer.toString(maxMoney);
+		String orderFeatureString = "price";
+		
+		if (orderFeature == 1) {
+			
+		}
+		if (orderFeature == 2) {
+			orderFeatureString = "price DESC";
+		}
+		
+		if (orderFeature == 3) {
+			orderFeatureString = "start_date";
+		}
+		
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql
+			String sql = "SELECT * FROM available_tour where tour_name LIKE \"%" + diemmuonden + "%\""
+					+ "and price >= " + minMoneyString + " and price <= " + maxMoneyString + " and start_date >= \""
+					+ date_start + "\" " + " ORDER BY " + orderFeatureString;
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn
+			myRs = myStmt.executeQuery(sql);
+			
+			while (myRs.next()) {
+				int ID = myRs.getInt("id");
+				String name = myRs.getString("tour_name");
+				String startDate = myRs.getString("start_date");
+				String endDate = myRs.getString("end_date");
+				int price = myRs.getInt("price");
+				
+				///tao ra mot doi tuong Tour
+				Tour tour = new Tour(ID, name, startDate, endDate, price);
+				//them vao danh sach
+				tourList.add(tour);	
+			}
+				
+			return tourList;
+		}
+		
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+	
+	}
 	
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {

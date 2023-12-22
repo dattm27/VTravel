@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,9 @@
 	      <h3 class="mt-3" >Nhập thông tin chuyến đi của bạn</h3>
 	      <form action="TourControllerServlet" method ="POST" >
 	       	<input type="hidden" name="command" value="REQUEST_CUSTOM_TOUR">
-	       	<input type="hidden" name= "userID" value="1"/>
+	       	<!-- Lấy ID của user đang đăng nhâp -->
+	       	<c:set var="userID" value="${sessionScope.ID}" />
+	       	<input type="hidden" name= "userID" value="${userID}"/>
 	        
 	        <div class="form-group">
 			    <label for="destination">Địa điểm:</label>

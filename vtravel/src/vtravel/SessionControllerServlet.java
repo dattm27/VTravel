@@ -74,7 +74,7 @@ public class SessionControllerServlet extends HttpServlet{
 		
 
 		// Redirect the user to the login page or any other appropriate page
-		response.sendRedirect("index.jsp"); 
+		response.sendRedirect("WelcomeControllerServlet"); 
 		
 	}
 
