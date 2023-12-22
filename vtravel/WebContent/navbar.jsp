@@ -17,7 +17,7 @@
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item ">
 			
-			<a class="nav-link" href="${WELCOME}">Trang chủ
+			<a class="nav-link" href="${WELCOME}">Trang chủ hello
 					<span class="sr-only">(current)</span>
 			</a></li>
 			<c:url var = "LIST_ALL_TOURS" value = "TourControllerServlet">
