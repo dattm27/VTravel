@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.anhpt.model.AccountDAO;
-import com.anhpt.model.TourDAO;
+import com.anhpt.model.PostDAO;
 
 @WebServlet("/lock")
 public class LockServlet extends HttpServlet {
@@ -28,15 +28,6 @@ public class LockServlet extends HttpServlet {
         
         // Sau khi thực hiện hành động "lock", bạn có thể gửi phản hồi về trình duyệt (ví dụ: "success")
         response.getWriter().write("success");
-		}else {
-	        String tourIDString = request.getParameter("tourId");
-	        // Chuyển đổi chuỗi thành số nguyên (int)
-	        int tourId = Integer.parseInt(tourIDString);
-	        TourDAO tourDAO = new TourDAO();
-	        tourDAO.lockTour(tourId);
-	        
-	        // Sau khi thực hiện hành động "lock", bạn có thể gửi phản hồi về trình duyệt (ví dụ: "success")
-	        response.getWriter().write("success");
 		}
 	}
 }

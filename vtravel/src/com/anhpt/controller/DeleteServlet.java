@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.anhpt.model.AccountDAO;
-import com.anhpt.model.TourDAO;
+import com.anhpt.model.PostDAO;
+
 
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
@@ -26,10 +27,10 @@ public class DeleteServlet extends HttpServlet {
 	        
 	        // Sau khi thực hiện hành động "xóa", bạn có thể gửi phản hồi về trình duyệt (ví dụ: "success")
 	        response.getWriter().write("success");
-		}else {
-			 int tourId = Integer.parseInt(request.getParameter("tourId"));
-	        TourDAO tourDAO = new TourDAO();
-	        tourDAO.deleteTour(tourId);
+		}else if(request.getParameter("id") != null)  {
+			 int id = Integer.parseInt(request.getParameter("id"));
+	        PostDAO postDAO = new PostDAO();
+	        postDAO.deletePost(id);
 	        
 	        // Sau khi thực hiện hành động "xóa", bạn có thể gửi phản hồi về trình duyệt (ví dụ: "success")
 	        response.getWriter().write("success");
