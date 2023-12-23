@@ -20,55 +20,10 @@ public class AccountDAO {
                 account.setId(resultSet.getInt("id"));
                 account.setUsername(resultSet.getString("username"));
                 account.setEmail(resultSet.getString("email"));
-                account.setPhoneNumber(resultSet.getString("phone_number"));
+                account.setPhone_number(resultSet.getString("phone_number"));
                 account.setRole(resultSet.getString("role"));
                 account.setStatus(resultSet.getString("status"));
-                accounts.add(account);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return accounts;
-    }
-
-    public List<Account> getUserAccounts() {
-        List<Account> accounts = new ArrayList<>();
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM account where role = 'user';";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Account account = new Account();
-                account.setId(resultSet.getInt("id_user"));
-                account.setUsername(resultSet.getString("username"));
-                account.setEmail(resultSet.getString("email"));
-                account.setPhoneNumber(resultSet.getString("phone_number"));
-                account.setRole(resultSet.getString("role"));
-                account.setStatus(resultSet.getString("status"));
-                accounts.add(account);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return accounts;
-    }
-
-    public List<Account> getAdminAccounts() {
-        List<Account> accounts = new ArrayList<>();
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM account where role = 'admin';";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Account account = new Account();
-                account.setId(resultSet.getInt("id_user"));
-                account.setUsername(resultSet.getString("username"));
-                account.setEmail(resultSet.getString("email"));
-                account.setPhoneNumber(resultSet.getString("phone_number"));
-                account.setRole(resultSet.getString("role"));
-                account.setStatus(resultSet.getString("status"));
+                account.setFullname(resultSet.getString("fullname"));
                 accounts.add(account);
             }
         } catch (SQLException e) {
@@ -80,15 +35,16 @@ public class AccountDAO {
     public Account getAccountByID(int userID) {
         Account account = new Account();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM account where id_user = " + userID + ";";
+            String query = "SELECT * FROM account where id = " + userID + ";";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                account.setId(resultSet.getInt("id_user"));
+                account.setId(resultSet.getInt("id"));
                 account.setUsername(resultSet.getString("username"));
+                account.setFullname(resultSet.getString("fullname"));
                 account.setEmail(resultSet.getString("email"));
-                account.setPhoneNumber(resultSet.getString("phone_number"));
+                account.setPhone_number(resultSet.getString("phone_number"));
                 account.setRole(resultSet.getString("role"));
                 account.setStatus(resultSet.getString("status"));
                 account.setPassword(resultSet.getString("password"));
@@ -102,16 +58,25 @@ public class AccountDAO {
     public boolean updateAccount(Account account) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String updateQuery = "UPDATE account SET " +
-                    "username = '" + account.getUsername() + "', " +
-                    "email = '" + account.getEmail() + "', " +
-                    "phone_number = '" + account.getPhoneNumber() + "', " +
-                    "password = '" + account.getPassword() + "', " +
-                    "role = '" + account.getRole() + "', " +
-                    "status = '" + account.getStatus() + "' " +
-                    "WHERE id_user = " + account.getId();
+                    "username = ?, " +
+                    "email = ?, " +
+                    "phone_number = ?, " +
+                    "password = ?, " +
+                    "role = ?, " +
+                    "status = ?, " +
+                    "fullname = ? " +
+                    "WHERE id = ?";
 
-            System.out.println(updateQuery);
             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+            preparedStatement.setString(1, account.getUsername());
+            preparedStatement.setString(2, account.getEmail());
+            preparedStatement.setString(3, account.getPhone_number());
+            preparedStatement.setString(4, account.getPassword());
+            preparedStatement.setString(5, account.getRole());
+            preparedStatement.setString(6, account.getStatus());
+            preparedStatement.setString(7, account.getFullname());
+            preparedStatement.setInt(8, account.getId());
+
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0; // Trả về true nếu có dòng bị cập nhật (thành công)
         } catch (SQLException e) {
@@ -122,7 +87,7 @@ public class AccountDAO {
 
     public void lockAccount(int id) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM account where id_user = " + id + ";";
+            String query = "SELECT * FROM account where id = " + id + ";";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -132,10 +97,10 @@ public class AccountDAO {
 
                 // Thực hiện cập nhật dựa trên giá trị status
                 String updateQuery;
-                if ("lock".equals(status)) {
-                    updateQuery = "UPDATE account SET status = 'unlock' WHERE id_user = ?";
+                if ("off".equals(status)) {
+                    updateQuery = "UPDATE account SET status = 'on' WHERE id = ?";
                 } else {
-                    updateQuery = "UPDATE account SET status = 'lock' WHERE id_user = ?";
+                    updateQuery = "UPDATE account SET status = 'off' WHERE id = ?";
                 }
 
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
@@ -157,8 +122,7 @@ public class AccountDAO {
 
     public void deleteAccount(int id) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "DELETE FROM account where id_user = " + id + ";";
-            System.out.println(query);
+            String query = "DELETE FROM account where id = " + id + ";";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             int a = preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -166,17 +130,26 @@ public class AccountDAO {
         }
     }
 
-    public void addAccount(Account account) {
+    public boolean addAccount(Account account) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String addQuery = "INSERT INTO account (username, email, phone_number, password, role, status) " +
-                    "VALUES ('" + account.getUsername() + "', '" + account.getEmail() + "', '" +
-                    account.getPhoneNumber() + "', '" + account.getPassword() + "', '" + account.getRole() + "', '" + account.getStatus() + "')";
+            String addQuery = "INSERT INTO account (username, email, phone_number, password, role, status, fullname) " +
+                    "VALUES (?, ?, ?, ?, ?, ?,?)";
 
-            System.out.println(addQuery);
             PreparedStatement preparedStatement = connection.prepareStatement(addQuery);
-            preparedStatement.executeUpdate();
+            preparedStatement.setString(1, account.getUsername());
+            preparedStatement.setString(2, account.getEmail());
+            preparedStatement.setString(3, account.getPhone_number());
+            preparedStatement.setString(4, account.getPassword());
+            preparedStatement.setString(5, account.getRole());
+            preparedStatement.setString(6, account.getStatus());
+            preparedStatement.setString(7, account.getFullname());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+     // Trả về false nếu có lỗi xảy ra
+        return false;
     }
 }
