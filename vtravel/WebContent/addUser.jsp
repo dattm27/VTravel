@@ -1,70 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	
-    <title>Chỉnh sửa thông tin người dùng</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .form-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .form-container input[type="text"][readonly="readonly"] {
-            background-color: #fff;
-        }
-        .form-container input[type="password"][readonly="readonly"] {
-            background-color: #fff;
-        }
-        .form-container input[type="text"]:not([readonly="readonly"]),
-        .form-container input[type="password"]:not([readonly="readonly"]) {
-            background-color: #fff; /* Các trường có thể chỉnh sửa vẫn có màu nền trắng */
-        }
-        .form-container input[type="submit"] {
-            background-color: #008CBA;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-		.form-container select {
-		    width: 106%; /* Để ô select box cùng chiều rộng với các ô khác */
-		    min-width: 100px; /* Chiều rộng tối thiểu (điều chỉnh kích thước theo nhu cầu) */
-		    padding: 10px;
-		    margin-bottom: 10px;
-		    border: 1px solid #ccc;
-		    border-radius: 3px;
-		}
-		.role-option {
-		    padding: 10px;
-		    margin-bottom: 10px;
-		    border: 1px solid #ccc;
-		    border-radius: 3px;
-	        font-size: 14px; /* Điều chỉnh kích thước phù hợp */
-	    }
-        .password-hint {
-	    	font: italic 12px Arial;
-	    	color: #777;
-	  	}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết thông tin người dùng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/44.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
-    <script>   
+    <div class="container mt-5">
+        <div class="p-4 bg-light">
+            <h1 class="mb-4">Thông tin người dùng</h1>
+            <form>
+                <div class="form-group">
+                    <label for="editUsername">Username:</label>
+                    <input type="text" id="editUsername" name="username" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="editFullname">Fullname:</label>
+                    <input type="text" id="editFullname" name="fullname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="text" id="editEmail" name="email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="editPhoneNumber">Số điện thoại:</label>
+                    <input type="text" id="editPhoneNumber" name="phoneNumber" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="editPassword">Password:<span class="small text-muted" id="passwordHint">
+                        (Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số)</span></label>
+                    <input type="password" id="editPassword" name="password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="editRole">Vai trò:</label>
+                    <select id="editRole" name="role" class="form-control">
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">Xác nhận</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.parent.hidePopup();">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
     function checkPassword() {
         var password = document.getElementById('editPassword').value;
         // Sử dụng biểu thức chính quy để kiểm tra mật khẩu
@@ -78,61 +66,57 @@
             return true;
         }
     }
-    function Exit2() {
+
+   
+    function submitForm() {
         var username = document.getElementById('editUsername').value;
+        var fullname = document.getElementById('editFullname').value;
         var email = document.getElementById('editEmail').value;
-        var phoneNumber = document.getElementById('editPhoneNumber').value;
+        var phone_number = document.getElementById('editPhoneNumber').value;
         var password = document.getElementById('editPassword').value;
         var role = document.getElementById('editRole').value;
-		var status ;
-		 var validPassword = checkPassword();
+        var status = "on";
+        var validPassword = checkPassword();
 
-		    if (!validPassword) {
-		        alert('Mật khẩu không đúng định dạng. Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.');
-		        return;
-		    }
+        if (!validPassword) {
+            alert('Mật khẩu không đúng định dạng. Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.');
+            return;
+        }
 
         // Kiểm tra nếu có bất kỳ ô nào trống thì hiển thị thông báo
-        if (!username || !email || !phoneNumber || !password || !role) {
+        if (!username || !email || !fullname || !phone_number || !password || !role) {
             alert('Vui lòng điền đầy đủ thông tin.');
             return;
         }
-        var url = 'user-management?command=ADD&'+
-            '&username=' + encodeURIComponent(username) +
-            '&email=' + encodeURIComponent(email) +
-            '&phoneNumber=' + encodeURIComponent(phoneNumber) +
-            '&password=' + encodeURIComponent(password) +
-            '&role=' + encodeURIComponent(role)+
-            '&status=unlock' ;
-        window.location.href = url;
 
+        // Gọi hàm savePost với các tham số đã lấy được
+        saveUser(username, fullname, email, phone_number, password,role,status);
+
+        // Ngăn form submit bằng cách trả về false
+        return false;
     }
 
-	</script>
-    <div class="form-container">
-    	<h1>Nhập thông tin người dùng</h1>
-        <form >
-            <label for="editUsername">Username:</label>
-            <input type="text" id="editUsername" name="username"  />
-            <label for="editEmail">Email:</label>
-            <input type="text" id="editEmail" name="email"  />
-            <label for="editPhoneNumber">Số điện thoại:</label>
-            <input type="text" id="editPhoneNumber" name="phoneNumber"  />
-            <label for="editPassword">Password:<span class="password-hint" id="passwordHint">
-            (Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số)</span></label>
-            <input type="text" id="editPassword" name="password"   />
-            
-            <label for="editRole">Vai trò:</label>
-			<select id="editRole" name="role">
-			    <option value="admin" class="role-option">Admin</option>
-			    <option value="user" class="role-option">User</option>
-			</select>
-
-            <br>
-			<input type="button" value="Xác nhận" onclick="Exit2()" />
-			<input type="button" value="Hủy" onclick="window.history.back()" />
-        </form>
-    </div>
-
+    function saveUser(username, fullname, email, phone_number, password,role,status) {
+        // Gửi yêu cầu AJAX đến controller
+        $.ajax({
+            type: "POST",
+            url: "add",
+            data: { username: username,command: "add-user", fullname: fullname,
+            	email: email, phone_number: phone_number, password: password, status: status,role: role},
+            success: function(data) {
+                if (data == "success") {                     	
+                    alert("Thêm tài khoản thành công.");
+                    window.parent.location.href = 'user-management?command=LIST_ALL';
+                    window.parent.hidePopup();
+                } else {
+                    alert("Thêm tài khoản thất bại.");
+                }
+            },
+            error: function() {
+                alert("Lỗi khi gọi servlet add.");
+            }
+        });
+    }
+</script>
 </body>
 </html>
