@@ -91,7 +91,7 @@
 					  	<c:param name="command" value = "DETAIL_TOUR_PAGE"/>
 					  	<c:param name="ID" value = "${tour.ID}"/>
  					  </c:url>
-					    <h5 class="card-title"><a href="${DETAIL_TOUR_PAGE}">${tour.name}</a></h5>
+					    <h5 class="card-title"><a href="${DETAIL_TOUR_PAGE}" class = "text-dark">${tour.name}</a></h5>
 					    <div class="card-text text-info" style="font-size:20px"><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /> VNĐ</div>
 					    <div class="card-text">Ngày bắt đầu: ${tour.startDate}</div>
 					    <div class="card-text">Ngày kết thúc: ${tour.endDate}</div>
