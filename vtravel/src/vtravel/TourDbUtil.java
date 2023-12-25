@@ -256,9 +256,9 @@ public class TourDbUtil {
 				String startDate = myRs.getString("start_date");
 				String endDate = myRs.getString("end_date");
 				int price = myRs.getInt("price");
-				
+				String image = myRs.getString("image");
 				///tao ra mot doi tuong Tour
-				Tour tour = new Tour(ID, name, startDate, endDate, price);
+				Tour tour = new Tour(ID, name, startDate, endDate, price, image);
 				//them vao danh sach
 				tourList.add(tour);	
 				if (limmited ==true && tourList.size() >= 8) break;

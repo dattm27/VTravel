@@ -107,7 +107,7 @@
 						<td style="max-width: 200px">${tour.name}</td>
 						<td>${tour.startDate}</td>
 			 			<td>${tour.endDate}</td>
-						<td><img src="images/tour/Halong-bay.jpeg" style="max-width: 150px"></td>
+						<td><img src="${tour.image}" style="max-width: 150px" alt= "Ảnh minh hoạ"></td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /></td>
 						<td>20</td>
 			 			<!-- set up a link to delete a tour  -->
