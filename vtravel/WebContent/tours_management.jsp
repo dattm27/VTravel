@@ -117,12 +117,12 @@
 			 			</c:url>		 		
 						<td>
 							<!-- tạo link xem chi tiết và phản hồi yêu cầu custom tour  -->
-				 			<c:url var="DETAIL_PROPOSAL" value ="TourControllerServlet">
-				 				<c:param name="command" value="DETAIL_PROPOSAL"/>
-				 				<c:param name="ID" value="${tempProposal.ID}"/>
-				 				<c:param name ="ordererID" value = "${tempProposal.ordererID}"/>
+				 			<c:url var="DETAIL_AND_UPDATE_TOUR" value ="TourControllerServlet">
+				 				<c:param name="command" value="DETAIL_AND_UPDATE_TOUR"/>
+				 				<c:param name="ID" value="${tour.ID}"/>
+				 				
 				 			</c:url>	
-							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_PROPOSAL}')">Chi tiết/ Sửa</a> 
+							<a  class="btn btn-primary btn-sm"  onclick="showPopup('${DETAIL_AND_UPDATE_TOUR}')">Chi tiết/ Sửa</a> 
 							<!-- Thực hiện thao tác sẽ làm thay đổi trạng thái nên cần cập nhật lại chức năng lọc -->
 							<a class="btn btn-success btn-sm" onclick="confirmAndPurchase('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Danh sách đặt</a>
 							<a class="btn btn-warning btn-sm">Khoá</a>
