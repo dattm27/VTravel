@@ -11,7 +11,7 @@ public class ProposalCustomTour {
 	private int numberOfTravellers;
 	private String status;
 	private String createdDate;
-	private double price;
+	private int price;
 	//constructors
 	public ProposalCustomTour(int ordererID, String destination,  String startDate, String endDate,
 			int numberOfTravellers, String note, String status) {
@@ -76,7 +76,7 @@ public class ProposalCustomTour {
 	
 	//khi admin xử lý custom tour và lưu lại thông tin custom tour mới 
 	public ProposalCustomTour(int ID, String destination,  String startDate, String endDate,
-			int numberOfTravellers,  double price, String note, String status) {
+			int numberOfTravellers,  int price, String note, String status) {
 		super();
 		this.ID = ID;
 		this.destination = destination;
@@ -153,12 +153,12 @@ public class ProposalCustomTour {
 	}
 
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
