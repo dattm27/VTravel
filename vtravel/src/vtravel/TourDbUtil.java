@@ -135,10 +135,10 @@ public class TourDbUtil {
 				String note = myRs.getString("note");
 				String status = myRs.getString("status");
 				String createdDate = myRs.getString("created_date");
-				
+				int price = (int)myRs.getDouble("price");
 				//tạo ra một đối tượng ProposalCustomTour
 				proposal = 
-						new ProposalCustomTour(ID,ordererID,  destination, startDate, endDate, numberOfTravellers, note, status, createdDate);
+						new ProposalCustomTour(ID,ordererID,  destination, startDate, endDate, numberOfTravellers, price,  note, status, createdDate);
 				
 				
 			}

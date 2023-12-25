@@ -389,12 +389,12 @@ public class TourControllerServlet extends HttpServlet {
 		String startDate = request.getParameter("start_date");
 		String endDate = request.getParameter("end_date");
 		int numberOfTravellers = Integer.parseInt(request.getParameter("number_of_traveller"));
-		double price = Integer.parseInt(request.getParameter("price"));
+		int price = Integer.parseInt(request.getParameter("price"));
 		String description = request.getParameter("description");
-
+		String createdDate = request.getParameter("created_date");
 		// tạo ra đối tượng customTour (ProposalCustomTour sau khi được xử lý)
 		ProposalCustomTour customTour = new ProposalCustomTour(ID, destination, startDate, endDate, numberOfTravellers,
-				price, description, "Chờ thanh toán");
+				price, description, "Chờ thanh toán", createdDate);
 		// thay đổi thông tin vào cơ sở dữ liệu
 		tourDbUtil.acceptCustomTour(customTour);
 		
@@ -413,7 +413,7 @@ public class TourControllerServlet extends HttpServlet {
 		
 		request.setAttribute("PROPOSAL", customTour);
 		//lấy ra đối tượng người đặt custom tour
-		Account orderer = accountDbUtil.getAccountInf(Integer.parseInt(request.getParameter("ID")));
+		Account orderer = accountDbUtil.getAccountInf(Integer.parseInt(request.getParameter("userID")));
 		request.setAttribute("ORDERER",orderer );
 		request.setAttribute("Message", "update_OK");
 		// gửi đến JSP

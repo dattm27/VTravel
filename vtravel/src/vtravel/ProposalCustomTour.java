@@ -57,10 +57,10 @@ public class ProposalCustomTour {
 	}
 	
 	
-
+	//khi lấy thông tin custom tour để hiển thị lên trang detail và update 
 
 	public ProposalCustomTour(int iD, int ordererID, String destination,  String startDate, String endDate,
-			int numberOfTravellers,String note, String status, String createdDate) {
+			int numberOfTravellers, int price, String note, String status, String createdDate) {
 		super();
 		ID = iD;
 		this.ordererID = ordererID;
@@ -69,6 +69,7 @@ public class ProposalCustomTour {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.numberOfTravellers = numberOfTravellers;
+		this.price = price;
 		this.status = status;
 		this.createdDate = createdDate;
 	}
@@ -76,7 +77,7 @@ public class ProposalCustomTour {
 	
 	//khi admin xử lý custom tour và lưu lại thông tin custom tour mới 
 	public ProposalCustomTour(int ID, String destination,  String startDate, String endDate,
-			int numberOfTravellers,  int price, String note, String status) {
+			int numberOfTravellers,  int price, String note, String status, String createdDate) {
 		super();
 		this.ID = ID;
 		this.destination = destination;
@@ -86,6 +87,7 @@ public class ProposalCustomTour {
 		this.numberOfTravellers = numberOfTravellers;
 		this.status = status;
 		this.price = price;
+		this.createdDate = createdDate;
 	}
 
 
