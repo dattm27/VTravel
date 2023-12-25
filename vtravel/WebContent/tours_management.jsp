@@ -46,7 +46,8 @@
 			<c:param name="command" value="TOURS_MANAGEMENT" />
 		</c:url>
 		<a href="${TOURS_MANAGEMENT}" class="btn btn-primary mb-2 btn-sm">Tải DS Tour phổ thông</a>
-		
+		<!-- tạo nút tạo tour mới -->
+		<button  class="btn btn-success mb-2 btn-sm" onclick="showPopup('add_new_tour.jsp')">Thêm Tour mới</button>
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
 		    <!-- Chọn số bản ghi mỗi trang -->
@@ -109,7 +110,7 @@
 			 			<td>${tour.endDate}</td>
 						<td><img src="${tour.image}" style="max-width: 150px" alt= "Ảnh minh hoạ"></td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /></td>
-						<td>20</td>
+						<td>${tour.booked}</td>
 			 			<!-- set up a link to delete a tour  -->
 			 			<c:url var="deleteLink" value ="TourControllerServlet">
 			 				<c:param name="command" value="DELETE"/>

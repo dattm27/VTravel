@@ -54,7 +54,7 @@
 					    <div class="card-text text-info" style="font-size:20px"><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /> VNĐ</div>
 					    <div class="card-text">Ngày bắt đầu: ${tour.startDate}</div>
 					    <div class="card-text">Ngày kết thúc: ${tour.endDate}</div>
-					    <div class = "card-text">Đã đặt: 20</div>
+					    <div class = "card-text">Đã đặt: ${tour.booked}</div>
 					  </div>
 					  <div class="card-footer">
 					    	<a href="#" class="btn btn-primary">Đặt vé ngay</a>
