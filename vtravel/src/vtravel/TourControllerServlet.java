@@ -1,27 +1,41 @@
 package vtravel;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
+
+
+
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Servlet implementation class TourControllerServlet
  */
 @WebServlet("/TourControllerServlet")
+// Khắc phục không sử dụng được getParamter khi gửi form dưới dạng multipart/form-data
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class TourControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TourDbUtil tourDbUtil; // tương tác với cơ sở dữ liệu về tour
@@ -75,6 +89,10 @@ public class TourControllerServlet extends HttpServlet {
 			case "DETAIL_PROPOSAL":
 				getDetailProposal(request, response);
 				break;
+			// hiển thị chi tiết về tour trong danh sách và cho phép admin chỉnh sửa thông tin				
+			case "DETAIL_AND_UPDATE_TOUR":
+				detailAndUpdateTour(request, response);
+				break;
 			// lấy danh sách tất cả các tour phổ thông hiển thị lên trang tour
 			case "LIST_ALL_TOURS":
 				listAllTours(request, response);
@@ -90,6 +108,23 @@ public class TourControllerServlet extends HttpServlet {
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void detailAndUpdateTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		
+		// lấy ID từ tour được chọn
+		int ID =  Integer.parseInt(request.getParameter("ID"));
+		logger.info("detail tour" + ID);
+		//Lấy tour từ ID
+		Tour tour = tourDbUtil.getDetailTour(ID);
+		//thêm vào request
+		request.setAttribute("tour", tour);
+		//Gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/update_detail_tour.jsp");
+		dispatcher.forward(request, response);
+		
+		
+		
 	}
 
 	private void detailTourPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -221,6 +256,7 @@ public class TourControllerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		
 		request.setCharacterEncoding("UTF-8");
 		try {
 			String theCommand = request.getParameter("command");
@@ -240,12 +276,93 @@ public class TourControllerServlet extends HttpServlet {
 			case "CANCEL_CUSTOM_TOUR":
 				cancel_custom_tour(request, response);
 				break;
+			case "UPDATE_DETAIL_TOUR":
+				updateDetailTour(request, response);
+				break;
 			default:
 				break;
 			}
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void updateDetailTour(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, Exception {
+		
+		PrintWriter out = response.getWriter();
+		//lấy các thông tin từ form ra
+		int ID = Integer.parseInt(getValue(request.getPart("id")));
+		logger.info("update tour" + ID );
+		String name = getValue(request.getPart("name"));
+	    String price = getValue(request.getPart("price"));
+	    String startDate = getValue(request.getPart("start_date"));
+	    String endDate = getValue(request.getPart("end_date"));
+	    String startPlace = getValue(request.getPart("start_place"));
+	   out.print(name);
+	    //Xử lý phần ảnh
+	    Part filePart = request.getPart("image");
+	    String uniqueFileName = null;
+	    //Kiểm tra nếu người dùng có nhập ảnh mới
+	    if (filePart != null && filePart.getSize() > 0) {
+	        String fileName = filePart.getSubmittedFileName();
+		    
+		    //Tạo tên độc nhất cho file ảnh, tránh trúng lặp
+	        uniqueFileName = "images/tour/" + UUID.randomUUID().toString() + "_" + fileName;
+
+		    String appPath = request.getServletContext().getRealPath("");
+		   
+		    
+		    String imagePath = appPath +  uniqueFileName;
+		    out.print(imagePath);
+		    //Ghi file ảnh vào thư mục 
+		    filePart.write(imagePath);
+	    
+		    //xoá file ảnh cũ
+		    String oldImage = getValue(request.getPart("oldImage"));
+		    imagePath =  appPath + oldImage;
+		    
+		    out.print("Old file: \n"+ imagePath);
+		    File oldImageFile = new File(imagePath);
+		    
+		    // kiểm tra nếu file đó có tồn tại trong kho thì xoá đi
+		    if ( oldImage.length() > 0  && oldImageFile.exists()  ) {
+		    	out.print("Old file existed");
+		    	//oldImageFile.delete();
+		    }
+		    else out.print("Old file not found");
+		    
+	    }
+	    
+	    else {
+	    	// nếu người dùng không cập nhật ảnh mới, tên file ảnh cũ giữ nguyên
+	    	String oldImage = getValue(request.getPart("oldImage"));
+	    	if (oldImage.length()==0)   uniqueFileName = ""; // chứng tỏ chưa có ảnh cũ
+	    	else uniqueFileName = oldImage;
+	    	out.print("Image path: " + uniqueFileName);
+	    }
+	    
+	    
+	    // Mô tả chi tiết
+	    String description = getValue(request.getPart("description"));
+		
+	    // Tạo tour object
+	    //Trip theTrip = new Trip(id, name, Integer.parseInt(price), start_date, end_date, description, address, "images/" + uniqueFileName);
+	    Tour tour = new Tour(ID, name,  startDate,  endDate,  description, Integer.parseInt(price),  startPlace,   uniqueFileName);
+	    
+	    // thêm tour vào cơ sở dữ liệu
+	    try {
+	    	tourDbUtil.updateTourDetail(tour);
+	    	request.setAttribute("tour", tour);
+	    	request.setAttribute("message", "update_OK");
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/update_detail_tour.jsp");
+			dispatcher.forward(request, response);
+	    }
+	    
+	    catch (Exception exc) {
+	    	exc.printStackTrace();
+	    }
+	
+		
 	}
 
 	private void cancel_custom_tour(HttpServletRequest request, HttpServletResponse response) throws SQLException {
@@ -280,20 +397,27 @@ public class TourControllerServlet extends HttpServlet {
 				price, description, "Chờ thanh toán");
 		// thay đổi thông tin vào cơ sở dữ liệu
 		tourDbUtil.acceptCustomTour(customTour);
-
+		
 		PrintWriter out = response.getWriter();
-		response.setContentType("text/plain;charset=UTF-8");
-		out.println(ID);
-		out.println(destination);
-		out.println(startDate);
-		out.println(endDate);
-		out.println(customTour.getNumberOfTravellers());
-		out.println(customTour.getPrice());
-		out.println(customTour.getNote());
-		out.println(customTour.getStatus());
-		out.close();
+//		response.setContentType("text/plain;charset=UTF-8");
+//		out.println(ID);
+//		out.println(destination);
+//		out.println(startDate);
+//		out.println(endDate);
+//		out.println(customTour.getNumberOfTravellers());
+//		out.println(customTour.getPrice();
+//		out.println(customTour.getNote());
+//		out.println(customTour.getStatus());
+//		out.close();
+		//thêm tour và thông điệp phản hồi
+		
+		request.setAttribute("PROPOSAL", customTour);
+		//lấy ra đối tượng người đặt custom tour
+		Account orderer = accountDbUtil.getAccountInf(Integer.parseInt(request.getParameter("ID")));
+		request.setAttribute("ORDERER",orderer );
+		request.setAttribute("Message", "update_OK");
 		// gửi đến JSP
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/custom_tour_management.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/detail_and_response_proposal.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -336,5 +460,16 @@ public class TourControllerServlet extends HttpServlet {
 //		out.println(destination);
 		response.sendRedirect("WelcomeControllerServlet"); 
 	}
+	
+	//lấy giá trị từ các Part trong form được gửi ở dạng multipart/form-data
+	String getValue(Part namePart)  throws Exception  {
+			
+			String value = null;  
+			if (namePart != null) {
+			        value = new BufferedReader(new InputStreamReader(namePart.getInputStream()))
+			                .lines().collect(Collectors.joining());
+			}
+			return value ;
+		}
 
 }
