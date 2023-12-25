@@ -9,6 +9,7 @@ public class Tour {
 	private int price;
 	private String startPlace;
 	private String image;
+	private int booked;
 //	constructor
 	
 	public int getID() {
@@ -24,7 +25,8 @@ public class Tour {
 		this.price = price;
 	}
 	
-	public Tour(int iD, String name, String startDate, String endDate, int price, String image) {
+	//hiển thị lên danh sách ở trang index và trang tours page
+	public Tour(int iD, String name, String startDate, String endDate, int price, String image, int booked) {
 		super();
 		ID = iD;
 		this.name = name;
@@ -32,8 +34,25 @@ public class Tour {
 		this.endDate = endDate;
 		this.price = price;
 		this.image = image;
+		this.booked = booked;
 	}
 	
+	// khi lấy lên thông tin tour để cho vào trang detail tour page 
+	public Tour(int iD, String name, String startDate, String endDate, String description, int price, String startPlace,
+			String image, int booked) {
+		super();
+		ID = iD;
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.description = description;
+		this.price = price;
+		this.startPlace = startPlace;
+		this.image = image;
+		this.booked = booked;
+	}
+	
+	//khi tạo ra đối tượng tour để update
 	public Tour(int iD, String name, String startDate, String endDate, String description, int price, String startPlace,
 			String image) {
 		super();
@@ -45,6 +64,7 @@ public class Tour {
 		this.price = price;
 		this.startPlace = startPlace;
 		this.image = image;
+	
 	}
 
 	public void setID(int iD) {
@@ -91,6 +111,14 @@ public class Tour {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getBooked() {
+		return booked;
+	}
+
+	public void setBooked(int booked) {
+		this.booked = booked;
 	}
 	
 	

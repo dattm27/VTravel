@@ -257,8 +257,9 @@ public class TourDbUtil {
 				String endDate = myRs.getString("end_date");
 				int price = myRs.getInt("price");
 				String image = myRs.getString("image");
+				int booked = myRs.getInt("booked");
 				///tao ra mot doi tuong Tour
-				Tour tour = new Tour(ID, name, startDate, endDate, price, image);
+				Tour tour = new Tour(ID, name, startDate, endDate, price, image, booked);
 				//them vao danh sach
 				tourList.add(tour);	
 				if (limmited ==true && tourList.size() >= 8) break;
@@ -315,9 +316,10 @@ public class TourDbUtil {
 				String endDate = myRs.getString("end_date");
 				int price = myRs.getInt("price");
 				String image = myRs.getString("image");
+				int booked = myRs.getInt("booked");
 				
 				///tao ra mot doi tuong Tour
-				Tour tour = new Tour(ID, name, startDate, endDate, price, image);
+				Tour tour = new Tour(ID, name, startDate, endDate, price, image, booked);
 				//them vao danh sach
 				tourList.add(tour);	
 			}
@@ -355,9 +357,9 @@ public class TourDbUtil {
 				String startPlace = myRs.getString("start_place");
 				String description = myRs.getString("description");
 				String image =  myRs.getString("image");
-				
+				int booked  = myRs.getInt("booked");
 				//tạo ra đối tượng tour mưới
-				Tour tour = new Tour(ID, name,  startDate,  endDate,  description, price,  startPlace, image);
+				Tour tour = new Tour(ID, name,  startDate,  endDate,  description, price,  startPlace, image, booked);
 				return tour;
 			}
 		}

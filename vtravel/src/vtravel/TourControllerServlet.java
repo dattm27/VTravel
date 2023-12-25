@@ -89,6 +89,10 @@ public class TourControllerServlet extends HttpServlet {
 			case "DETAIL_PROPOSAL":
 				getDetailProposal(request, response);
 				break;
+			//khi admin muốn tạo một tour phổ thông mới
+			case "CREATE_NEW_TOUR":
+				createNewTour(request, response);
+				break;
 			// hiển thị chi tiết về tour trong danh sách và cho phép admin chỉnh sửa thông tin				
 			case "DETAIL_AND_UPDATE_TOUR":
 				detailAndUpdateTour(request, response);
@@ -100,6 +104,7 @@ public class TourControllerServlet extends HttpServlet {
 			case "LIST_HOT_TOURS":
 				listHotTours(request, response);
 				break;
+			//xem trang thông tin chi tiết của một tour 
 			case "DETAIL_TOUR_PAGE":
 				detailTourPage(request, response);
 			default:
@@ -108,6 +113,11 @@ public class TourControllerServlet extends HttpServlet {
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void createNewTour(HttpServletRequest request, HttpServletResponse response) {
+		
+		
 	}
 
 	private void detailAndUpdateTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
