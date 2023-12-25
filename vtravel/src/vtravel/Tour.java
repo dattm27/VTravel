@@ -24,6 +24,16 @@ public class Tour {
 		this.price = price;
 	}
 	
+	public Tour(int iD, String name, String startDate, String endDate, int price, String image) {
+		super();
+		ID = iD;
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.price = price;
+		this.image = image;
+	}
+	
 	public Tour(int iD, String name, String startDate, String endDate, String description, int price, String startPlace,
 			String image) {
 		super();
