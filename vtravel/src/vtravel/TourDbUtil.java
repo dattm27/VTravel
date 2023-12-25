@@ -366,7 +366,38 @@ public class TourDbUtil {
 		return null;
 	}
 
+	public void updateTourDetail(Tour tour) throws SQLException {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
 	
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql
+			String sql = "update available_tour "
+					+ "set tour_name = ?, start_date = ?, end_date = ?, description = ?, price = ?, start_place = ?, image = ? "
+					+ "where id = ? " ;
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set tham số
+			myStmt.setString(1, tour.getName());
+			myStmt.setString(2, tour.getStartDate());
+			myStmt.setString(3, tour.getEndDate());
+			myStmt.setString(4, tour.getDescription());
+			myStmt.setInt(5, tour.getPrice());
+			myStmt.setString(6, tour.getStartPlace());
+			myStmt.setString(7, tour.getImage());
+			myStmt.setInt(8, tour.getID());
+			
+			//execute
+			myStmt.execute();
+		}
+		finally {
+			close (myConn, myStmt, null );
+		}
+		
+	}
 	
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
@@ -386,6 +417,8 @@ public class TourDbUtil {
 		}
 		
 	}
+
+	
 
 
 
