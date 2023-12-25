@@ -20,7 +20,7 @@
 			<div class="col-9">
 				<img src="${tour.image}" style="max-width: 100%" alt="Ảnh mình hoạ ${tour.name}">
 				<h3 class="mt-3">Lịch trình</h3>
-				
+				${tour.description}
 					
 				
 			</div>
@@ -36,12 +36,10 @@
 				<h5>Giá: <span class="text-primary-emphasis"><fmt:formatNumber type="number" maxFractionDigits="2" value="${tour.price}" /> </span> VNĐ</h5>
 				<br>
 				<h3>Đặt vé</h3>
+				<h5>Số lượng đã đặt: ${tour.booked}</h5>
 				<button class="btn btn-primary mt-3" type="button" style="width:100%">Đặt tour ngay</button>
 			
 			</div>
-		</div>
-		<div class = "row">
-			${tour.description}
 		</div>
 	</div>
 </body>
