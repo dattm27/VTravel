@@ -1325,32 +1325,32 @@ SELECT * FROM post;
 SELECT * FROM comment;
 
 -- Update image to available_tour
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/1.jpg' WHERE (`id` = '1');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/2.jpg' WHERE (`id` = '2');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/3.jpg' WHERE (`id` = '3');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/4.jpg' WHERE (`id` = '4');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/Ninh-Binh.jpg' WHERE (`id` = '5');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/6.jpg' WHERE (`id` = '6');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/7.jpg' WHERE (`id` = '7');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/8.jpg' WHERE (`id` = '8');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/9.jpg' WHERE (`id` = '9');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/10.jpg' WHERE (`id` = '10');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/11.jpg' WHERE (`id` = '11');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/12.jpg' WHERE (`id` = '12');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/13.jpg' WHERE (`id` = '13');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/14.jpg' WHERE (`id` = '14');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/15.jpg' WHERE (`id` = '15');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/16.jpg' WHERE (`id` = '16');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/17.jpg' WHERE (`id` = '17');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/18.jpg' WHERE (`id` = '18');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/19.jpg' WHERE (`id` = '19');
-UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/20.jpg' WHERE (`id` = '20');
+UPDATE `available_tour` SET `image` = 'images/tour/1.jpg' WHERE (`id` = '1');
+UPDATE `available_tour` SET `image` = 'images/tour/2.jpg' WHERE (`id` = '2');
+UPDATE `available_tour` SET `image` = 'images/tour/3.jpg' WHERE (`id` = '3');
+UPDATE `available_tour` SET `image` = 'images/tour/4.jpg' WHERE (`id` = '4');
+UPDATE `available_tour` SET `image` = 'images/tour/Ninh-Binh.jpg' WHERE (`id` = '5');
+UPDATE `available_tour` SET `image` = 'images/tour/6.jpg' WHERE (`id` = '6');
+UPDATE `available_tour` SET `image` = 'images/tour/7.jpg' WHERE (`id` = '7');
+UPDATE `available_tour` SET `image` = 'images/tour/8.jpg' WHERE (`id` = '8');
+UPDATE `available_tour` SET `image` = 'images/tour/9.jpg' WHERE (`id` = '9');
+UPDATE `available_tour` SET `image` = 'images/tour/10.jpg' WHERE (`id` = '10');
+UPDATE `available_tour` SET `image` = 'images/tour/11.jpg' WHERE (`id` = '11');
+UPDATE `available_tour` SET `image` = 'images/tour/12.jpg' WHERE (`id` = '12');
+UPDATE `available_tour` SET `image` = 'images/tour/13.jpg' WHERE (`id` = '13');
+UPDATE `available_tour` SET `image` = 'images/tour/14.jpg' WHERE (`id` = '14');
+UPDATE `available_tour` SET `image` = 'images/tour/15.jpg' WHERE (`id` = '15');
+UPDATE `available_tour` SET `image` = 'images/tour/16.jpg' WHERE (`id` = '16');
+UPDATE `available_tour` SET `image` = 'images/tour/17.jpg' WHERE (`id` = '17');
+UPDATE `available_tour` SET `image` = 'images/tour/18.jpg' WHERE (`id` = '18');
+UPDATE `available_tour` SET `image` = 'images/tour/19.jpg' WHERE (`id` = '19');
+UPDATE `available_tour` SET `image` = 'images/tour/20.jpg' WHERE (`id` = '20');
 
 -- Update image to post
-UPDATE `tourweb`.`post` SET `image` = 'images/post/1.jpg' WHERE (`id` = '1');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/2.jpg' WHERE (`id` = '2');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/3.jpg' WHERE (`id` = '3');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/4.jpg' WHERE (`id` = '4');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/5.jpg' WHERE (`id` = '5');
+UPDATE `post` SET `image` = 'images/post/1.jpg' WHERE (`id` = '1');
+UPDATE `post` SET `image` = 'images/post/2.jpg' WHERE (`id` = '2');
+UPDATE `post` SET `image` = 'images/post/3.jpg' WHERE (`id` = '3');
+UPDATE `post` SET `image` = 'images/post/4.jpg' WHERE (`id` = '4');
+UPDATE `post` SET `image` = 'images/post/5.jpg' WHERE (`id` = '5');
 
-
+-- update available tour to have booked 
