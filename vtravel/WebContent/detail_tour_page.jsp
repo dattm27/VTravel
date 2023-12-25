@@ -20,9 +20,9 @@
 			<div class="col-9">
 				<img src="${tour.image}" style="max-width: 100%" alt="Ảnh mình hoạ ${tour.name}">
 				<h3 class="mt-3">Lịch trình</h3>
-				<div>
-					${tour.description}
-				</div>
+				
+					
+				
 			</div>
 			
 			<div class="col-3">
@@ -39,6 +39,9 @@
 				<button class="btn btn-primary mt-3" type="button" style="width:100%">Đặt tour ngay</button>
 			
 			</div>
+		</div>
+		<div class = "row">
+			${tour.description}
 		</div>
 	</div>
 </body>
