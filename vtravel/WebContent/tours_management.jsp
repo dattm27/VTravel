@@ -94,7 +94,7 @@
 					<th>Tên chuyến</th>
 					<th>Ngày bắt đầu</th>
 					<th> Ngày kết thúc</th>
-					<th>Điểm khởi hành</th>
+					<th>Ảnh</th>
 					<th>Giá vé</th>
 					<th>Đã đặt</th>
 					<th>Hành động</th>

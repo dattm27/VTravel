@@ -84,8 +84,8 @@
             <div class = "d-flex justify-content-around flex-wrap">	 
 	       	   <!-- Vòng lặp for hiển thị danh sách các tour -->
 	       	   <c:forEach items="${TOUR_LIST}" var="tour">
-			        <div class="card mb-3" style="width: 16rem;">
-					  <img class="card-img-top" src="images/tour/Halong-bay.jpeg" alt="Card image cap">
+			        <div class="card mb-3" style="width: 16rem">
+					  <img class="card-img-top" src="${tour.image}" alt="Card image cap" style="height: 180px; object-fit: cover;">
 					  <div class="card-body">
 					  <c:url var="DETAIL_TOUR_PAGE" value ="TourControllerServlet">
 					  	<c:param name="command" value = "DETAIL_TOUR_PAGE"/>
