@@ -107,12 +107,44 @@ public class TourControllerServlet extends HttpServlet {
 			//xem trang thông tin chi tiết của một tour 
 			case "DETAIL_TOUR_PAGE":
 				detailTourPage(request, response);
+				break;
+			// khi người dùng ấn vào đặt vé -> Tạo form đặt chuyến cho người dùng nhâp thông tin
+			case "CREATE_BOOKING_FORM":
+				createBooking(request, response);	
+				break;
 			default:
 				break;
 			}
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void createBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		//lấy ID tour và ID user
+		int tourID = Integer.parseInt(request.getParameter("tourID"));
+		if (request.getParameter("userID")=="") {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			int userID = Integer.parseInt(request.getParameter("userID"));
+			
+			
+			
+			//lấy ra thông tin đối tượng tour và user tương ứng với ID vừa lấy được
+			Account user = accountDbUtil.getAccountInf(userID);
+			Tour tour = tourDbUtil.getDetailTour(tourID);
+			
+			//thêm vào request
+			request.setAttribute("tour", tour);
+			request.setAttribute("user", user);
+			
+			//Gửi đến JSP
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirm_tour_booking.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 	}
 
 	private void createNewTour(HttpServletRequest request, HttpServletResponse response) {

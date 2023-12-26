@@ -97,8 +97,13 @@
 					    <div class="card-text">Ngày kết thúc: ${tour.endDate}</div>
 					    <div class = "card-text">Đã đặt: ${tour.booked}</div>
 					  </div>
+					  <c:url var="CREATE_BOOKING_FORM" value = "TourControllerServlet">
+					  	<c:param name="command" value="CREATE_BOOKING_FORM"/>
+					  	<c:param name="tourID" value="${tour.ID}"/>
+					  	<c:param name="userID" value="${sessionScope.ID}"/>
+					  </c:url>
 					  <div class="card-footer">
-					    	<a href="#" class="btn btn-primary">Đặt vé ngay</a>
+					    	<a href="${CREATE_BOOKING_FORM}" class="btn btn-primary">Đặt vé ngay</a>
 					    </div>
 					</div>
 				</c:forEach>
