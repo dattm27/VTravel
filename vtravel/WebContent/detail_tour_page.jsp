@@ -37,7 +37,12 @@
 				<br>
 				<h3>Đặt vé</h3>
 				<h5>Số lượng đã đặt: ${tour.booked}</h5>
-				<button class="btn btn-primary mt-3" type="button" style="width:100%">Đặt tour ngay</button>
+				<c:url var="CREATE_BOOKING_FORM" value = "TourControllerServlet">
+			  		<c:param name="command" value="CREATE_BOOKING_FORM"/>
+		  			<c:param name="tourID" value="${tour.ID}"/>
+				  	<c:param name="userID" value="${sessionScope.ID}"/>
+			 	</c:url>
+				<a class="btn btn-primary mt-3" href="${CREATE_BOOKING_FORM}" style="width:100%">Đặt tour ngay</a>
 			
 			</div>
 		</div>
