@@ -34,13 +34,13 @@
 						style="margin-right: 50px">Đăng nhập</a></li>
 				</c:if> <!-- Display dropdown if the user is logged in --> <c:if
 					test="${not empty sessionScope.username and sessionScope.role eq 'user'}">
-					<li class="nav-item dropdown" style="margin-right: 50px"><a
+					<li class="nav-item dropdown" style="margin-right: 80px"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							${sessionScope.username} </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#">Tour của tôi</a> <a
-								class="dropdown-item" href="#">Chức năng 2</a>
+								class="dropdown-item" href="#">Thông tin cá nhân</a>
 							<div class="dropdown-divider"></div>
 							<!-- tạo xử lý yêu cầu đăng xuất  -->
 							<c:url var="LOG_OUT" value="SessionControllerServlet">
