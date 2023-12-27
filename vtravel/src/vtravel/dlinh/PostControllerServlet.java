@@ -67,22 +67,43 @@ public class PostControllerServlet extends HttpServlet {
 			case "LIST_ALL_POST":
 				listAllPost(request, response);
 				break;
+			case "POST_DETAIL":
+				postDetail(request, response);
+				break;
 			}
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
 	}
 
-	private void listAllPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	private void listAllPost(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
 		// Lấy danh sách các bài Post từ cơ sở dữ liệu
 		List<Post> postList = postDbUtil.getPostList();
-		
+
 		// Thêm danh sách Post vừa lấy được vào request
 		request.setAttribute("POST_LIST", postList);
-		
+
 		// Gửi đến JSP
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Post.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	private void postDetail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		// logger.info("ID = " + ID);
+
+		// Lấy chi tiết bài Post từ cơ sở dữ liệu
+		Post post = postDbUtil.getPostDetail(ID);
+
+		// Thêm chi tiết bài Post vừa lấy được vào request
+		request.setAttribute("details", post);
+
+		// Gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/PostDetail.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 }

@@ -7,21 +7,23 @@ public class Post {
 	private String shortDescription;
 	private String content;
 	private String date;
+	private String image;
 	
-	public Post(String name, String shortDescription) {
+	public Post(int ID, String name, String shortDescription, String image) {
 		super();
+		this.ID = ID;
 		this.name = name;
 		this.shortDescription = shortDescription;
+		this.image = image;
 	}
 
-	public Post(int iD, int userID, String name, String shortDescription, String content, String date) {
+	public Post(String name, String shortDescription, String content, String date, String image) {
 		super();
-		ID = iD;
-		this.userID = userID;
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.content = content;
 		this.date = date;
+		this.image = image;
 	}
 
 	public int getID() {
@@ -70,6 +72,14 @@ public class Post {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
