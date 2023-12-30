@@ -85,6 +85,9 @@ public class TourControllerServlet extends HttpServlet {
 			case "TOURS_MANAGEMENT":
 				listAllTourAdmin(request, response);
 				break;
+			case "BOOKING_LIST_OF_A_TOUR":
+				listBookingOfTour(request, response);
+				break;
 			// khi admin bấm vào chi tiết một proposal
 			case "DETAIL_PROPOSAL":
 				getDetailProposal(request, response);
@@ -118,6 +121,23 @@ public class TourControllerServlet extends HttpServlet {
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void listBookingOfTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		// lấy ID của tour cần hiẻn thị danh sách khách đặt
+		int tourID = Integer.parseInt(request.getParameter("tourID"));
+		
+		//lấy danh sách khách đặt của tour đó
+		List<Booking> bookingList = tourDbUtil.getBookingOfTour(tourID);
+		Tour tour = tourDbUtil.getDetailTour(tourID);
+		//thêm vào request
+		request.setAttribute("BOOKING_LIST", bookingList);
+		request.setAttribute("tour", tour);
+		//gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/booking_list.jsp");
+		dispatcher.forward(request, response);
+		logger.info("TourControllerServlet list Bookings of tour" + tourID);
+		
 	}
 
 	private void createBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -156,7 +176,7 @@ public class TourControllerServlet extends HttpServlet {
 		
 		// lấy ID từ tour được chọn
 		int ID =  Integer.parseInt(request.getParameter("ID"));
-		logger.info("detail tour" + ID);
+		logger.info("TourControllerServlet detail tour" + ID);
 		//Lấy tour từ ID
 		Tour tour = tourDbUtil.getDetailTour(ID);
 		//thêm vào request
@@ -325,6 +345,14 @@ public class TourControllerServlet extends HttpServlet {
 			case "BOOKING":
 				bookingTour(request, response);
 				break;
+			// khi admin xác nhận một đơn tour phổ thông đã được thanh toán
+			case "PURCHASED_BOOKING":
+				purchased_booking(request, response);
+				break;
+			//huỷ booking của một tour phổ thông
+			case "CANCEL_BOOKING":
+				cancel_booking(request, response);
+				break;
 			default:
 				break;
 			}
@@ -332,8 +360,37 @@ public class TourControllerServlet extends HttpServlet {
 			throw new ServletException(exc);
 		}
 	}
+	//huỷ booking của một tour phổ thông
+	private void cancel_booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		// lấy ID của proposal custom tour cần huỷ
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		tourDbUtil.cancelBooking(ID);
+		logger.info("Cancelled booking" + ID);
+		
+	}
 
-	private void bookingTour(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//xác nhận khách đã thanh toán một tour phổ thông 
+	private void purchased_booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		// lấy ID tour được thanh toán
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		tourDbUtil.confirmPurchasedBooking(ID);
+		logger.info("Purchased booking" + ID);
+		
+	}
+
+	private void bookingTour(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		//lấy thông tin đặt tour từ form
+		int userID = Integer.parseInt(request.getParameter("userID"));
+		int tourID = Integer.parseInt(request.getParameter("tourID"));
+		int numberOfTourists = Integer.parseInt(request.getParameter("number_of_tourists"));
+		String note = request.getParameter("pick_up_location");
+		
+		//tạo đối tượng booking mới
+		Booking booking = new Booking(userID, tourID, numberOfTourists, note);
+		
+		//thêm đơn booking vào cơ sở dữ liệu
+		tourDbUtil.addBooking(booking);
+		
 		// gửi đến JSP
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/booking_successfully.jsp");
 		dispatcher.forward(request, response);
@@ -345,7 +402,7 @@ public class TourControllerServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//lấy các thông tin từ form ra
 		int ID = Integer.parseInt(getValue(request.getPart("id")));
-		logger.info("update tour" + ID );
+		logger.info("TourControllerServlet update tour" + ID );
 		String name = getValue(request.getPart("name"));
 	    String price = getValue(request.getPart("price"));
 	    String startDate = getValue(request.getPart("start_date"));
@@ -422,7 +479,7 @@ public class TourControllerServlet extends HttpServlet {
 		// lấy ID của proposal custom tour cần huỷ
 		int ID = Integer.parseInt(request.getParameter("ID"));
 		tourDbUtil.cancelCustomTour(ID);
-		logger.info("Cancelled tour" + ID);
+		logger.info("Cancelled custom tour" + ID);
 	}
 
 	// cập nhật trạng thái custom Tour thành đã được thanh toán
@@ -430,7 +487,7 @@ public class TourControllerServlet extends HttpServlet {
 		// lấy ID tour được thanh toán
 		int ID = Integer.parseInt(request.getParameter("ID"));
 		tourDbUtil.confirmPurchasedCustomTour(ID);
-		logger.info("Purchased tour" + ID);
+		logger.info("Purchased custom tour" + ID);
 	}
 
 	// admin xử lý yêu cầu đặt custom tour, sắp xếp, chỉnh sửa lại proposal và lưu

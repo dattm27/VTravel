@@ -16,8 +16,8 @@ function searchData(attribute1, attribute2) {
         rows[i].style.display = displayStyle;
     }
     // Reset về trang đầu tiên khi thực hiện tìm kiếm
-    currentPage = 1;
-    //Cập nhật lại bảng
+    currentPage = 1;  
+   //Cập nhật lại bảng
     updateTable();
   }
 
@@ -73,7 +73,6 @@ function updateTable() {
     // Xác định phạm vi bản ghi hiện tại từ danh sách các dòng
     var startIndex = (currentPage - 1) * recordsPerPage;
     var endIndex = recordsPerPage === 'all' ? rows.length : startIndex + recordsPerPage;
-
     // Hiển thị các bản ghi trong phạm vi
     for (var i = 0; i < rows.length; i++) {
         if (i >= startIndex && i < endIndex) {

@@ -207,6 +207,28 @@ public class TourDbUtil {
 		
 	}
 	
+	public void confirmPurchasedBooking(int ID) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị SQL
+			String sql = "update booking "
+					+ "set status = 'Đã thanh toán' "
+					+ "where ID = " + ID;
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn
+			myStmt.execute(sql);
+		}
+		finally {
+			close (myConn, myStmt, null);
+		}
+		
+	}
+	
 	//cập nhật trạng thái một custom tour là đã bị huỷ
 	public void cancelCustomTour(int ID) throws SQLException{
 		Connection myConn = null;
@@ -230,6 +252,28 @@ public class TourDbUtil {
 		
 	}
 	
+	//huỷ một booking của tour phổ thông
+	public void cancelBooking(int ID) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị SQL
+			String sql = "update booking "
+					+ "set status = 'Đã huỷ' "
+					+ "where ID = " + ID;
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn
+			myStmt.execute(sql);
+		}
+		finally {
+			close (myConn, myStmt, null);
+		}
+		
+	}
 	
 	// hiển thị tất cả các tour lên tour page
 	public List<Tour> getAllTour(boolean limmited) throws SQLException {
@@ -402,6 +446,75 @@ public class TourDbUtil {
 		
 	}
 	
+	//thêm đơn đặt tour phổ thông vào cơ sở dữ liệu
+	public void addBooking(Booking booking) throws SQLException {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql 
+			String sql = "insert into booking(user_id, tour_id, number_tourist, note) "
+					+ " values (? , ? , ?, ?) ";
+			myStmt = myConn.prepareStatement(sql);
+			
+			//đặt tham số
+			myStmt.setInt(1, booking.getUserID());
+			myStmt.setInt(2, booking.getTourID());
+			myStmt.setInt(3, booking.getNumberOfTourists());
+			myStmt.setString(4, booking.getNote());
+			
+			//execute
+			myStmt.execute();
+			
+		}
+		finally {
+			close (myConn, myStmt, null);
+		}
+		
+	}
+	
+	// Trả về danh sách booking của một tour theo ID cho admin
+	public List<Booking> getBookingOfTour(int tourID) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		List<Booking> bookingList = new ArrayList<>();
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql 
+			String sql = "select user_id, tour_id, number_tourist, note, booking.id, fullname, booking.status, created_date, phone_number "
+					+ "from booking join account on booking.user_id = account.id "
+					+ "where booking.tour_id = " + tourID;
+			myStmt = myConn.createStatement();
+			
+			//execute
+			myRs = myStmt.executeQuery(sql);
+			
+			while (myRs.next()) {
+				int ID = myRs.getInt("id");
+				int userID = myRs.getInt("user_id");
+				int numberOfTourists = myRs.getInt("number_tourist");
+				String note = myRs.getString("note");
+				String userFullname = myRs.getString("fullname");
+				String status = myRs.getString("status");
+				String createdDate = myRs.getString("created_date");
+				String userPhoneNumber = myRs.getString("phone_number");
+				Booking booking = new Booking(ID, userID, tourID, numberOfTourists, note, userFullname, status, createdDate, userPhoneNumber);
+				bookingList.add(booking);
+			}
+			
+			return bookingList;
+		}
+		finally {
+			close (myConn, myStmt, null );
+		}
+	
+	}
+
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
 			if (myRs != null) {
@@ -420,6 +533,13 @@ public class TourDbUtil {
 		}
 		
 	}
+
+	
+
+	
+
+	
+	
 
 	
 
