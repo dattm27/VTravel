@@ -50,11 +50,21 @@ VALUES
 
 select * from account;
 use vtravel;
+select * from booking ;
 select * from proposal_custom_tour;
 select * from available_tour;
 select cus_tour.id, user_id ,fullname, destination, start_date, end_date, number_of_travellers, note, cus_tour.status, created_date
 from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id;
 
 
+update available_tour
+set booked = 1
+where id = 5;
 
+UPDATE available_tour
+SET booked = 0
+WHERE booked IS NULL;
 
+select user_id, tour_id, number_tourist, note, booking.id, fullname
+from booking join account on booking.user_id = account.id
+where booking.toud_id = 5;

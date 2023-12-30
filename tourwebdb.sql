@@ -106,7 +106,7 @@ END;
 DELIMITER ;
 -- add status column to booking
 ALTER TABLE booking
-ADD status varchar(15) DEFAULT 'Chờ thanh toán';
+ADD status varchar(20) DEFAULT 'Chờ thanh toán';
 ALTER TABLE booking
 ADD created_date DATETIME default CURRENT_TIMESTAMP;
 
