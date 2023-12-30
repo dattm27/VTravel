@@ -38,13 +38,11 @@
 	<!-- Phần thân trang -->
 	<div class="container">
 		<div class="row mt-3">
-			<!-- Phần bên trái với hình ảnh minh hoạ -->
-			
-
-			<!-- Phần bên phải với form nhập thông tin -->
+			<!-- Phần bên trái với form nhập thông tin -->
 			<div class="col-md-7">
 				
-				<form>
+				<form action="TourControllerServlet" method ="POST">
+						<input type="hidden" name = "command" value = "BOOKING">
 						<h3 class="mt-3">Thông tin khách hàng</h3>
 						<div class="mb-3">
 							<label for="disabledTextInput" class="form-label">Tên khách hàng</label> <input type="text" id="disabledTextInput"
@@ -78,6 +76,7 @@
 					<button type="submit" class="btn btn-primary">Xác nhận</button>
 				</form>
 			</div>
+			<!-- Phần bên phải hiển thị thông tin cơ bản của tour -->
 			<div class="col-md-5 mt-3">
 				<h4>${tour.name}</h4>
 				<img src="${tour.image}" alt="Hình ảnh minh hoạ" class="img-fluid mt-3"

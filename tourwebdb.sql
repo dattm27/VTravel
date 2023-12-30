@@ -18,7 +18,8 @@ CREATE TABLE account (
 CREATE TABLE available_tour (
   id int auto_increment,
   price int not null,
-  max_number_tourist int not null,
+  booked int, -- This is to count number of tourist had booked a tour
+  max_number_tourist int not null, -- This is to count max number of tourist can book 
   start_date date not null,
   view int,
   end_date date not null,
@@ -1325,32 +1326,123 @@ SELECT * FROM post;
 SELECT * FROM comment;
 
 -- Update image to available_tour
-UPDATE `available_tour` SET `image` = 'images/tour/1.jpg' WHERE (`id` = '1');
-UPDATE `available_tour` SET `image` = 'images/tour/2.jpg' WHERE (`id` = '2');
-UPDATE `available_tour` SET `image` = 'images/tour/3.jpg' WHERE (`id` = '3');
-UPDATE `available_tour` SET `image` = 'images/tour/4.jpg' WHERE (`id` = '4');
-UPDATE `available_tour` SET `image` = 'images/tour/Ninh-Binh.jpg' WHERE (`id` = '5');
-UPDATE `available_tour` SET `image` = 'images/tour/6.jpg' WHERE (`id` = '6');
-UPDATE `available_tour` SET `image` = 'images/tour/7.jpg' WHERE (`id` = '7');
-UPDATE `available_tour` SET `image` = 'images/tour/8.jpg' WHERE (`id` = '8');
-UPDATE `available_tour` SET `image` = 'images/tour/9.jpg' WHERE (`id` = '9');
-UPDATE `available_tour` SET `image` = 'images/tour/10.jpg' WHERE (`id` = '10');
-UPDATE `available_tour` SET `image` = 'images/tour/11.jpg' WHERE (`id` = '11');
-UPDATE `available_tour` SET `image` = 'images/tour/12.jpg' WHERE (`id` = '12');
-UPDATE `available_tour` SET `image` = 'images/tour/13.jpg' WHERE (`id` = '13');
-UPDATE `available_tour` SET `image` = 'images/tour/14.jpg' WHERE (`id` = '14');
-UPDATE `available_tour` SET `image` = 'images/tour/15.jpg' WHERE (`id` = '15');
-UPDATE `available_tour` SET `image` = 'images/tour/16.jpg' WHERE (`id` = '16');
-UPDATE `available_tour` SET `image` = 'images/tour/17.jpg' WHERE (`id` = '17');
-UPDATE `available_tour` SET `image` = 'images/tour/18.jpg' WHERE (`id` = '18');
-UPDATE `available_tour` SET `image` = 'images/tour/19.jpg' WHERE (`id` = '19');
-UPDATE `available_tour` SET `image` = 'images/tour/20.jpg' WHERE (`id` = '20');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/1.jpg' WHERE (`id` = '1');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/2.jpg' WHERE (`id` = '2');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/3.jpg' WHERE (`id` = '3');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/4.jpg' WHERE (`id` = '4');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/Ninh-Binh.jpg' WHERE (`id` = '5');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/6.jpg' WHERE (`id` = '6');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/7.jpg' WHERE (`id` = '7');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/8.jpg' WHERE (`id` = '8');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/9.jpg' WHERE (`id` = '9');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/10.jpg' WHERE (`id` = '10');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/11.jpg' WHERE (`id` = '11');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/12.jpg' WHERE (`id` = '12');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/13.jpg' WHERE (`id` = '13');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/14.jpg' WHERE (`id` = '14');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/15.jpg' WHERE (`id` = '15');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/16.jpg' WHERE (`id` = '16');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/17.jpg' WHERE (`id` = '17');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/18.jpg' WHERE (`id` = '18');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/19.jpg' WHERE (`id` = '19');
+UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/20.jpg' WHERE (`id` = '20');
 
 -- Update image to post
-UPDATE `post` SET `image` = 'images/post/1.jpg' WHERE (`id` = '1');
-UPDATE `post` SET `image` = 'images/post/2.jpg' WHERE (`id` = '2');
-UPDATE `post` SET `image` = 'images/post/3.jpg' WHERE (`id` = '3');
-UPDATE `post` SET `image` = 'images/post/4.jpg' WHERE (`id` = '4');
-UPDATE `post` SET `image` = 'images/post/5.jpg' WHERE (`id` = '5');
+UPDATE `tourweb`.`post` SET `image` = 'images/post/1.jpg' WHERE (`id` = '1');
+UPDATE `tourweb`.`post` SET `image` = 'images/post/2.jpg' WHERE (`id` = '2');
+UPDATE `tourweb`.`post` SET `image` = 'images/post/3.jpg' WHERE (`id` = '3');
+UPDATE `tourweb`.`post` SET `image` = 'images/post/4.jpg' WHERE (`id` = '4');
+UPDATE `tourweb`.`post` SET `image` = 'images/post/5.jpg' WHERE (`id` = '5');
 
--- update available tour to have booked 
+-- Format again content of post
+UPDATE `tourweb`.`post` SET `content` = '<pre> 
+<h3>Phương tiện đi lại</h3> 
+Từ TP.HCM, Đà Nẵng hay Cần Thơ thì phương tiện thuận tiện và tiết kiệm thời gian nhất bạn nên chọn là máy bay, bởi hiện nay các hãng hàng không Vietjet, Jestar hay Vietnam Airlines luôn có nhiều chương trình khuyến mãi hấp dẫn, bạn nên đăng ký địa chỉ mail để các hãng hàng không gởi thông tin khuyến mãi nhé. Ngoài ra, bạn có thể chọn xe lửa tàu Thống Nhất Bắc Nam tuy nhiên lưu ý bạn chỉ nên chọn khi có nhiều thời gian tham quan. 
+Từ sân bay Nội Bài về trung tâm khoảng 30km, bạn có thể đi taxi nếu đi đông hay chọn xe bus trung chuyển của hai hãng hàng không nội địa là Jetstar và VietJet Air với giá mềm hơn. Trong trung tâm Hà Nội để tham quan bạn nên thuê xe máy để di chuyển, ngoài ra còn 2 phương tiện cũng khá độc đáo để thăm thủ đô là xích lô và xe điện. 
+<h3>Nên đi Hà Nội mùa nào?</h3> 
+Thời gian thích hợp nhất để du lịch Hà Nội là vào tháng 9 đến tháng 11 hoặc từ tháng 3 đến tháng 4, đó là lúc chuyển mùa thời tiết ấm áp và dễ chịu, không quá nắng gắt hay hanh khô. Tuyệt vời nhất là vào mùa thu, Hà Nội như khoác một chiếc áo mới, dịu dàng và lãng mạng nhất trong năm. 
+<h3>Những điểm nào nên tham quan khi đến Hà Nội</h3>
+Hà Nội có rất nhiều điểm tham quan di tích lịch sử - văn hóa để bạn tham quan tìm hiểu, ngay khu vực trung tâm thủ đô bạn hãy ghé tham quan Hồ Hoàn Kiếm, ngắm tháp Rùa, đền Ngọc Sơn, cầu Thê Húc. Chiêm ngưỡng và chụp hình tại Nhà thờ lớn Hà Nội, Nhà hát lớn Hà Nội, khu phố Cổ. Xa hơn một chút tầm 3km bạn hãy viếng Lăng Bác (lưu ý Lăng không mở thứ 2, 6 hàng tuần) thăm quan Bảo tàng Hồ Chí Minh, nhà sàn Bác Hồ, chùa Một Cột, quảng trường Ba Đình; tiếp tục tham quan Văn Miếu - Quốc Tử Giám - nơi thờ Khổng Tử và các bậc hiền triết của Nho Giáo, Hoàng Thành Thăng Long. 
+Ngày hôm sau tại Hà Nội bạn hãy ghé khu vực Hồ Tây, tham quan Đền Quán Thánh, chùa Trấn Quốc. Thích tìm hiểu về văn hóa các dân tộc thì bạn ghé tham quan Bảo tàng dân tộc học Việt Nam, nếu còn thời gian tại Hà Nội bạn hãy ghé các khu vực lân cận như làng gốm Bát Tràng (cách trung tâm 20km), làng cổ Đường Lâm (cách trung tâm 45km) nơi còn lưu giữ những nét cổ xưa của một làng quê miền Bắc. 
+<h3>Hà Nội có lễ hội gì đặc sắc?</h3> 
+Lễ hội Chùa Hương là lễ hội đặc sắc nhất ở Hà Nội, được diễn ra từ mùng 6 tháng Giêng đến hết tháng 3 âm lịch, tuy nhiên trong giai đoạn lễ hội thường rất đông nên bạn có thể đi dịp trước tết dương lịch và nguyên đán. Ngoài ra, Hà Nội còn có các lễ hội như Hội gò Đống Đa mùng 5 Tết tại gò Đống Đa, lễ hội đền Gióng Sóc Sơn ngày 6/1 âm lịch, lễ hội Cổ Loa diễn ra từ ngày 6 đến 16 tháng giêng âm lịch (chính hội ngày 6). 
+<h3>Khách sạn và ẩm thực địa phương</h3>
+Hà nội có rất nhiều khách sạn để bạn lựa chọn, để tham khảo các khách sạn hợp với túi tiền và vị trí gần trung tâm phố cổ bạn nên tham khảo trước trên các web tư vấn khách sạn như Agoda hay Tripadvisor rất hữu ích. Ngoài ra, mình tư vấn cho bạn một số khách sạn như Asian Star, Chaerry 2, Crysral 2 sao hay khách sạn 3 sao như Boss, ATS, Church Boutique. 
+Ẩm thực Hà Nội luôn hấp dẫn với những món ăn đậm chất riêng. Một số món ăn không thể bỏ qua khi du lịch Hà Nội: phở gánh Hàng Trống, chả cá Lã Vọng, bún chả, bún thang, bánh cốm, bánh cuốn, bún đậu mắm tôm. 
+<h3>Đến Hà Nội mua gì về làm quà?</h3> 
+Hà Nội có khá nhiều sản phẩm để bạn mua về làm quà cho người thân như các sản phẩm sơn mài, thủ công, đồ lưu niệm như đồ trang trí bằng bạc, gốm sứ và đồ trang sức dọc phố Hàng Khay, Tràng Tiền; sản phẩm lụa cũng khá đẹp bạn có thể mua tại phố Hàng Gai, phố Nha Thờ. Ngoài ra, các đặc sản mua về ăn như Ô Mai (hàng Đường), bánh cốm (Hàng Than) hay bánh đậu xanh (hàng Điếu) rất được du khách ưu chuộng khi mua về. 
+<h3>Những điều lưu ý</h3>
+Miền Bắc có bốn mùa rõ rệt trong năm, chính vì vậy thời tiết là điều bạn cần quan tâm khi đi du lịch Hà Nội. Mùa hè trời thường rất nắng nóng, mùa đông thì rất lạnh, mùa xuân thì hay mưa phùn, ẩm ướt. Hãy có một tấm bản đồ để xác định quãng đường đi, tránh việc bị người khác (xe ôm, taxi) đưa đi lòng vòng rồi tính tiền. Hãy hỏi về giá cả trước khi sử dụng bất cứ dịch vụ nào. Cách tốt nhất là bạn nên nhờ lễ tân tại khách sạn mình ở tư vấn, giúp đỡ khi cần thông tin. Để thưởng thức hết vẻ đẹp thiên nhiên, kiến trúc kỳ vĩ ở các chùa lớn thì không nên đi các chùa vào mùa lễ hội. 
+</pre>' WHERE (`id` = '1');
+UPDATE `tourweb`.`post` SET `content` = '<pre> 
+<h3>Phương tiện đi lại</h3> 
+Hạ Long cách Hà Nội khoảng 150km, bạn có thể ra bến xe Lương Yên, Mỹ Đình để bắt xe đi Hạ Long, có nhiều nhà xe và chạy liên tục trong ngày, xe chạy khoảng 4 tiếng. Với những chuyến đi 2 ngày 1 đêm với dịch vụ ngủ đêm trên du thuyền thì bạn an tâm là du thuyền đón bạn tại khách sạn nên sẽ không lo vận chuyển xuống Hạ Long. Từ miền Trung hay miền Nam đến Hạ Long thì bạn có thể lựa chọn bay trực tiếp đến Hà Nội hoặc Hải Phòng sau đó bắt xe đi Hạ Long, riêng miền Tây thì chỉ có bay trực tiếp đến Hà Nội thôi nhé. 
+<h3>Nên đi Hạ Long mùa nào?</h3> 
+Thời điểm tốt nhất để tham quan Hạ Long là vào mùa hè (tháng 4 – 10), lưu ý tháng 6 – 7 thường có mưa bão nên hạn chế thời gian này. Mùa đông ở Hạ Long rất lạnh (tháng 11 – 3 năm sau), nên bạn lưu ý mang theo áo ấm nhé. 
+<h3>Những điểm nào nên tham quan khi đến Hạ Long</h3> 
+Trên đường ra Hạ Long nếu đi bằng xe máy bạn có thể ghé tham quan núi Yên Tử, cách thành phố Hạ Long 73km, núi Yên Tử khá rộng và phải di chuyển bằng cáp treo 2 lượt nên nếu tham quan cả Chùa Đồng bạn sẽ mất một ngày. Chiều trên đường về Hạ Long bạn tiếp tục ghé tham quan Chùa Ba Vàng, cách Yên Tử 35km và cách Hạ Long 40km. Ngày hôm sau bắt đầu chuyến hành trình khám phá Vịnh bạn có thể lựa chọn tuyến tham quan Động Thiên Cung và Hang Dấu Gỗ (4 tiếng) hoặc Hang Sửng Sốt và Đảo Ti Tốp (6 tiếng), trên đường đi bạn sẽ được nhìn thấy Hòn Đỉnh Hương, Hòn Gà Chọi… 
+Nếu còn thời gian tại Hạ Long bạn có thể ghé tham quan Làng chải Cửa Vạn để tìm hiểu cuộc sống của ngư dân miền biển và tham gia vào những cuộc đánh bắt cá, câu cá, mực, chèo thuyền với ngư dân. Muốn tắm biển thì ghé đảo Ti Tốp, biển Tuần Châu hay Bãi Cháy. Hay tìm hiểu về di tích lịch sử Hạ Long thì bạn nên ghé núi Bài Thơ, đền thờ Trần Quốc Nghiễm, chùa Cửa Ông, bảo tàng Quảng Ninh. Ngoài ra, Đảo Cô Tô cũng là một điểm đến thú vị mà du khách Hà Nội thường lựa chọn vào dịp hè (cách Hạ Long 60km), đảo hiện tại vẫn còn giữ nét hoang sơ nên biển rất xanh và êm ả.
+<h3>Hạ Long có lễ hội gì đặc sắc?</h3> 
+Lễ Hội đặc sắc nhất tại Hạ Long mà du khách hay quan tâm là Carnaval Hạ Long thường tổ chức định kỳ tháng 4 hàng năm tại Quảng Trường thành phố Hạ Long. Trong tháng 4 còn có lễ hội Hoa Anh Đào Hạ Long với hàng trăm cành đào đến từ Nhật Bản. Ngoài ra, tại Hạ Long còn có lễ hội Yên Tử được tổ chức thường niên, bắt đầu từ ngày 10 tháng giêng và kéo dài hết tháng 3 (âm lịch), lễ hội Đền Cửa Ông diễn ra từ 2/1 – 30/3 âm lịch, lễ hội Bạch Đằng được tổ chức vào ngày mùng 8 tháng 3 (âm lịch) hàng năm. 
+<h3>Khách sạn và ẩm thực tại địa phương</h3> 
+Hạ Long được phân ra làm 2 khu: Hòn Gai và Bãi Cháy, được nối với nhau bởi cây cầu Bãi Cháy. Khu du lịch chính là Bãi Cháy, với bờ biển chạy dài và các cảng du lịch. Khu Hòn Gai là khu trung tâm hành chính. Bạn nên ở khu Bãi Cháy cho thuận tiện đi lại và ăn uống. Tại Bãi Cháy có rất nhiều khách sạn để bạn lựa chọn, trước khi quyết định đặt khách sạn nào bạn nên tham khảo đánh giá của các khách ở trước trên web Agoda hay Tripadviser để có thêm thông tin tham khảo. Một vài khách sạn gợi ý cho bạn các khách sạn 3 sao như Blue Sky, BMC Thăng Long, Golden Lotus, City Bay Palace. Ngoài ra, bạn nên trải nghiệm một đêm trên du thuyền Hạ Long sẽ rất thú vị, các du thuyền mình hay ngủ đêm như Bài Thơ, Pelican, Halong Emotion. 
+Hạ Long là thiên đường của hải sản nên đến đây bạn không nên bỏ qua món chả Mực, hàu nướng, Sam xào chua ngọt, Sá Sùng, bún tôm, bún xào Ngán, tu hài Vân Đồn. Ngoài ra các món nem chua và canh hà Quảng Yên Cà Sáy (vịt lai nga) cũng rất hấp dẫn. 
+<h3>Đến Hạ Long mua gì về làm quà?</h3> 
+Hạ Long có khá nhiều mặt hàng để bạn mua về làm quà cho người thân như đồ hải sản gồm mực khô, sá sùng khô, chả mực được bán nhiều tại các chợ Cái Dăm, chợ Hạ Long 1, Hạ Long 2. Đồ lưu niệm được chế tác từ vỏ sinh vật biển, than đá, gỗ, khảm trai, ngọc trai, các sản phẩm này bạn có thể mua tại cửa hàng lưu niệm Hòn Gai hoặc chợ đêm Hạ Long. Ngoài ra, còn có rượu Ngán Hạ long, nem chua Quảng Yên, Cà sáy (vịt lai ngan) bạn có thể mua về để cả gia đình cùng thưởng thức. 
+<h3>Những điều lưu ý</h3> 
+Mua hàng tại Hạ Long thì bạn lưu ý dò hỏi giá ở nhiều cửa hàng để so sánh trước khi quyết định mua vì đa số các cửa hàng đều nói thách. Khi ngủ đêm trên du thuyền lưu ý giữ gìn vệ sinh cảnh quan môi trường biển. Nếu đi đảo Cô Tô bạn nên tránh lúc thời tiết gió bão vì tàu thuyền sẽ không được phép chạy nếu sóng quá lớn. 
+</pre>' WHERE (`id` = '2');
+UPDATE `tourweb`.`post` SET `content` = '<pre> 
+<h3>Phương tiện đi lại</h3> 
+Cách Hà Nội chỉ 100km nên bạn có thể tham quan Ninh Bình bằng xe máy hoặc xe khách, nhưng mình khuyên bạn nên đi xe khách vì thuận tiện và sức khỏe. Các bến xe khách đi Ninh Bình đó là Giáp Bát và Mỹ Đình, hàng ngày đều có các chuyến xe khách Bắc Nam chạy liên tục. Nếu đi Open Bus bạn có thể đi của hãng The Sinh Tourist hoặc Hưng Thành. Vì các điểm tham quan ở Ninh Bình cách xa nhau nên đến Ninh Bình bạn nên thuê xe máy để thuận tiện di chuyển. Các bạn từ TP.HCM, miền Tây hay miền Trung thì nên đặt vé máy bay giá rẻ để đến Hà Nội trước, sau đó kết hợp tham quan Ninh Bình. 
+<h3>Nên đi Ninh Bình mùa nào?</h3> 
+Nếu muốn đi viếng chùa Bái Đính thì nên đến vào những ngày đầu năm (từ mùng 6 đến tháng 3 âm lịch), còn đam mê chụp ảnh mùa vàng Tam Cốc thì bạn nên đến vào tháng 5 – 6. Những điểm nào nên tham quan khi đến Ninh Bình Để tham quan hết các điểm đặc sắc tại Ninh Bình bạn mất 2 – 3 ngày. Ngày đầu tiên đến Ninh Bình bạn hãy ghé thăm Chùa Bái Đính và Khu du lịch Tràng An – di sản thiên nhiên và địa chất thế giới, Tràng An khá rộng nên mất khoảng 3 tiếng ngồi thuyền, các hang động tại Tràng An khá dài và rộng hang Hang Cả, Hang Hai, Hang Ba. 
+Ngày thứ 2 tại Ninh Bình bạn hãy ghé thăm nhà thờ Phát Diệm cách trung tâm Ninh Bình 30km, trưa về ghé tham quan Cố Đô Hoa Lư – đền thờ vua Đinh, vua Lê. Ngoài ra nếu còn thời gian tại Ninh Bình bạn hãy ghé tham quan Tam Cốc, hệ thống hang động ít và ngắn hơn Tràng An nhưng tuyệt đẹp vào mùa lúa (tháng 5 – 6), chùa Bích Động (cùng hướng Tam Cốc). Khu bảo tồn thiên nhiên Vân Long - khu bảo tồn thiên nhiên ngập nước lớn nhất đồng bằng Bắc Bộ, tại đây còn có suối nước nóng Kênh Gà, động Vân Trình, Kẽm Trống và nhiều núi hang đẹp khác. Ngoài ra còn có động Thiên Hà và Vườn Quốc Gia Cúc Phương cho những yêu thiên nhiên và khám phá. 
+<h3>Ninh Bình có lễ hội gì đặc sắc</h3> 
+Nếu đến vào dịp đầu năm bạn sẽ tham quan Lễ hội chùa Bái Đính là một lễ hội xuân được tổ chức hàng năm, diễn ra từ ngày mùng 6 Tết đến hết tháng 3 âm lịch. Ngoài ra trong tháng 3 (mồng 10 tháng 3 âm lịch) còn có lễ hội Hoa Lư, tương truyền là ngày vua Đinh lên ngôi hoàng đế, nhân dân Trường Yên lại mở hội tưởng nhớ Đinh Tiên Hoàng. 
+<h3>Khách sạn và ẩm thực địa phương</h3> 
+Trước khi quyết định đặt phòng bạn hãy tham khảo thêm các đánh giá của những người từng ở trước trên các trang web như Agoda hay Tripadvisor để lựa chọn khách sạn mình thích và hợp túi tiền. Một số khách sạn gợi ý mình đánh giá tốt như Tuấn Ngọc 1 sao, Canh Dieu Moutain, Ngọc Anh & Kinh Đô 2 sao, còn 3 sao thì có Bái Đính và khách sạn Queen. 
+Nhắc đến Ninh Bình là nhắc đến dê núi, vì vậy bạn không quên thưởng thức món dê núi (được chế biến gần 20 món) ăn kèm cơm cháy, ngoài ra còn có những món đặc sắc như gỏi cá nhệch Kim Sơn, ốc núi, nem Yên Mạc, canh chua cá rô, miến lươn chắc chắc sẽ làm bạn hài lòng. 
+<h3>Đến Ninh Bình mua gì về làm quà?</h3> 
+Gợi ý một số sản vật Ninh Bình bạn có thể mua về là quà cho người thân là rượu cần Nho Quan, hàng mỹ nghệ từ cói Ninh Bình (như thảm, khay, túi xách, cốc, mũ) và món ăn đặc sản cơm cháy chà bông. 
+<h3>Những điều lưu ý</h3> 
+Mùa mưa ở Ninh Bình từ tháng 5 – tháng 9 nên bạn nhớ mang theo dù khi đi du lịch, còn mùa đông (tháng 12 – tháng 1) thì nên mang theo áo ấm vì mua đông miền Bắc khá lạnh và buốt. 
+</pre>' WHERE (`id` = '3');
+UPDATE `tourweb`.`post` SET `content` = '<pre> 
+<h3>Phương tiện đi lại</h3> 
+Để đến Huế bạn có thể lựa chọn nhiều phương tiện như xa khách, tàu hỏa, máy bay. Nhưng tốt nhất mình khuyên bạn nên chọn máy bay để tiết kiếm thời gian nếu di chuyển từ TP.HCM và Hà Nội, và vì các hãng hàng không của Việt Nam (Vietjet, Jestar, Vietnam Airlines) thường có nhiều chương trình khuyến mãi, bạn lưu ý đăng ký mail để có thông tin khuyến mãi của hàng không. Còn từ Cần Thơ bạn nên bay trực tiếp đến Đà Nẵng, sau đó kết hợp chuyến hành trình tham quan Huế, chỉ cách 100km. 
+Tại thành phố Huế thì bạn nên lựa chọn phượng tiện phổ biến là thuê xe máy dể dạo quanh phố phường, bạn có thể dễ dàng thuê tại các khách sạn mình ở. Ngoài ra, bạn có thể thuê xích lô tham quan cố đô và trong khu Đại Nội Huế cũng rất thú vị. 
+<h3>Nên đi Huế mùa nào?</h3> 
+Bạn nên đến Huế vào mùa khô từ tháng 3 – tháng 8, có khi nhiệt độ lên tới 35-400C tuy nhiên đây là mùa khô ráo nên bạn có thể tham quan và khám phá trọn vẹn cố đô Huế. Ngoài ra, để hiểu về bản sắc văn hóa Huế bạn nên đến vào dịp Festival Huế (được tổ chức 2 năm 1 lần vào các năm chẵn vào cuối dịp tháng 4. 
+<h3>Những điểm nào nên tham quan khi đến Huế</h3>
+Ngày đầu đến Huế bạn nên ghé tham quan Hoàng Cung Huế, cách trung tâm tầm 6km, điểm tham quan này khá rộng nên mất gần 1 buổi, tại đây có lễ đổi gác từ 9h00 – 9h30 hàng ngày nên bạn chú ý xem để biết hoạt động đổi gác ngày xưa dưới thời vua chúa như thế nào nhé. Nếu còn thời gian buổi sáng bạn có thể ghé tham quan Chùa Thiên Mụ, cách Hoàng Cung Huế 6km. Buổi chiều thì bạn nên tham quan lăng của các vua Triều Nguyễn như Minh Mạng, Tự Đức, Khải Định, Gia Long, Thiệu Trị, Đồng Khánh trong phạm vị bán kính tầm 7 – 12km. 
+Nếu còn thời gian ở lại Huế bạn có thể đi thuyền trên sông Hương tham quan ghé Điện Hòn Chén, làng hoa giấy Thanh Tiên. Tắm biển Thuận An cách trung tâm Huế 18km, ghé Phá Tam Giang ngắm hoàng hôn hay thư giãn tại Suối khoáng nóng Thanh Tân (cách Huế 31km). Buổi tối ở Huế bạn hãy đi thuyền trên sông Hương, thả đèn hoa đăng và thưởng thức ca hò Huế sẽ rất thú vị. 
+<h3>Huế có lễ hội gì đặc sắc?</h3> 
+Tại Huế định kỳ 2 năm 1 lần vào các năm chẵn sẽ tổ chức Festival Huế, thường vào dịp cuối tháng 4. Hay đến vào dịp 2/9 bạn sẽ được hòa mình vào lễ hội đua ghe được tổ chức bên bờ sông Hương. Nếu thích xem đấu vật bạn có thể ghé Huế vào mồng mười tháng giêng âm lịch hàng năm để xem lễ hội Vật Làng Sình (huyện Phú Vang). 
+<h3>Khách sạn và ẩm thực địa phương</h3> 
+Tại Huế có rất nhiều khách sạn để bạn lựa chọn, bạn nên tham khảo trước giá và các đánh giá của những du khách đã từng ở trước trên các website như Agoda hay Tripadvisor để có lựa chọn tốt nhất theo khả năng chi trả của mình. Giá khách sạn tại Huế tương đối mềm hơn so với Đà Nẵng hay Hội An, nên bạn đừng ngần ngại lựa chọn dòng khách sạn 3-4 sao tại đây. 
+Huế là vùng đất của ẩm thực cung đình, nên khi đến đây bạn có thể ghé vào các nhà hàng như Cung Đình để vừa thưởng thức các món ăn cung đình như nem công, chả phụng, cơm cung đình, súp hạt sen, tôm ngự thuyền rồng... vừa được nghe nhã nhạc Huế trong trang phục hoàng tộc và không gian cung đình Huế. Ngoài ra còn có những món ăn quen thuộc mà dân dã như cơm Hến Huế, bún bò Huế (nổi tiếng nhất ở số 13 Lý Thường Kiệt), nem lụi Huế, các loại bánh như Bánh bèo, bánh bột lọc, bánh khoái. Cơm chay Huế tại số 3 Lê Quý Đôn, và những bạn là tín đồ của chè thì không nên bỏ qua quán chè hẻm nằm sâu tít trong đường Hùng Vương với 19 loại chè cực ngon. 
+<h3>Đến Huế mua gì về làm quà?</h3> 
+Mè xửng, hạt sen, bưởi Thanh Trà, các loại mắm Huế (mắm cá cơm, tôm chua, mắm ruốc, mắm rò), mứt gừng Huế. Và những sản phẩm tô điểm thêm cho ngôi nhà của bạn như hoa giấy Thanh Tiên hay nón Bài Thơ là những đặc sản của xứ Huế mà bạn có thể mua về làm quà cho người thân, bạn bè. 
+<h3>Những điều lưu ý</h3> 
+Bạn nên hạn chế đến Huế vào mùa mưa từ tháng 9 – 12, đặc biệt tháng 10 là mùa lũ lụt. Và mùa đông ở Huế thường rất lạnh và buốt, có khi nhiệt độ xuống đến 90C (tháng 1 – 2). Nhớ nhé, thời tiết huế khá thất thường, ngay cả khi trời nắng bạn cũng có thể gặp những cơn mưa bất chợt. Bởi thế lúc nào cũng phải mang theo 1 chiếc ô. 
+</pre>' WHERE (`id` = '4');
+UPDATE `tourweb`.`post` SET `content` = '<pre> 
+<h3>Phương tiện đi lại</h3> 
+Hiện nay có rất nhiều phương tiện đến Đà Nẵng cho bạn lựa chọn là máy bay, tàu hỏa hay xe khách. Tuy nhiên mình khuyên bạn nếu sắp xếp được thời gian và lên lịch cho kỳ nghỉ rồi thì nên đặt vé máy bay sẽ thuận tiện hơn, cách hãng hàng không VietJetAir, Jetstar hay Vietnam Airlines thường xuyên có chương trình khuyến mãi với giá cả rất hấp dẫn từ 3 đầu Tp.HCM, Hà Nội và Cần Thơ. Từ sân bay Đà Nẵng về thành phố tầm 6km nên bạn đi xe taxi sẽ rất thuận tiện. 
+Ngoài ra, nếu không đặt được vé máy bay bạn có thể đi tàu hỏa với giá cả cũng rất hợp lý tùy theo bạn lựa chọn ghế ngồi hay giường nằm, đặc biệt ga Đà Nẵng nằm ngay trung tâm nên bạn thuận tiện đi lại. Còn nếu chọn xe khách thì bạn dễ dàng mua vé từ bến xe tại TP.HCM hay Hà Nội. Tại thành phố Đà Nẵng bạn nên thuê xe máy đi tham quan vì khoảng cách các điểm không quá xa nên bạn thuận tiện tham quan trong thời gian ở lại đây. 
+<h3>Nên đi Đà Nẵng mùa nào?</h3> 
+Nếu muốn có cảm giác se lạnh thì đến Đà Nẵng từ tháng 1-3, tuy nhiên cũng không phải quá lạnh mà nhiệt độ chỉ ở ngưỡng vừa phải. Còn đến vào tháng 4-5 thì tuy đã chuyển sang hè nhưng đôi khi vẫn còn sương mù. Thời điểm đẹp nhất để đến Đà Nẵng sẽ là tháng 6-9 bởi bước vào mùa hè của miền Trung, trời nắng ráo và biển trong xanh, thích hợp cho chuyến vui chơi dạo biển của bạn. 
+<h3> Những điểm nào nên tham quan khi đến Đà Nẵng</h3> 
+Thành phố Đà Nẵng nổi tiếng với những bãi biển đẹp nên đến đây bạn không nên bỏ qua việc ngâm mình trong các bãi biển như biển Mỹ Khê, bãi tắm Xuân Thiều, bãi tắm ở Bán Đảo Sơn Trà hoặc bãi tắm Non Nước. Ngay khu vực trung tâm Đà Nẵng bạn nên ghé tham quan bảo tàng Đà Nẵng trưng bày những cổ vật của Chămpa hay tham quan công viên Châu Á với những trò chơi hấp dẫn cùng vòng quay mặt trời Sun Wheel hiện là 1 trong 10 vòng quay lớn nhất thế giới. Đi xa chừng 16km bạn sẽ đến với Bán đảo Sơn Trà, viếng Chùa Linh Ứng, tham quan đỉnh Bàn Cờ, Bãi Bụt, Bãi Bắc, khu du lịch Bãi Cát Vàng và sân bay trực thăng Sơn Trà. 
+Ngày hôm sau tại Đà Nẵng bạn tiếp tục tham quan danh thắng Ngũ Hành Sơn cách trung tâm thành phố Đà Nẵng khoảng 12km hướng về Hội An, sau đó về lại thành phố Đà Nẵng và tiếp tục hành trình khám phá Bà Nà Hills, cách Đà Nẵng 30km. Đến Bà Nà bạn không quên trải nghiệm dịch vụ đi tàu lửa, tham quan vườn hoa Le Jardin D’Amour và khu Làng Pháp xinh đẹp. Buổi tối tại Đà Nẵng thì đừng quên trải nghiệm dịch vụ di thuyền trên sông Hàn về đêm và chiêm ngưỡng những cây cầu làm nên tên tuổi của thành phố Đà Nẵng đó là cầu sông Hàn, cầu Rồng, cầu Trần Thị Lý, cầu Thuận Phước. 
+<h3>Đà Nẵng có lễ hội gì đặc sắc?</h3> 
+Đà Nẵng nổi tiếng với Lễ hội pháo hoa Đà Nẵng được tổ chức 2 năm một lần, thường được tổ chức vào năm lẻ, hoạt động diễn ra vào cuối tháng 4. Ngoài ra, Đà Nẵng còn có Lễ hội đua thuyền diễn ra vào tháng Giêng âm lịch hàng năm, lễ hội Cầu Ngư tổ chức sau khi ăn Tết và lễ hội Quan Thế Âm vào ngày 19.2 Âm lịch hàng năm. 
+<h3>Khách sạn và ẩm thực địa phương</h3> 
+Là một thành phố du lịch nổi tiếng nên Đà Nẵng được đầu tư rất nhiều về hệ thống giao thông, dịch vụ du lịch như khách sạn, nhà hàng. Vì vậy bạn dễ dàng tìm thấy những khách sạn với mức giá phải chăng đến những khách sạn cao cấp, resort 4-5 sao dọc bãi biển. Để có những lựa chọn tối ưu bạn nên tham khảo thông tin đánh giá trên Agoda hay Tripadvisor. Ngoài ra, nếu muốn thức dậy trong khi khí se lạnh và trải nghiệm cảm giác thiên nhiên thì bạn nên đặt 1 đêm phòng trên Bà Nà Hilss tại khách sạn Lệ Nim hay khu Làng Pháp, mình tin cảm giác sẽ rất khác bởi không gian ở đây rất lãng mạng và nên thơ. 
+Đà Nẵng có thể được xem là thiên đường của ẩm thực, bởi đến đây bạn không chỉ thưởng thức hải sản tươi sống mà còn ăn được những món ăn độc đáo của miền Trung như Mỳ Quảng, bánh tráng cuốn thịt heo, bún mắm, bê thui Cầu Mống, bún chả cá, gỏi cá Nam Ô, nem lụi, bánh xèo, bánh bèo – nậm lọc, bún bò.... Ngoài ra, nếu muốn ngắm phong cảnh về đêm của Đà Nẵng thì bạn nên đến Sky Bar cao nhất Việt Nam tại tầng 36 của khách sạn Novotel Đà Nẵng, giá cả cũng rất phải chăng với nhiều loại thức uống được phục vụ. 
+<h3>Đến Đà Nẵng mua gì về làm quà?</h3> 
+Bạn có thể mua các loại hải sản tươi sống hoặc khô như mực, tôm, cá khô tẩm tại chợ Cồn hay chợ Hàn…Các loại bánh tré Bà Đệ, rong biển Mỹ Khê, nước nắm Nam Ông…là những món quà đặc sản du khách thường mua về làm quà khi tới Đà Nẵng. 
+<h3>Những điều lưu ý</h3> 
+Tháng 10-12 Đà Nẵng (và miền Trung) bắt đầu vào mùa mưa, bão nên không thuận lợi cho các bạn di chuyển, nếu đến Đà Nẵng lúc này gần như chỉ có thể trải nghiệm cảm giác mưa bão miền Trung kết hợp với tour khám phá ẩm thực Đà Nẵng mà thôi. Nhớ là mưa miền Trung khá dai bạn nhé có thể kéo dài từ sáng đến chiều và từ tháng này qua tháng nọ. Và bạn nên nhớ là người dân Đà Nẵng rất nhiệt tình và hiếu khách nên muốn hỏi đường đi thì bạn đừng ngần ngại nhé, họ rất sẵn lòng và chỉ dẫn tận tình. 
+</pre>' WHERE (`id` = '5');
