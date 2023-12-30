@@ -18,7 +18,7 @@ CREATE TABLE account (
 CREATE TABLE available_tour (
   id int auto_increment,
   price int not null,
-  booked int, -- This is to count number of tourist had booked a tour
+  booked int default 0, -- This is to count number of tourist had booked a tour
   max_number_tourist int not null, -- This is to count max number of tourist can book 
   start_date date not null,
   view int,
