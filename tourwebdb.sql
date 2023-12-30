@@ -88,7 +88,9 @@ CREATE TABLE booking (
   tour_id int not null,
   number_tourist int,
   note text,
-  PRIMARY KEY (user_id, tour_id)
+  id int primary key auto_increment,
+  FOREIGN KEY (user_id) REFERENCES account(id),
+  FOREIGN KEY (tour_id) REFERENCES available_tour(id)
 );
 
 -- Example data for available tour 
