@@ -106,7 +106,10 @@ END;
 DELIMITER ;
 -- add status column to booking
 ALTER TABLE booking
-ADD status varchar(15) DEFAULT 'Đang chờ';
+ADD status varchar(15) DEFAULT 'Chờ thanh toán';
+ALTER TABLE booking
+ADD created_date DATETIME default CURRENT_TIMESTAMP;
+
 -- Example data for available tour 
 INSERT INTO available_tour (tour_name, start_date, end_date, start_place, description, price, max_number_tourist,
 status)
