@@ -321,12 +321,23 @@ public class TourControllerServlet extends HttpServlet {
 			case "UPDATE_DETAIL_TOUR":
 				updateDetailTour(request, response);
 				break;
+			// Khi người dùng gửi form đặt tour phổ thông
+			case "BOOKING":
+				bookingTour(request, response);
+				break;
 			default:
 				break;
 			}
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	private void bookingTour(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/booking_successfully.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 	private void updateDetailTour(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, Exception {
