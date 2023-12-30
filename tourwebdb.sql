@@ -104,8 +104,10 @@ BEGIN
 END;
 //
 DELIMITER ;
-
---  Example data for available tour 
+-- add status column to booking
+ALTER TABLE booking
+ADD status varchar(15) DEFAULT 'Đang chờ';
+-- Example data for available tour 
 INSERT INTO available_tour (tour_name, start_date, end_date, start_place, description, price, max_number_tourist,
 status)
 VALUES ('Hà Nội - Hạ Long - Yên Tử - Ninh Bình - Bái Đính - Tràng An', '2023-12-05', '2023-12-09', 'TP. Hồ Chí Minh', '
