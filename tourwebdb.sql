@@ -93,7 +93,19 @@ CREATE TABLE booking (
   FOREIGN KEY (tour_id) REFERENCES available_tour(id)
 );
 
--- Example data for available tour 
+-- trigger to update number of booking
+DELIMITER //
+CREATE TRIGGER update_booked_count AFTER INSERT ON booking
+FOR EACH ROW
+BEGIN
+    UPDATE available_tour
+    SET booked = booked + NEW.number_tourist
+    WHERE id = NEW.tour_id;
+END;
+//
+DELIMITER ;
+
+--  Example data for available tour 
 INSERT INTO available_tour (tour_name, start_date, end_date, start_place, description, price, max_number_tourist,
 status)
 VALUES ('Hà Nội - Hạ Long - Yên Tử - Ninh Bình - Bái Đính - Tràng An', '2023-12-05', '2023-12-09', 'TP. Hồ Chí Minh', '
