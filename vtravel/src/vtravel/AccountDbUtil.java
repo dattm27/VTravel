@@ -27,7 +27,7 @@ public class AccountDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//viết SQL
-			String sql = "select ID, username, fullname, phone_number, email, role from account where ID = ?";
+			String sql = "select ID, username, fullname, phone_number, email, role, status from account where ID = ?";
 			myStmt = myConn.prepareStatement(sql);
 			
 			//đặt tham số
@@ -44,7 +44,8 @@ public class AccountDbUtil {
 				String email = myRs.getString("email");
 				String username = myRs.getString("username");
 				String role = myRs.getString("role");
-				account = new Account(ID,  fullname,username, phonenumber, email, role);
+				String status = myRs.getString("status");
+				account = new Account(ID,  fullname, username, phonenumber, email, status, role);
 				
 			}
 			//trả về đối tượng là người dùng có ID là ID

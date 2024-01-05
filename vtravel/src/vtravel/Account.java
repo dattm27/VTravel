@@ -32,6 +32,17 @@ public class Account {
 		this.role = role;
 	}
 
+	public Account(int iD, String fullname, String username, String phoneNumber, String email, String status, String role) {
+		super();
+		ID = iD;
+		this.fullname = fullname;
+		this.username = username;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.status = status;
+		this.role = role;
+	}
+
 
 	public int getID() {
 		return ID;

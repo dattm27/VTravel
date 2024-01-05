@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.anhpt.model.Account;
 import com.anhpt.model.AccountDAO;
@@ -44,6 +45,9 @@ public class UserController extends HttpServlet {
             case "ADD":
                 addUser(request, response);
                 break;
+            case "CHANGE":
+            	handleChange(request, response);
+            	break;
             default:
                 handleDefault(request, response);
         }
@@ -81,6 +85,7 @@ public class UserController extends HttpServlet {
 
     protected void handleUpdate(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
         AccountDAO accountDAO = new AccountDAO();
         String userIdString = request.getParameter("id");
         String username = request.getParameter("username");
@@ -92,7 +97,7 @@ public class UserController extends HttpServlet {
         String fullname = request.getParameter("fullname");
 
         int userId = Integer.parseInt(userIdString);
-        Account updatedAccount = new Account(userId, email, username, password, status, role, phoneNumber,fullname);
+        Account updatedAccount = new Account(userId, email, username, password, status, role, phoneNumber, fullname);
 
         boolean updateSuccess = accountDAO.updateAccount(updatedAccount);
         // Trả về kết quả
@@ -122,6 +127,41 @@ public class UserController extends HttpServlet {
     protected void addUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	request.getRequestDispatcher("addUser.jsp").forward(request, response);
+    }
+    
+    protected void handleChange(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    	
+        AccountDAO accountDAO = new AccountDAO();
+        String userIdString = request.getParameter("id");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phone_number");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
+        String status = request.getParameter("status");
+        String fullname = request.getParameter("fullname");
+
+        int userId = Integer.parseInt(userIdString);
+        Account updatedAccount = new Account(userId, email, username, password, status, role, phoneNumber, fullname);
+     // tạo session
+     			HttpSession session = request.getSession();
+        session.setAttribute("ID", userId);
+		session.setAttribute("username", username);
+		session.setAttribute("fullname", fullname);
+		session.setAttribute("email", email);
+		session.setAttribute("phoneNumber", phoneNumber);
+		session.setAttribute("password", password);
+		session.setAttribute("role" ,role);
+		session.setAttribute("status" ,status);
+        
+        boolean updateSuccess = accountDAO.updateAccount(updatedAccount);
+        // Trả về kết quả
+        if (updateSuccess) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("error");
+        }
     }
 
     private void handleDefault(HttpServletRequest request, HttpServletResponse response)

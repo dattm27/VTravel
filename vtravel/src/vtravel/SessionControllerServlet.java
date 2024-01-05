@@ -116,7 +116,11 @@ public class SessionControllerServlet extends HttpServlet {
 			session.setAttribute("ID", id);
 			session.setAttribute("username", account.getUsername());
 			session.setAttribute("fullname", account.getFullname());
+			session.setAttribute("email", account.getEmail());
+			session.setAttribute("phoneNumber", account.getPhoneNumber());
+			session.setAttribute("password", password);
 			session.setAttribute("role" ,account.getRole());
+			session.setAttribute("status" ,account.getStatus());
 			session.setMaxInactiveInterval(30*60);
 			//gửi lại jsp
 			response.sendRedirect("WelcomeControllerServlet");
