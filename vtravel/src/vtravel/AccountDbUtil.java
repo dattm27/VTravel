@@ -85,7 +85,63 @@ public class AccountDbUtil {
 				
 			}
 		}
-	
+	/// tim so luong account co ten la username
+    public int numberOfUsername(String username) throws SQLException {
+    	String sql = "SELECT count(*) as total " +
+                "FROM account" + " WHERE username LIKE \"" + username +"\"";
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        try {
+            myConn = dataSource.getConnection();
+            //chuẩn bị sql
+            myStmt = myConn.prepareStatement(sql);
+            myRs = myStmt.executeQuery();
+            myRs.next();
+            return myRs.getInt("total");
+        }
+        finally {
+            close(myConn, myStmt, myRs);
+        }
+    }
+    /// kiem tra so luong account co Email la email
+    public int numberOfEmail(String email) throws SQLException {
+        String sql = "SELECT count(*) as total " +
+                "FROM account" + " WHERE email LIKE \"" + email +"\"";
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        try {
+            myConn = dataSource.getConnection();
+            //chuẩn bị sql
+            myStmt = myConn.prepareStatement(sql);
+            myRs = myStmt.executeQuery();
+            myRs.next();
+            return myRs.getInt("total");
+        }
+        finally {
+            close(myConn, myStmt, myRs);
+        }
+    }
+    public int numberOfPhone_number(String phone_number) throws SQLException {
+        String tmp = phone_number.substring(1); 
+    	String sql = "SELECT count(*) as total " +
+        		"FROM account" + " WHERE phone_number = \"" + tmp +"\"";
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        try {
+            myConn = dataSource.getConnection();
+            //chuẩn bị sql
+            myStmt = myConn.prepareStatement(sql);
+            myRs = myStmt.executeQuery();
+            myRs.next();
+            return myRs.getInt("total");
+        }
+        finally {
+            close(myConn, myStmt, myRs);
+        }
+    }
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
 			if (myRs != null) {
