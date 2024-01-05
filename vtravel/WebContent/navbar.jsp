@@ -27,7 +27,11 @@
 					thông</a></li>
 			<li class="nav-item"><a class="nav-link" href="custom_tour.jsp">Tour tuỳ
 					chọn</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Bài viết</a> <!-- Check if the user is logged in -->
+					<!-- Hiển thị trang Bài viết -->
+			<c:url var="LIST_ALL_POST" value="PostControllerServlet">
+				<c:param name="command" value="LIST_ALL_POST" />
+			</c:url>
+			<li class="nav-item"><a class="nav-link" href="${LIST_ALL_POST}">Bài viết</a> <!-- Check if the user is logged in -->
 				<c:if test="${empty sessionScope.username}">
 					<!-- Display Đăng nhập link if not logged in -->
 					<li class="nav-item"><a class="nav-link" href="login.jsp"
@@ -40,7 +44,7 @@
 							${sessionScope.username} </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#">Tour của tôi</a> <a
-								class="dropdown-item" href="#">Thông tin cá nhân</a>
+								class="dropdown-item" href="user_info.jsp">Thông tin cá nhân</a>
 							<div class="dropdown-divider"></div>
 							<!-- tạo xử lý yêu cầu đăng xuất  -->
 							<c:url var="LOG_OUT" value="SessionControllerServlet">
