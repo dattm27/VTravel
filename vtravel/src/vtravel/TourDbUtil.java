@@ -388,7 +388,6 @@ public class TourDbUtil {
 			//chuẩn bị sql 
 			String sql = "select * from available_tour where ID = " + ID;
 			myStmt = myConn.createStatement();
-			
 			//execute query
 			myRs = myStmt.executeQuery(sql);
 			
@@ -504,6 +503,47 @@ public class TourDbUtil {
 				String createdDate = myRs.getString("created_date");
 				String userPhoneNumber = myRs.getString("phone_number");
 				Booking booking = new Booking(ID, userID, tourID, numberOfTourists, note, userFullname, status, createdDate, userPhoneNumber);
+				bookingList.add(booking);
+			}
+			
+			return bookingList;
+		}
+		finally {
+			close (myConn, myStmt, null );
+		}
+	
+	}
+	/// lay ra danh sach booking cua 1 nguoi
+	public ArrayList<Booking> getPersonalBooking(int user_ID, String sxtype) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		ArrayList<Booking> bookingList = new ArrayList<>();
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql 
+			String sql = "select user_id, booking.tour_id, booking.number_tourist, note, booking.id, booking.status, created_date "
+					+ "from booking join available_tour on booking.tour_id = available_tour.id "
+					+ "where booking.user_id = " + user_ID + " and booking.status like \"%" + sxtype + "%\"" 
+				    + " order by " + "created_date";
+			//System.out.println(sql);
+			myStmt = myConn.createStatement();			
+			//execute
+			myRs = myStmt.executeQuery(sql);
+			
+			while (myRs.next()) {
+				int ID = myRs.getInt("id");
+				int userID = myRs.getInt("user_id");
+				int tourID = myRs.getInt("tour_id");
+				int numberOfTourists = myRs.getInt("number_tourist");
+				String note = myRs.getString("note");
+				//String userFullname = myRs.getString("");
+				String status = myRs.getString("status");
+				String createdDate = myRs.getString("created_date");
+				//String userPhoneNumber = myRs.getString("phone_number");
+				Booking booking = new Booking(ID, userID, tourID, numberOfTourists, note, "", status, createdDate, "");
 				bookingList.add(booking);
 			}
 			
