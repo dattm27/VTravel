@@ -13,7 +13,16 @@
 </head>
 <body>
 	<div class= "container"> 
-		<h2>Cập nhật chi tiết tour</h2>
+		 <%
+			String Message = (String) request.getAttribute("message");
+		 	
+		 	if (Message != null) {
+				
+			%>
+		<h3 class= "text-success">Cập nhật thành công</h3>
+		<%} else {%>
+		<h3>Cập nhật chi tiết tour</h3>
+		<%} %>
 		<form action="TourControllerServlet" method="POST" id="updateForm"
 				enctype="multipart/form-data">
 				<input type="hidden" name="command" value="UPDATE_DETAIL_TOUR">
@@ -29,7 +38,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="price">Giá (VNĐ): </label> <input type="number"
-								class="form-control" id="email" name="price"
+								class="form-control" id="price" name="price"
 								placeholder="VD: 5000000" required pattern="[0-9]"
 								value="${tour.price }" title="Vui lòng nhập giá chuyến du lịch ">
 						</div>
@@ -128,7 +137,17 @@
 					</c:url>
 					
 					<!-- Thêm  nút Submit -->
-					<button type="submit" class="btn btn-success ml-1" id="updateBtn" >Cập nhật</button>
+					<%
+				 	if (Message == null) {
+					%>
+						<button type="submit" class="btn btn-success ml-1" id="updateBtn" >Cập nhật</button>
+					<%}else {%>
+					<!-- tạo link gửi yêu cầu hiển thị danh sách  -->
+					<c:url var="TOURS_MANAGEMENT" value="TourControllerServlet">
+						<c:param name="command" value="TOURS_MANAGEMENT" />
+					</c:url>
+					<a class = "btn btn-primary ml-1" href="${TOURS_MANAGEMENT}" target="_parent" >Tải lại DS</a>
+					<%} %>
 				</div>
 			</form>
 	</div>

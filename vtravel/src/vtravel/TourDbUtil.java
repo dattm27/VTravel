@@ -554,6 +554,45 @@ public class TourDbUtil {
 		}
 	
 	}
+	// admin thêm tour phổ thông mới 
+	public void addTour(Tour tour) {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		
+		try {
+			// get connection to db
+			myConn = dataSource.getConnection();
+			
+			//create sql for insert
+			String sql = "insert into available_tour(tour_name, price, start_date, end_date, start_place, image, description) "
+					+ "values (?, ? , ?, ?, ?, ?,?) ";
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set params
+			myStmt.setString(1, tour.getName());
+			myStmt.setInt(2, tour.getPrice());
+			myStmt.setString(3, tour.getStartDate());
+			myStmt.setString(4, tour.getEndDate());
+			myStmt.setString(5,tour.getStartPlace());
+			myStmt.setString(6, tour.getImage());
+			myStmt.setString(7, tour.getDescription());
+
+			//execute the sql
+			myStmt.execute();
+			
+		}
+		catch (Exception exc){
+			exc.printStackTrace();
+		}
+		finally {
+			//close the JDBC objects
+			close(myConn, myStmt, null);
+		}
+		
+	}
+
+	
 
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
