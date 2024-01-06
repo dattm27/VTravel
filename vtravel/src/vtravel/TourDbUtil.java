@@ -288,7 +288,7 @@ public class TourDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//chuẩn bị sql
-			String sql = "select * from available_tour";
+			String sql = "select * from available_tour order by booked desc";
 			myStmt = myConn.createStatement();
 			
 			//thực thi truy vấn

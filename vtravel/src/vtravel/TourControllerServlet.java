@@ -506,7 +506,6 @@ public class TourControllerServlet extends HttpServlet {
 		    else out.print("Old file not found");
 		    
 	    }
-	    
 	    else {
 	    	// nếu người dùng không cập nhật ảnh mới, tên file ảnh cũ giữ nguyên
 	    	String oldImage = getValue(request.getPart("oldImage"));
@@ -572,7 +571,7 @@ public class TourControllerServlet extends HttpServlet {
 		// thay đổi thông tin vào cơ sở dữ liệu
 		tourDbUtil.acceptCustomTour(customTour);
 		
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 //		response.setContentType("text/plain;charset=UTF-8");
 //		out.println(ID);
 //		out.println(destination);
@@ -583,6 +582,7 @@ public class TourControllerServlet extends HttpServlet {
 //		out.println(customTour.getNote());
 //		out.println(customTour.getStatus());
 //		out.close();
+		
 		//thêm tour và thông điệp phản hồi
 		
 		request.setAttribute("PROPOSAL", customTour);
@@ -636,14 +636,13 @@ public class TourControllerServlet extends HttpServlet {
 	}
 	
 	//lấy giá trị từ các Part trong form được gửi ở dạng multipart/form-data
-	String getValue(Part namePart)  throws Exception  {
-			
-			String value = null;  
-			if (namePart != null) {
-			        value = new BufferedReader(new InputStreamReader(namePart.getInputStream()))
-			                .lines().collect(Collectors.joining());
-			}
-			return value ;
+	String getValue(Part namePart)  throws Exception  {	
+		String value = null;  
+		if (namePart != null) {
+		        value = new BufferedReader(new InputStreamReader(namePart.getInputStream()))
+		                .lines().collect(Collectors.joining());
 		}
+		return value ;
+	}
 
 }

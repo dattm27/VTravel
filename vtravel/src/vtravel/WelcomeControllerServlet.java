@@ -52,7 +52,7 @@ public class WelcomeControllerServlet extends HttpServlet {
 	
 		try {
 			//lấy 5 bài viết trong cơ sở dữ liệu
-			List<Post> postList = postDbUtil.getPostList();
+			List<Post> postList = postDbUtil.getPostList(true);
 			//lấy 8 tour nổi bật trong cơ sở dữ liệu
 			List<Tour> tourList = tourDbUtil.getAllTour(true);
 			

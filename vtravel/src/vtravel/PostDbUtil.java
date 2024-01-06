@@ -21,7 +21,7 @@ public class PostDbUtil {
 	}
 
 	// Lấy tất cả thông tin của 1 bài Post và lưu trữ dưới dạng List
-	public List<Post> getPostList() throws SQLException {
+	public List<Post> getPostList(boolean limit) throws SQLException {
 		List<Post> postList = new ArrayList<>();
 
 		Connection myConn = null;
@@ -34,6 +34,7 @@ public class PostDbUtil {
 
 			// Viết câu lệnh sql
 			String sql = "select id, post_name, short_description, image from post";
+			if (limit) sql += " limit 5; ";
 			myStmt = myConn.prepareStatement(sql);
 
 			// Thực thi truy vấn

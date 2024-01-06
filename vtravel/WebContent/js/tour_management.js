@@ -22,11 +22,8 @@ function markAsCancelled(ID) {
             console.log(xhr.responseText);
             alert("Đã xoá thành công");
             // Cập nhật cột trạng thái  sau khi huỷ
-            document.getElementById("ID_" + ID).style.display = "none";
-      
-            
+            document.getElementById("ID_" + ID).style.display = "none";      
         }
     };
-
     xhr.send(data);
 }
