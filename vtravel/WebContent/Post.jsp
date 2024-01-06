@@ -11,10 +11,6 @@
 <!-- bootstrap css -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- Thêm script của Bootstrap Modal -->
-<script
-	src="https://cdnjs.cloudflare.com/aj
-    ax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="css/Post.css">
 </head>
 
