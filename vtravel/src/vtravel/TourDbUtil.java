@@ -591,8 +591,35 @@ public class TourDbUtil {
 		}
 		
 	}
+	//xoá mộtt tour phổ thông
+	public void deleteTour(int ID) {
+		Connection myConn = null;
+		Statement myStmt = null;
+		
+		
+		try {
+			// get connection to db
+			myConn = dataSource.getConnection();
+			
+			//create sql for insert
+			String sql = "delete from available_tour where id = " + ID;
+			myStmt = myConn.createStatement();
+		
 
-	
+			//execute the sql
+			myStmt.execute(sql);
+			
+		}
+		catch (Exception exc){
+			exc.printStackTrace();
+		}
+		finally {
+			//close the JDBC objects
+			close(myConn, myStmt, null);
+		}
+		
+	}
+
 
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
@@ -613,6 +640,7 @@ public class TourDbUtil {
 		
 	}
 
+	
 	
 
 	

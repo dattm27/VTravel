@@ -374,7 +374,8 @@ public class TourControllerServlet extends HttpServlet {
 		try {
 			//lấy ID tour cần xoá
 			int ID = Integer.parseInt(request.getParameter("ID"));
-			logger.info("TourControllerServlet delete tour" );
+			logger.info("TourControllerServlet delete tour" +ID );
+			tourDbUtil.deleteTour(ID);
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
