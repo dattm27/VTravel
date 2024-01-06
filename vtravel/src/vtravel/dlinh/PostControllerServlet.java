@@ -26,7 +26,7 @@ public class PostControllerServlet extends HttpServlet {
 	private AccountDbUtil accountDbUtil; // Tương tác cơ sở dữ liệu về account
 	private static final Logger logger = Logger.getLogger(PostControllerServlet.class.getName());
 	// Định nghĩa data source/ connection pool cho nguồn Resource
-	@Resource(name = "jdbc/tourweb")
+	@Resource(name = "jdbc/web_travel_booking")
 	private DataSource dataSource;
 
 	/**

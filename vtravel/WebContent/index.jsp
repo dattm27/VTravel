@@ -89,10 +89,10 @@
 			<!-- Phần bài viết nổi bật -->
 			<div class="d-flex mb-3 align-items-center">
 	       	 	<h3 class="">Bài viết nổi bật </h3> 
-	       	 	<c:url var="LIST_NEW_POSTS" value = "PostController">
-	       	 		<c:param name="command" value= "LIST_NEW_POSTS"/>
-	       	 	</c:url>
-	       		 <a class="ml-auto" href="${LIST_NEW_POSTS}">Xem tất cả </a>
+	       	 <c:url var="LIST_ALL_POST" value="PostControllerServlet">
+				<c:param name="command" value="LIST_ALL_POST" />
+			</c:url>
+	       		 <a class="ml-auto" href="${LIST_ALL_POST}">Xem tất cả </a>
 	       	</div>
 			<!-- Vòng lặp for hiển thị các bài viết nổi bật -->
 			<c:forEach items="${POST_LIST}" var="post">
@@ -106,9 +106,11 @@
 				</div>
 			</c:forEach>
 			<!-- Hết phần bài viết -->
+			<!-- 
 			 <div class = "d-flex"> 
 			 	<a class="ml-auto">Xem tất cả </a>    
 			 </div>
+			  -->
 	    </div>
 	</body>
 	<!-- script for searching tour by destination -->
