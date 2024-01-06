@@ -97,10 +97,10 @@ public class AccountDAO {
 
                 // Thực hiện cập nhật dựa trên giá trị status
                 String updateQuery;
-                if ("off".equals(status)) {
-                    updateQuery = "UPDATE account SET status = 'on' WHERE id = ?";
+                if ("disable".equals(status)) {
+                    updateQuery = "UPDATE account SET status = 'active' WHERE id = ?";
                 } else {
-                    updateQuery = "UPDATE account SET status = 'off' WHERE id = ?";
+                    updateQuery = "UPDATE account SET status = 'disable' WHERE id = ?";
                 }
 
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
