@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   	
    <!-- script xử lý các thao tác của  tour-->
- 	<script src="js/tour_management.js"></script>   
+ 	<script src="js/booking_list.js"></script>   
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />
