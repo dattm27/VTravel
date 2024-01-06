@@ -5,12 +5,8 @@
 <html>
 <head>
 	<style>
-	h1 {
-		padding: 5vh 0 5vh;
-	}
-	img {
-		width: 50%;
-	}
+	
+
 	#Content {
 		white-space: pre-wrap;
 		word-wrap: break-word;
@@ -28,14 +24,16 @@
 		    ax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 	<title>VTravel - Bài viết</title>
 </head>
-<body>
+<body >
 	<!-- Header -->
 	<jsp:include page="navbar.jsp"></jsp:include>
-
-	<h1>${details.name}</h1>
-	<p>${details.shortDescription}</p>
-	<img src="${details.image}" class="rounded mx-auto d-block">
-	<div id="Content">${details.content}</div>
+	<div class = "container">
+		<h1 class = "mt-3">${details.name}</h1>
+		<p>${details.shortDescription}</p>
+		<img src="${details.image}" class="rounded mx-auto d-block" style ="height: 300px">
+		<div id="Content">${details.content}</div>
+	</div>
+	
 
 </body>
 </html>
