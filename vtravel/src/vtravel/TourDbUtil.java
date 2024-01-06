@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -343,11 +345,15 @@ public class TourDbUtil {
 		try {
 			//thiết lập kết nối
 			myConn = dataSource.getConnection();
-			
+			LocalDate localDate = LocalDate.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        String dateString = formatter.format(localDate);
 			//chuẩn bị sql
 			String sql = "SELECT * FROM available_tour where tour_name LIKE \"%" + diemmuonden + "%\""
 					+ "and price >= " + minMoneyString + " and price <= " + maxMoneyString + " and start_date >= \""
-					+ date_start + "\" " + " ORDER BY " + orderFeatureString;
+					+ date_start + "\" " + " and start_date >= \"" + dateString +"\"" +  
+					" ORDER BY " + orderFeatureString;
+			System.out.println(sql);
 			myStmt = myConn.createStatement();
 			
 			//thực thi truy vấn
