@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body  class="bg-light">
-	<div class="container mt-5">
+	<div class="container mt-2">
         <div class="card mx-auto" style="max-width: 450px;">
             <div class="card-body text-center">
                 <h1 class="display-1 text-success ">&#10003;</h1>
@@ -17,7 +18,9 @@
                 <p class="card-text">Cảm ơn bạn đã đặt tour.</p>
                 <p> Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
                 <div class="mt-4">
-                    <a href="#" class="btn btn-primary">Về Trang Chủ</a>
+                    <c:url var = "Home" value = "WelcomeControllerServlet">
+                    </c:url>
+                    <a href="${Home}" class="btn btn-primary">Về Trang Chủ</a>
                     <a href="#" class="btn btn-success">Xem Danh Sách Đặt Tour</a>
                 </div>
             </div>
@@ -25,38 +28,42 @@
         <h3 class="mt-3">Kênh thanh toán:</h3>
         <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
 		  <div class="col">
-		    <div class="card h-100">
-		      <img src="..." class="card-img-top" alt="..." style="height: 250px">
+		    <div class="card h-60">
+		      <img src="images/QRBIDV.JPG" class="card-img-top" alt="..." style="height: 250px">
 		      <div class="card-body">
 		        <h5 class="card-title">BIDV</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+		        <div >STK: 4430394543</div>
+		        <div >CTK: TRAN MANH DAT</div>
 		      </div>
 		    </div>
 		  </div>
 		  <div class="col">
-		    <div class="card h-100">
-		      <img src="..." class="card-img-top" alt="..." style="height: 250px">
+		    <div class="card h-60">
+		      <img src="images/QRMB.jpeg" class="card-img-top" alt="..." style="height: 250px">
 		      <div class="card-body">
 		        <h5 class="card-title">MB</h5>
-		        <p class="card-text">This is a short card.</p>
+		        <div>STK: 0827666910</div>
+		        <div >CTK: TRAN MANH DAT</div>
 		      </div>
 		    </div>
 		  </div>
 		  <div class="col">
-		    <div class="card h-100">
-		      <img src="..." class="card-img-top" alt="..." style="height: 250px">
+		    <div class="card h-60">
+		      <img src="images/QRTECHCOMBANK.jpg" class="card-img-top" alt="..." style="height: 250px">
 		      <div class="card-body">
-		        <h5 class="card-title">Card title</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+		        <h5 class="card-title">TECHCOMBANK</h5>
+		        <div>STK: 1903 9944 7520 18</div>
+		        <div>CTK: PHAN VIET HOANG</div>
 		      </div>
 		    </div>
 		  </div>
 		  <div class="col">
-		    <div class="card h-100">
-		      <img src="..." class="card-img-top" alt="..." style="height: 250px">
+		    <div class="card h-60">
+		      <img src="images/QRVIETINBANK.jpg" class="card-img-top" alt="..." style="height: 250px">
 		      <div class="card-body">
-		        <h5 class="card-title">Card title</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+		        <h5 class="card-title">VIETINBANK</h5>
+		        <div class="card-text">STK: 102873396890</div>
+		        <div>CTK: TRAN DANH LINH</div>
 		      </div>
 		    </div>
 		  </div>
