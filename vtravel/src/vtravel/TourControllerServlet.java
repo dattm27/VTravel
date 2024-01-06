@@ -338,12 +338,21 @@ public class TourControllerServlet extends HttpServlet {
 			case "CANCEL_CUSTOM_TOUR":
 				cancel_custom_tour(request, response);
 				break;
+			//admin chỉnh sửa thông tin về một tour phổ thông
 			case "UPDATE_DETAIL_TOUR":
 				updateDetailTour(request, response);
 				break;
 			// Khi người dùng gửi form đặt tour phổ thông
 			case "BOOKING":
 				bookingTour(request, response);
+				break;
+			// thêm tour phổ thông mới
+			case "ADD_NEW_TOUR":
+				addNewTour(request, response);
+				break;
+			//xoá một tour phổ thông
+			case "DELETE_A_TOUR":
+				deleteTour(request, response);
 				break;
 			// khi admin xác nhận một đơn tour phổ thông đã được thanh toán
 			case "PURCHASED_BOOKING":
@@ -360,6 +369,61 @@ public class TourControllerServlet extends HttpServlet {
 			throw new ServletException(exc);
 		}
 	}
+	private void deleteTour(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			//lấy ID tour cần xoá
+			int ID = Integer.parseInt(request.getParameter("ID"));
+			logger.info("TourControllerServlet delete tour" +ID );
+			tourDbUtil.deleteTour(ID);
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void addNewTour(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("TourControllerServlet add tour" );
+		try {
+			// lấy các thông tin nhập ở form
+			String name = getValue(request.getPart("name"));
+			String price = getValue(request.getPart("price"));
+		    String startDate = getValue(request.getPart("start_date"));
+		    String endDate = getValue(request.getPart("end_date"));
+		    String startPlace = getValue(request.getPart("start_place"));
+		    
+		    //Xử lý phần ảnh
+		    Part filePart = request.getPart("image");
+		    String fileName = filePart.getSubmittedFileName();
+
+		    //Tạo tên độc nhất cho file ảnh, tránh trúng lặp
+		    String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
+		    String appPath = request.getServletContext().getRealPath("");
+		    String imagePath = appPath + "images/tour/" + uniqueFileName;
+		    //Ghi file ảnh vào thư mục 
+		    filePart.write(imagePath);
+		    // Mô tả chi tiết
+		    String description = getValue(request.getPart("description"));
+		    Tour tour = new Tour( name,  startDate,  endDate,  description, Integer.parseInt(price),  startPlace,  "images/tour/"+ uniqueFileName);
+		    
+		    // thêm vào cơ sở dữ liệu
+		    tourDbUtil.addTour(tour);
+		    
+		    request.setAttribute("message", "add_successfully");
+		    // gửi đến JSP
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/add_new_tour.jsp");
+			dispatcher.forward(request, response);
+		    
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		
+	}
+
 	//huỷ booking của một tour phổ thông
 	private void cancel_booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		// lấy ID của proposal custom tour cần huỷ
@@ -437,7 +501,7 @@ public class TourControllerServlet extends HttpServlet {
 		    // kiểm tra nếu file đó có tồn tại trong kho thì xoá đi
 		    if ( oldImage.length() > 0  && oldImageFile.exists()  ) {
 		    	out.print("Old file existed");
-		    	//oldImageFile.delete();
+		    	oldImageFile.delete();
 		    }
 		    else out.print("Old file not found");
 		    
@@ -456,7 +520,7 @@ public class TourControllerServlet extends HttpServlet {
 	    String description = getValue(request.getPart("description"));
 		
 	    // Tạo tour object
-	    //Trip theTrip = new Trip(id, name, Integer.parseInt(price), start_date, end_date, description, address, "images/" + uniqueFileName);
+	    
 	    Tour tour = new Tour(ID, name,  startDate,  endDate,  description, Integer.parseInt(price),  startPlace,   uniqueFileName);
 	    
 	    // thêm tour vào cơ sở dữ liệu

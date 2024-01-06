@@ -388,7 +388,6 @@ public class TourDbUtil {
 			//chuẩn bị sql 
 			String sql = "select * from available_tour where ID = " + ID;
 			myStmt = myConn.createStatement();
-			
 			//execute query
 			myRs = myStmt.executeQuery(sql);
 			
@@ -514,6 +513,113 @@ public class TourDbUtil {
 		}
 	
 	}
+	/// lay ra danh sach booking cua 1 nguoi
+	public ArrayList<Booking> getPersonalBooking(int user_ID, String sxtype) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		ArrayList<Booking> bookingList = new ArrayList<>();
+		try {
+			//thiết lập kết nối
+			myConn = dataSource.getConnection();
+			
+			//chuẩn bị sql 
+			String sql = "select user_id, booking.tour_id, booking.number_tourist, note, booking.id, booking.status, created_date "
+					+ "from booking join available_tour on booking.tour_id = available_tour.id "
+					+ "where booking.user_id = " + user_ID + " and booking.status like \"%" + sxtype + "%\"" 
+				    + " order by " + "created_date";
+			//System.out.println(sql);
+			myStmt = myConn.createStatement();			
+			//execute
+			myRs = myStmt.executeQuery(sql);
+			
+			while (myRs.next()) {
+				int ID = myRs.getInt("id");
+				int userID = myRs.getInt("user_id");
+				int tourID = myRs.getInt("tour_id");
+				int numberOfTourists = myRs.getInt("number_tourist");
+				String note = myRs.getString("note");
+				//String userFullname = myRs.getString("");
+				String status = myRs.getString("status");
+				String createdDate = myRs.getString("created_date");
+				//String userPhoneNumber = myRs.getString("phone_number");
+				Booking booking = new Booking(ID, userID, tourID, numberOfTourists, note, "", status, createdDate, "");
+				bookingList.add(booking);
+			}
+			
+			return bookingList;
+		}
+		finally {
+			close (myConn, myStmt, null );
+		}
+	
+	}
+	// admin thêm tour phổ thông mới 
+	public void addTour(Tour tour) {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		
+		try {
+			// get connection to db
+			myConn = dataSource.getConnection();
+			
+			//create sql for insert
+			String sql = "insert into available_tour(tour_name, price, start_date, end_date, start_place, image, description) "
+					+ "values (?, ? , ?, ?, ?, ?,?) ";
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set params
+			myStmt.setString(1, tour.getName());
+			myStmt.setInt(2, tour.getPrice());
+			myStmt.setString(3, tour.getStartDate());
+			myStmt.setString(4, tour.getEndDate());
+			myStmt.setString(5,tour.getStartPlace());
+			myStmt.setString(6, tour.getImage());
+			myStmt.setString(7, tour.getDescription());
+
+			//execute the sql
+			myStmt.execute();
+			
+		}
+		catch (Exception exc){
+			exc.printStackTrace();
+		}
+		finally {
+			//close the JDBC objects
+			close(myConn, myStmt, null);
+		}
+		
+	}
+	//xoá mộtt tour phổ thông
+	public void deleteTour(int ID) {
+		Connection myConn = null;
+		Statement myStmt = null;
+		
+		
+		try {
+			// get connection to db
+			myConn = dataSource.getConnection();
+			
+			//create sql for insert
+			String sql = "delete from available_tour where id = " + ID;
+			myStmt = myConn.createStatement();
+		
+
+			//execute the sql
+			myStmt.execute(sql);
+			
+		}
+		catch (Exception exc){
+			exc.printStackTrace();
+		}
+		finally {
+			//close the JDBC objects
+			close(myConn, myStmt, null);
+		}
+		
+	}
+
 
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
@@ -534,6 +640,7 @@ public class TourDbUtil {
 		
 	}
 
+	
 	
 
 	

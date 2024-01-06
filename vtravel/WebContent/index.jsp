@@ -20,7 +20,7 @@
 
     <div class="hero-section">
         <div class="brand-info">
-            <h1>VietTravel</h1>
+            <h1>V Travel</h1>
             <p>Slogan của bạn ở đây</p>
         </div>
         <div class="search-bar">
@@ -97,7 +97,7 @@
 			<!-- Vòng lặp for hiển thị các bài viết nổi bật -->
 			<c:forEach items="${POST_LIST}" var="post">
 				<div class="media mt-3 mb-3">
-				  <img src="images/tour/Halong-bay.jpeg" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
+				  <img src="${post.image}" class="align-self-center mr-3" alt="..." style="width: 200px; height: 200px;  object-fit: cover;">
 				  <div class="media-body">
 				    <h5 class="mt-0">${post.name}</h5>
 				    <p>${post.shortDescription}</p>

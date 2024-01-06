@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   	
    <!-- script xử lý các thao tác của custom tour-->
- 	<script src="js/custom_tour_management.js"></script>   
+ 	<script src="js/tour_management.js"></script>   
 	
 </head>
 <body>
@@ -51,7 +51,7 @@
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
 		    <!-- Chọn số bản ghi mỗi trang -->
-		    <div class="input-group col-md-4 mb-3 ">
+		    <div class="input-group col-md-3 mb-3 ">
 			    <div class="input-group-prepend">
 			        <label for="recordsPerPage" class="input-group-text">Số bản ghi/trang:</label>
 			        <select class="custom-select" id="recordsPerPage" onchange="changeRecordsPerPage()">
@@ -77,12 +77,30 @@
 			    <option value ="Chọn trạng thái">Tất cả </option>
 			  </select>
 			</div>
-			
-		    <div class="input-group mb-3 col-md-4 ml-auto " >
+			<!-- Nút phân trang -->
+			 <div id="pagination">
+			    <button onclick="previousPage()" class="btn btn-md btn-outline-primary">Previous Page</button>
+			    <span id="currentPage">1</span>
+			    <button onclick="nextPage()" class="btn btn-md btn-outline-primary">Next Page</button>
+			</div> 
+		    <div class="input-group mb-3 col-md-3 ml-auto " >
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" >Tìm kiếm</span>
 			  </div>
 			  <input type="text" class="form-control" id="searchInput" name="search" placeholder="VD: Nha Trang"   oninput="searchData('data-search-1','data-search-2')">
+			</div>
+			
+			<div class="input-group col-md-2 mb-3  " >
+			  <div class="input-group-prepend">
+			    <label class="input-group-text" for="Filter">Sắp xếp</label>
+			  </div>
+			  <select class="custom-select" id="Filter" onchange="filterByStatus()">
+			    <option selected value="Chọn trạng thái" disabled>Chọn </option>
+			    <option value="Đang chờ">Theo giá</option>
+			    <option value="Chờ thanh toán">Theo ngày bắt đầu</option>
+			   
+			    <option value ="Chọn trạng thái">Tất cả </option>
+			  </select>
 			</div>
 			
 		</div>
@@ -103,7 +121,7 @@
 			</thead>
 			<tbody id="InfoBody">
 				<c:forEach items="${TOUR_LIST}" var="tour" varStatus="loopStatus">
-					<tr class="row-item" data-search-1="${tour.name}" data-search-2="${tour.startPlace}" status="${tempProposal.status}">
+					<tr class="row-item" data-search-1="${tour.name}" data-search-2="${tour.startPlace}" status="${tempProposal.status}" id = "ID_${tour.ID}">
 						<td>${loopStatus.index + 1}</td>
 						<td style="max-width: 200px">${tour.name}</td>
 						<td>${tour.startDate}</td>
@@ -131,18 +149,14 @@
 							</c:url>
 							<a class="btn btn-success btn-sm" href="${BOOKING_LIST_OF_A_TOUR}">Danh sách đặt</a>
 							<a class="btn btn-warning btn-sm">Khoá</a>
-							<a class="btn btn-danger btn-sm" onclick="confirmAndCancel('${tempProposal.destination}', '${tempProposal.ordererFullname}', ${tempProposal.ID})">Xoá</a>
+							
+							<a class="btn btn-danger btn-sm" onclick="confirmAndDelete(${tour.ID})">Xoá</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<!-- Nút phân trang -->
-		 <div id="pagination">
-		    <button onclick="previousPage()" class="btn btn-sm btn-outline-primary">Previous Page</button>
-		    <span id="currentPage">1</span>
-		    <button onclick="nextPage()" class="btn btn-sm btn-outline-primary">Next Page</button>
-		</div> 
+		
 		
 		<!-- Truyền giá trị PROPOSAL_LIST.size() vào một thuộc tính HTML -->
 		<div id="proposalListSize" data-size="${TOUR_LIST.size()}"></div>

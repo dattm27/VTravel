@@ -66,6 +66,19 @@ public class Tour {
 		this.image = image;
 	
 	}
+	
+	public Tour(String name, String startDate, String endDate, String description, int price, String startPlace,
+			String image) {
+		super();
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.description = description;
+		this.price = price;
+		this.startPlace = startPlace;
+		this.image = image;
+	}
+
 
 	public void setID(int iD) {
 		ID = iD;

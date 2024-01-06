@@ -43,7 +43,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							${sessionScope.username} </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Tour của tôi</a> <a
+							<a class="dropdown-item" href="/vtravel/BookedTour?ID=<c:out value = "${sessionScope.ID}"/>">Tour của tôi</a> <a
 								class="dropdown-item" href="user_info.jsp">Thông tin cá nhân</a>
 							<div class="dropdown-divider"></div>
 							<!-- tạo xử lý yêu cầu đăng xuất  -->

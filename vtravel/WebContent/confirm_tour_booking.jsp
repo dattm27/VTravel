@@ -27,6 +27,8 @@
 
             // Hiển thị tổng tiền trong ô nhập liệu
             document.getElementById("total_bill").value = totalBill;
+            
+            
         }
     </script>
 </head>
@@ -41,8 +43,10 @@
 			<!-- Phần bên trái với form nhập thông tin -->
 			<div class="col-md-7">
 				
-				<form action="TourControllerServlet" method ="POST">
+				<form action="TourControllerServlet" method ="POST"  onsubmit="return confirmSubmit()">
 						<input type="hidden" name = "command" value = "BOOKING">
+						<input type="hidden" name = "userID" value = "${user.ID}">
+						<input type="hidden" name = "tourID" value = "${tour.ID}">
 						<h3 class="mt-3">Thông tin khách hàng</h3>
 						<div class="mb-3">
 							<label for="disabledTextInput" class="form-label">Tên khách hàng</label> <input type="text" id="disabledTextInput"
@@ -61,7 +65,7 @@
 						<div class="mb-3">
 							<label for="disabledTextInput" class="form-label">Số
 								lượng người</label> 
-							<input type="number" id="number_of_tourists"
+							<input type="number" id="number_of_tourists" name = "number_of_tourists"
 								class="form-control" placeholder="" value ="0" required min = "1" onchange="updateTotalBill()">
 						</div>
 						<div class="mb-3">
@@ -74,6 +78,15 @@
 						<label class="form-check-label" for="exampleCheck1">Tôi đồng ý với các điều khoản và chính sách</label>
 					</div>
 					<button type="submit" class="btn btn-primary">Xác nhận</button>
+					<script>
+					    function confirmSubmit() {
+					        // Sử dụng hàm confirm để hiển thị hộp thoại xác nhận
+					        var confirmResult = confirm("Bạn có chắc chắn muốn xác nhận không?");
+					
+					        // Nếu người dùng nhấn "OK", return true để submit form, ngược lại return false
+					        return confirmResult;
+					    }
+					</script>
 				</form>
 			</div>
 			<!-- Phần bên phải hiển thị thông tin cơ bản của tour -->
