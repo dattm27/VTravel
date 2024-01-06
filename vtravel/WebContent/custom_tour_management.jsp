@@ -50,7 +50,7 @@
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
 		    <!-- Chọn số bản ghi mỗi trang -->
-		    <div class="input-group col-md-4 mb-3 ">
+		    <div class="input-group col-md-3 mb-3 ">
 			    <div class="input-group-prepend">
 			        <label for="recordsPerPage" class="input-group-text">Số bản ghi/trang:</label>
 			        <select class="custom-select" id="recordsPerPage" onchange="changeRecordsPerPage()">
@@ -62,8 +62,13 @@
 			        </select>
 			    </div>
 			  </div>
-			
-			<div class="input-group col-md-3 mb-3  ">
+			<!-- Nút phân trang -->
+		 <div id="pagination">
+		    <button onclick="previousPage()" class="btn btn-md btn-outline-primary">Previous Page</button>
+		    <span id="currentPage">1</span>
+		    <button onclick="nextPage()" class="btn btn-md btn-outline-primary">Next Page</button>
+		</div> 
+			<div class="input-group col-md-3 mb-3 ml-auto ">
 			  <div class="input-group-prepend">
 			    <label class="input-group-text" for="Filter">Lọc</label>
 			  </div>
@@ -77,7 +82,7 @@
 			  </select>
 			</div>
 			
-		    <div class="input-group mb-3 col-md-4 ml-auto " >
+		    <div class="input-group mb-3 col-md-3 " >
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" >Tìm kiếm</span>
 			  </div>
@@ -133,12 +138,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<!-- Nút phân trang -->
-		 <div id="pagination">
-		    <button onclick="previousPage()" class="btn btn-sm btn-outline-primary">Previous Page</button>
-		    <span id="currentPage">1</span>
-		    <button onclick="nextPage()" class="btn btn-sm btn-outline-primary">Next Page</button>
-		</div> 
+		
 		
 		<!-- Truyền giá trị PROPOSAL_LIST.size() vào một thuộc tính HTML -->
 		<div id="proposalListSize" data-size="${PROPOSAL_LIST.size()}"></div>

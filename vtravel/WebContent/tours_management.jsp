@@ -148,7 +148,7 @@
 								<c:param name= "tourID" value = "${tour.ID}"/>
 							</c:url>
 							<a class="btn btn-success btn-sm" href="${BOOKING_LIST_OF_A_TOUR}">Danh sách đặt</a>
-							<a class="btn btn-warning btn-sm">Khoá</a>
+							<!-- <a class="btn btn-warning btn-sm">Khoá</a> -->
 							
 							<a class="btn btn-danger btn-sm" onclick="confirmAndDelete(${tour.ID})">Xoá</a>
 						</td>
