@@ -61,7 +61,10 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							${sessionScope.username} </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="user-management.jsp">Quản lý user</a>
+							<c:url var="LIST_ALL" value="user-management">
+								<c:param name="command" value="LIST_ALL" />
+							</c:url>
+							<a class="dropdown-item" href="${LIST_ALL}">Quản lý user</a>
 							<!-- tạo link xử lý yêu cầu quản lý tour phổ thông -->
 							<c:url var="TOURS_MANAGEMENT" value="TourControllerServlet">
 								<c:param name="command" value="TOURS_MANAGEMENT" />
