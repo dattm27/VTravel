@@ -1367,11 +1367,16 @@ UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/19.jpg' WHERE (`id`
 UPDATE `tourweb`.`available_tour` SET `image` = 'images/tour/20.jpg' WHERE (`id` = '20');
 
 -- Update image to post
-UPDATE `tourweb`.`post` SET `image` = 'images/post/1.jpg' WHERE (`id` = '1');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/2.jpg' WHERE (`id` = '2');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/3.jpg' WHERE (`id` = '3');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/4.jpg' WHERE (`id` = '4');
-UPDATE `tourweb`.`post` SET `image` = 'images/post/5.jpg' WHERE (`id` = '5');
+UPDATE `post` SET `image` = 'images/post/1.jpg' WHERE (`id` = '11');
+UPDATE `post` SET `image` = 'images/post/2.jpg' WHERE (`id` = '12');
+UPDATE `post` SET `image` = 'images/post/3.jpg' WHERE (`id` = '13');
+UPDATE `post` SET `image` = 'images/post/4.jpg' WHERE (`id` = '14');
+UPDATE `post` SET `image` = 'images/post/5.jpg' WHERE (`id` = '15');
+
+-- Update availabler_tour to have default value for max_number_of_tourist
+ALTER TABLE available_tour
+ALTER COLUMN max_number_tourist SET DEFAULT 30;
+
 
 -- Format again content of post
 UPDATE `tourweb`.`post` SET `content` = '<pre> 
