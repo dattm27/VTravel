@@ -70,9 +70,9 @@
 			</script>
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/vtravel/trangdangki"
-                class="link-danger">Register</a></p>
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng nhập</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Không có tài khoản? <a href="/vtravel/trangdangki"
+                class="link-danger">Đăng ký</a></p>
           </div>
 
         </form>
