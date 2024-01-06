@@ -16,6 +16,8 @@ import javax.sql.DataSource;
 
 import vtravel.Booking;
 import vtravel.TourControllerServlet;
+import vtravel.BookedTourService;
+
 
 /**
  * Servlet implementation class BookedTourController
@@ -31,13 +33,13 @@ public class BookedTourController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int user_id = Integer.parseInt(req.getParameter("ID"));
-		int kieusapxep = 0;
+		int kieusapxep = 4;
 		String sxtype = "";
 		if (req.getParameter("kieusapxep") != null && req.getParameter("kieusapxep") != "") {
 			kieusapxep = Integer.parseInt(req.getParameter("kieusapxep"));
 			if (kieusapxep == 1) sxtype = "Dang thanh toan";
-			if (kieusapxep == 2) sxtype = "Dang thuc hien";
-			if (kieusapxep == 3) sxtype = "Da hoan thanh";
+			if (kieusapxep == 2) sxtype = "Da thanh toan";
+			if (kieusapxep == 3) sxtype = "Da huy";
 		}
 		
 		ArrayList<Booking> booked_tours = new ArrayList<>();
@@ -60,6 +62,7 @@ public class BookedTourController extends HttpServlet {
 		}
 		req.setAttribute("bookedTours", booked_tours);
 		req.setAttribute("tours", tours);
+		req.setAttribute("ksx", kieusapxep);
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("ToursBooked.jsp");
 		requestDispatcher.forward(req,resp);
 	}
