@@ -74,7 +74,7 @@
 		                <td>${post.fullname}</td>
 		                <td>${post.post_name}</td>
 		                <td>
-                    		<img src="images/post/${post.image}" alt="Hình ảnh" style="max-width: 100px; max-height: 100px;">
+                    		<img src="${post.image}" alt="Hình ảnh" style="max-width: 100px; max-height: 100px;">
                 		</td>
 		                <td>
 		                	<c:url var="DETAIL_POST" value ="post-management">

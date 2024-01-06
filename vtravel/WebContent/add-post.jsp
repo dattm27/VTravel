@@ -19,7 +19,10 @@
         <h3>Thêm Bài Viết Mới</h3>
         
         <!-- Form thêm bài viết -->
-        <form id="addPostForm" enctype="multipart/form-data" onsubmit="return submitForm()">
+        <form id="addPostForm" enctype="multipart/form-data" action="add" method="POST">
+        <input type="hidden" name="command" value="add-post">
+        <input type="hidden" name="user_id" value="${sessionScope.ID}">
+		
             <div class="form-group">
                 <label for="post_name">Tên Bài Viết:</label>
                 <input type="text" class="form-control" id="post_name" name="post_name" required>
@@ -30,11 +33,29 @@
                 <input type="text" class="form-control" id="short_description" name="short_description" required>
             </div>
 
-            <!-- Ô tải lên ảnh -->
             <div class="form-group">
-                <label for="image">Tải Lên Ảnh:</label>
-                <input type="file" class="form-control-file" id="image" name="image">
-            </div>
+				<label for="imageUpload" id="imageUpload">Tải lên ảnh:</label>
+				<div class="custom-file">
+					<input type="hidden" name = "oldImage" id = "oldImage" value= "${post.image}"/>
+					<input type="file" class="custom-file-input" id="image"
+						name="image"> <label class="custom-file-label"
+						for="image" id="fileUpload">${post.image.substring(post.image.indexOf('_') + 1, post.image.indexOf('_') + 1 + Math.min(30, post.image.length() - post.image.indexOf('_') - 1))}</label>
+				</div>
+				<script>
+					// kiểm tra nếu không có tên file thì ghi ra là chưa chọn tệp	
+					var fileUpload =	document.getElementById("fileUpload");
+					if (fileUpload.innerHTML ==="") fileUpload.innerHTML = "Chưa chọn tệp";
+							
+				
+					const fileInput = document.getElementById('image');
+				  	const fileLabel = document.querySelector('.custom-file-label');
+				
+				 	fileInput.addEventListener('change', (event) => {
+				    const fileName = event.target.files[0].name;
+				    fileLabel.textContent = fileName;
+			  	  	});
+				</script>
+			</div>
 
             <!-- Phần mô tả chi tiết -->
             <div class="form-group">
@@ -51,57 +72,13 @@
 			</div>
 
 				<!-- Nút Lưu -->
-			    <button type="submit" class="btn btn-primary" id="savePostBtn">Lưu</button>
+            	<button type="submit" class="btn btn-success ml-1" id="updateBtn" >Lưu</button>
 			    <!-- Nút Hủy -->
 			    <a class="btn btn-secondary" href="post-management?command=GET_ALL_POSTS">Hủy</a>
         </form>
     </div>
 
-<script>
-function submitForm() {
-    // Lấy giá trị từ các trường dữ liệu của form
-    var newImageInput = document.getElementById("image");
 
-    // Kiểm tra xem đã chọn ảnh mới hay chưa
-    if (!newImageInput || !newImageInput.files || newImageInput.files.length === 0) {
-        alert("Bạn phải chọn ảnh trước.");
-        return false;
-    }
-    // Lấy giá trị từ các trường dữ liệu của form
-    var user_id = 1; // Đặt giá trị cho user_id tại đây
-    var image = newImageInput.files[0].name;
-    var content = document.getElementById("contentTextarea").value;
-    var short_description = document.getElementById("short_description").value;
-    var post_name = document.getElementById("post_name").value;
-
-    // Gọi hàm savePost với các tham số đã lấy được
-    savePost(user_id, image, content, short_description, post_name);
-
-    // Ngăn form submit bằng cách trả về false
-    return false;
-}
-
-function savePost(user_id, image, content, short_description, post_name) {
-    // Gửi yêu cầu AJAX đến controller
-    $.ajax({
-        type: "POST",
-        url: "add",
-        data: { user_id: user_id,command: "add-post", image: image, content: content, short_description: short_description, post_name: post_name },
-        success: function(data) {
-            if (data == "success") { 
-            	
-                alert("Thêm bài viết thành công.");
-                window.location.href = 'post-management?command=GET_ALL_POSTS';
-            } else {
-                alert("Thêm bài viết thất bại.");
-            }
-        },
-        error: function() {
-            alert("Lỗi khi gọi servlet add.");
-        }
-    });
-}
-</script>
 
 
 </body>
