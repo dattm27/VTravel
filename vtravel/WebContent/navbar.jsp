@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<nav class="navbar navbar-expand-lg navbar-light  bg-light">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
 	<c:url var="WELCOME" value="WelcomeControllerServlet">
 	</c:url>
 	<a class="navbar-brand" href="${WELCOME}">VTravel</a>

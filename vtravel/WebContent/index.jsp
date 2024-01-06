@@ -46,7 +46,7 @@
 			        <div class="card mb-3" style="width: 16rem;">
 					   <img class="card-img-top" src="${tour.image}" alt="Card image cap" style="height: 180px; object-fit: cover;">
 					  <div class="card-body">
-					  	<c:url var="DETAIL_TOUR_PAGE" value ="TourControllerServlet">
+					  <c:url var="DETAIL_TOUR_PAGE" value ="TourControllerServlet">
 					  	<c:param name="command" value = "DETAIL_TOUR_PAGE"/>
 					  	<c:param name="ID" value = "${tour.ID}"/>
  					  </c:url>
@@ -70,7 +70,7 @@
 	       <!-- Hết các tour -->
 	       
 			 <div class = "d-flex"> 
-			 	<a class="ml-auto">Xem tất cả </a>    
+			 	<a class="ml-auto" href= "${LIST_ALL_TOURS}">Xem tất cả </a>    
 			 </div>
 			
 	        <h3 class="mt-3">Yêu cầu tour tuỳ ý <span class="badge badge-success">NEW</span></h3> 
@@ -112,7 +112,9 @@
 			 </div>
 			  -->
 	    </div>
+	     <jsp:include page="footer.jsp" />
 	</body>
+	
 	<!-- script for searching tour by destination -->
 	<script>
 		
