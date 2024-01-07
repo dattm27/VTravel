@@ -10,6 +10,8 @@ public class Booking {
 	private String status;
 	private String createdDate; 
 	private String userPhoneNumber;
+	private String tourName; 
+	private int totalBill;
 	
 	//constructor khi user confirm booking 
 	public Booking(int userID, int tourID, int numberOfTourists, String note) {
@@ -33,12 +35,24 @@ public class Booking {
 		this.createdDate = createdDate;
 		this.userPhoneNumber = userPhoneNumber;
 	}
+	//khi người dùng load danh sách booking của chính mình
+	public Booking(int iD, int tourID, int numberOfTourists, String note, String status, String createdDate,
+			String tourName, int totalBill) {
+		super();
+		ID = iD;
+		this.tourID = tourID;
+		this.numberOfTourists = numberOfTourists;
+		this.note = note;
+		this.status = status;
+		this.createdDate = createdDate;
+		this.tourName = tourName;
+		this.totalBill = totalBill;
+	}
 	
 	public String getUserFullname() {
 		return userFullname;
 	}
 	
-
 	public void setUserFullname(String userFullname) {
 		this.userFullname = userFullname;
 	}
@@ -95,6 +109,22 @@ public class Booking {
 
 	public void setUserPhoneNumber(String userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
+	}
+
+	public String getTourName() {
+		return tourName;
+	}
+
+	public void setTourName(String tourName) {
+		this.tourName = tourName;
+	}
+
+	public int getTotalBill() {
+		return totalBill;
+	}
+
+	public void setTotalBill(int totalBill) {
+		this.totalBill = totalBill;
 	}
 	
 	
