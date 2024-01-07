@@ -530,10 +530,10 @@ public class TourDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//chuẩn bị sql 
-			String sql = "select user_id, booking.tour_id, booking.number_tourist, note, booking.id, booking.status, created_date "
+			String sql = "select user_id, booking.tour_id, booking.number_tourist, note, booking.id, booking.status, created_date, tour_name, price "
 					+ "from booking join available_tour on booking.tour_id = available_tour.id "
 					+ "where booking.user_id = " + user_ID + " and booking.status like \"%" + sxtype + "%\"" 
-				    + " order by " + "created_date";
+				    + " order by " + "created_date desc";
 			//System.out.println(sql);
 			myStmt = myConn.createStatement();			
 			//execute
@@ -541,7 +541,7 @@ public class TourDbUtil {
 			
 			while (myRs.next()) {
 				int ID = myRs.getInt("id");
-				int userID = myRs.getInt("user_id");
+				//int userID = myRs.getInt("user_id");
 				int tourID = myRs.getInt("tour_id");
 				int numberOfTourists = myRs.getInt("number_tourist");
 				String note = myRs.getString("note");
@@ -549,7 +549,9 @@ public class TourDbUtil {
 				String status = myRs.getString("status");
 				String createdDate = myRs.getString("created_date");
 				//String userPhoneNumber = myRs.getString("phone_number");
-				Booking booking = new Booking(ID, userID, tourID, numberOfTourists, note, "", status, createdDate, "");
+				String tourName = myRs.getString("tour_name");
+				int totalBill = (myRs.getInt("number_tourist")*myRs.getInt("price")) ;
+				Booking booking  = new Booking(ID, tourID, numberOfTourists, note, status, createdDate, tourName, totalBill);
 				bookingList.add(booking);
 			}
 			
@@ -625,7 +627,57 @@ public class TourDbUtil {
 		}
 		
 	}
-
+	//lấy ra danh sách custom tour của một user
+	public List<ProposalCustomTour> getPersonalCustomTour(int ID) throws SQLException {
+List<ProposalCustomTour> proposalList = new ArrayList<>();
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			//thiết lập kết nối cơ sở dữ liệu
+			myConn = dataSource.getConnection();
+			
+			//viết sql
+			String sql = "select cus_tour.id, user_id ,fullname, destination, start_date, end_date,"
+					+ " number_of_travellers, note, cus_tour.status, created_date, price"
+					+ " from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id where user_id = " + ID +" order by created_date desc; ";
+			myStmt = myConn.createStatement();
+			
+			//thực thi truy vấn 
+			myRs =  myStmt.executeQuery(sql);
+			
+			//xử lý bộ kết quả
+			while (myRs.next()) {
+				//lấy ra nội dung các trường trong từng bản ghi
+		
+				int ordererID = myRs.getInt("user_id");
+				String ordererFullname = myRs.getString("fullname");
+				String destination = myRs.getString("destination");
+				String startDate = myRs.getString("start_date");
+				String endDate = myRs.getString("end_date");
+				int numberOfTravellers = myRs.getInt("number_of_travellers");
+				String note = myRs.getString("note");
+				String status = myRs.getString("status");
+				String createdDate = myRs.getString("created_date");
+				int price = myRs.getInt("price");
+				//tạo ra một đối tượng ProposalCustomTour
+				ProposalCustomTour proposalCustomTour 
+						
+				= new  ProposalCustomTour(ID,  ordererID,  destination,   startDate, endDate,
+						numberOfTravellers,  price,  note,  status,  createdDate);
+				//thêm đối tượng vào danh sách 
+				proposalList.add(proposalCustomTour);
+			}
+			//trả về danh sách tất cả các đơn customTour
+			return proposalList;
+		}
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+		
+	}
 
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 		try {
@@ -645,6 +697,10 @@ public class TourDbUtil {
 		}
 		
 	}
+
+	
+
+	
 
 	
 	

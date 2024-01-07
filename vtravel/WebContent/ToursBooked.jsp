@@ -52,14 +52,13 @@
 		<table  id="InfoTable" class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col" class="col-sm-1">Mã đơn đặt</th>
-		      <th scope="col" class="col-sm-2">Ngày đặt</th>
-		      <th scope="col" class="col-sm-1">Mã tour</th>
-		      <th scope="col" class="col-sm-4">Tên Tour</th>
-		      <th scope="col" class="col-sm-1">Số người</th>
-		      <th scope="col" class="col-sm-1">Tổng tiền (VNĐ)</th>
-		      <th scope="col" class="col-sm-1">Lưu ý</th>
-		      <th scope="col" class="col-sm-3">Trạng thái</th>
+		      <th scope="col">Mã đơn đặt</th>
+		      <th scope="col" >Ngày đặt</th>
+		      <th scope="col" >Tên Tour</th>
+		      <th scope="col" >Số người</th>
+		      <th scope="col" >Tổng tiền (VNĐ)</th>
+		      <th scope="col" >Lưu ý</th>
+		      <th scope="col" >Trạng thái</th>
 		    </tr>
 		  </thead>
 		  <tbody id="InfoBody">
@@ -68,7 +67,7 @@
 				  	<tr>
 				  		<th scope="row"><%= tour.getID() %></th>
 				  		<td> <%= tour.getCreatedDate()%>  </td>
-				  		<td> <%= tour.getTourID()%> </td>
+				  
 				  		<td> <a href="/vtravel/TourControllerServlet?command=DETAIL_TOUR_PAGE&ID=<%= tour.getTourID()%>"> <%= tours.get(i).getName() %> </a> </td>
 				  		<td> <%= tour.getNumberOfTourists() %> </td>
 				  		<td> <%= tour.getNumberOfTourists() * tours.get(i).getPrice() %> </td>			  		

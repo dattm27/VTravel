@@ -115,12 +115,39 @@ public class TourControllerServlet extends HttpServlet {
 			case "CREATE_BOOKING_FORM":
 				createBooking(request, response);	
 				break;
+			//khi người dùng xem danh sách các tour đã đặt của mình
+			case "LIST_MY_TOUR":
+				listMyTour(request, response);
+				break;
+		
+			
 			default:
 				break;
 			}
 		} catch (Exception exc) {
 			throw new ServletException(exc);
 		}
+	}
+
+	
+
+	private void listMyTour(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		// lấy ID user cần lầy danh sách tour
+		int ID = Integer.parseInt(request.getParameter("ID"));
+		
+		//lấy danh sách các tour của user ID
+		List<Booking> myBookings = tourDbUtil.getPersonalBooking(ID, "");
+		//lấy danh sách các tour của user ID
+		List<ProposalCustomTour> myCustomTours = tourDbUtil.getPersonalCustomTour(ID);
+		
+		request.setAttribute("myBookings", myBookings);
+		request.setAttribute("myCustomTours", myCustomTours);
+		//gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/my_tour_list.jsp");
+		dispatcher.forward(request, response);
+		
+		
+		
 	}
 
 	private void listBookingOfTour(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
