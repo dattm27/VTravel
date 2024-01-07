@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,9 @@
 </head>
 <body>
 	<div class="container mt-4">
-		 <h2> <a href="index.jsp">VTravel </a></h2>
+		 <c:url var="WELCOME" value="WelcomeControllerServlet">
+		</c:url>
+		 <h2> <a href="${WELCOME}">VTravel </a></h2>
 		
 	</div>
 	<div class="container-fluid h-custom" style = "margin-top: 20vh">
