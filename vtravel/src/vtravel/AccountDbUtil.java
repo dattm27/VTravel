@@ -125,9 +125,8 @@ public class AccountDbUtil {
         }
     }
     public int numberOfPhone_number(String phone_number) throws SQLException {
-        String tmp = phone_number.substring(1); 
     	String sql = "SELECT count(*) as total " +
-        		"FROM account" + " WHERE phone_number = \"" + tmp +"\"";
+        		"FROM account" + " WHERE phone_number = \"" + phone_number +"\"";
         Connection myConn = null;
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
