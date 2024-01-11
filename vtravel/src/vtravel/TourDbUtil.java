@@ -320,7 +320,7 @@ public class TourDbUtil {
 	
 	}
 	public List<Tour> getFitlerTour(String diemmuonden, int orderFeature, int minMoney, 
-			 int maxMoney, String date_start) throws SQLException {
+			 int maxMoney, String date_start, int so_nguoi) throws SQLException {
 		List<Tour> tourList = new ArrayList<>();
 		
 		Connection myConn = null;
@@ -341,18 +341,20 @@ public class TourDbUtil {
 		if (orderFeature == 3) {
 			orderFeatureString = "start_date";
 		}
-		
+		String so_nguoi_String = Integer.toString(so_nguoi);
 		try {
 			//thiết lập kết nối
 			myConn = dataSource.getConnection();
 			LocalDate localDate = LocalDate.now();
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        String dateString = formatter.format(localDate);
+	        //String dateString = "1-01-01";
 			//chuẩn bị sql
 			String sql = "SELECT * FROM available_tour where tour_name LIKE \"%" + diemmuonden + "%\""
 					+ "and price >= " + minMoneyString + " and price <= " + maxMoneyString + " and start_date >= \""
-					+ date_start + "\" " + " and start_date >= \"" + dateString +"\"" +  
-					" ORDER BY " + orderFeatureString;
+					+ date_start + "\" " + " and start_date >= \"" + dateString +"\"" 
+					+ " and max_number_tourist - booked >= " + so_nguoi_String
+					+ " ORDER BY " + orderFeatureString;
 			System.out.println(sql);
 			myStmt = myConn.createStatement();
 			

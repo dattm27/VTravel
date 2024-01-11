@@ -58,7 +58,11 @@
 										type="text" name = "gia_mong_muon" class="form-control" id="autoSizingInput"
 										placeholder="Giá tiền" value="<%= request.getParameter("gia_mong_muon") == null ?  "" : request.getParameter("gia_mong_muon") %>">
 								</div>
-								
+								<div class="col-auto">
+									<label class="visually" for="autoSizingInput">Số lượng người đi</label> <input
+										type="text" name = "so_nguoi" class="form-control" id="autoSizingInput"
+										placeholder="Số người" value="<%= request.getParameter("so_nguoi") == null ?  "" : request.getParameter("so_nguoi") %>">
+								</div>				
 								
 								<div class="col-auto mt-auto" >
 									<button type="submit" class="btn btn-primary" style="margin-top: 20px;">Lọc</button>
