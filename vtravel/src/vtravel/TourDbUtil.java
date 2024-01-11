@@ -355,7 +355,7 @@ public class TourDbUtil {
 					+ date_start + "\" " + " and start_date >= \"" + dateString +"\"" 
 					+ " and max_number_tourist - booked >= " + so_nguoi_String
 					+ " ORDER BY " + orderFeatureString;
-			System.out.println(sql);
+			//System.out.println(sql);
 			myStmt = myConn.createStatement();
 			
 			//thực thi truy vấn
