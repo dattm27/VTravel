@@ -97,7 +97,7 @@ public class AccountDAO {
 
                 // Thực hiện cập nhật dựa trên giá trị status
                 String updateQuery;
-                if ("disable".equals(status)) {
+                if ("disabled".equals(status)) {
                     updateQuery = "UPDATE account SET status = 'active' WHERE id = ?";
                 } else {
                     updateQuery = "UPDATE account SET status = 'disabled' WHERE id = ?";
