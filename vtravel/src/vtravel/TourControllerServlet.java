@@ -486,7 +486,7 @@ public class TourControllerServlet extends HttpServlet {
 		
 		//thêm đơn booking vào cơ sở dữ liệu
 		tourDbUtil.addBooking(booking);
-		
+		request.setAttribute("typeOfTour", "economy");		
 		request.setAttribute("ID", userID);
 		// gửi đến JSP
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/booking_successfully.jsp");
@@ -665,7 +665,9 @@ public class TourControllerServlet extends HttpServlet {
 //
 //		out.println("Đặt tour thành công");
 //		out.println(destination);
-		response.sendRedirect("WelcomeControllerServlet"); 
+		// gửi đến JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("booking_successfully.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	//lấy giá trị từ các Part trong form được gửi ở dạng multipart/form-data
