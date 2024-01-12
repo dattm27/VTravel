@@ -487,6 +487,7 @@ public class TourControllerServlet extends HttpServlet {
 		//thêm đơn booking vào cơ sở dữ liệu
 		tourDbUtil.addBooking(booking);
 		
+		request.setAttribute("ID", userID);
 		// gửi đến JSP
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/booking_successfully.jsp");
 		dispatcher.forward(request, response);
