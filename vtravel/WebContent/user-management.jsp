@@ -53,8 +53,8 @@
 		 				<c:param name="command" value="ADD"/>				 				
 		</c:url>
 		<div class="mb-3">
-			<a href="${LIST_ALL}" class="btn btn-info mr-2">Tải DS tài khoản</a>
-			<button class="btn btn-primary" onclick = "showPopup('${ADD_USER}')">Thêm tài khoản mới</button>
+			<a href="${LIST_ALL}" class="btn btn-primary mr-2 btn-sm">Tải DS tài khoản</a>
+			<button class="btn btn-success btn-sm" onclick = "showPopup('${ADD_USER}')">Thêm tài khoản mới</button>
 		</div>
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
@@ -128,9 +128,9 @@
 			 				<c:param name="command" value="LOAD"/>
 			 				<c:param name="userId" value="${account.id}"/>				 				
 		 			</c:url>
-		      				<button class="btn btn-warning" onclick="showPopup('${UPDATE_USER}')">Sửa</button>		                
-		                <button class="btn btn-warning" onclick="lockAccount(${account.id})">Mở/khóa</button>
-		                <button class="btn btn-secondary" onclick="deleteAccount(${account.id})">Xóa</button>
+		      				<button class="btn btn-primary btn-sm" onclick="showPopup('${UPDATE_USER}')">Sửa</button>		                
+		                <button class="btn btn-warning btn-sm" onclick="lockAccount(${account.id})">Mở/khóa</button>
+		                <button class="btn btn-danger btn-sm" onclick="deleteAccount(${account.id})">Xóa</button>
 		            </td>
 		           </tr>
 		       </c:forEach>
