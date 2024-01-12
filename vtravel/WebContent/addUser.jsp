@@ -13,13 +13,13 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class="p-4 bg-light">
-            <h1 class="mb-4">Thông tin người dùng</h1>
+        <div class="p-4 ">
+            <h1 class="mb-4">Thêm người dùng mới</h1>
             <form>
                	<div class="row">
                		<div class="col-md-6">            
 		                <div class="form-group">
-		                    <label for="editFullname">Fullname:</label>
+		                    <label for="editFullname">Họ và tên:</label>
 		                    <input type="text" id="editFullname" name="fullname" class="form-control" />
 		                </div>
 	                </div>
@@ -34,7 +34,7 @@
                	<div class="row">
                		<div class="col-md-6">
 		                <div class="form-group">
-		                    <label for="editUsername">Username:</label>
+		                    <label for="editUsername">Tên đăng nhập:</label>
 		                    <input type="text" id="editUsername" name="username" class="form-control" />
 		                </div>
 	                </div>
@@ -49,7 +49,7 @@
                	<div class="row">
                		<div class="col-md-6">		                
 		                <div class="form-group">
-		                    <label for="editPassword">Password:</label>
+		                    <label for="editPassword">Mật khẩu:</label>
 		                    <input type="password" id="editPassword" name="password" class="form-control" />
 		                    <span class="small text-muted" id="passwordHint">
 		                        (Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số)</span>
@@ -65,8 +65,8 @@
 		                </div>
 	                </div>
                 </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary" onclick="submitForm()">Xác nhận</button>
+                <div class="btn-toolbar  justify-content-end">
+                    <button type="button" class="btn btn-primary mr-2" onclick="submitForm()">Xác nhận</button>
                     <button type="button" class="btn btn-secondary" onclick="window.parent.hidePopup();">Hủy</button>
                 </div>
             </form>
