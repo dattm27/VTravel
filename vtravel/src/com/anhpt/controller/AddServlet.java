@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -111,8 +112,16 @@ public class AddServlet extends HttpServlet {
 		        boolean success = postDAO.savePost(post);
 		        
 		        try {        	
-		        	request.getRequestDispatcher("post-management.jsp").forward(request, response);
-
+			        if (success) {
+					    request.setAttribute("message", "add_successfully");
+					    request.setAttribute("postUP", post);
+					    // gửi đến JSP
+						RequestDispatcher dispatcher = request.getRequestDispatcher("add-post.jsp");
+						dispatcher.forward(request, response);
+			        } else {
+			            // Gửi phản hồi lỗi về trình duyệt (ví dụ: "error")
+			            response.getWriter().write("error");
+			        }
 		        }catch (Exception exc) {
 			    	exc.printStackTrace();
 			    }
