@@ -29,50 +29,54 @@
                 </div>
             </div>
         </div>
-        <h3 class="mt-3">Kênh thanh toán:</h3>
-        <div class="row row-cols-1 row-cols-lg-4 g-4 mb-3">
-		  <div class="col">
-		    <div class="card h-60">
-		      <img src="images/QRBIDV.JPG" class="card-img-top" alt="..." style="height: 250px">
-		      <div class="card-body">
-		        <h5 class="card-title">BIDV</h5>
-		        <div >STK: 4430394543</div>
-		        <div >CTK: TRAN MANH DAT</div>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col">
-		    <div class="card h-60">
-		      <img src="images/QRMB.jpeg" class="card-img-top" alt="..." style="height: 250px">
-		      <div class="card-body">
-		        <h5 class="card-title">MB</h5>
-		        <div>STK: 0827666910</div>
-		        <div >CTK: TRAN MANH DAT</div>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col">
-		    <div class="card h-60">
-		      <img src="images/QRTECHCOMBANK.jpg" class="card-img-top" alt="..." style="height: 250px">
-		      <div class="card-body">
-		        <h5 class="card-title">TECHCOMBANK</h5>
-		        <div>STK: 1903 9944 7520 18</div>
-		        <div>CTK: PHAN VIET HOANG</div>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col">
-		    <div class="card h-60">
-		      <img src="images/QRVIETINBANK.jpg" class="card-img-top" alt="..." style="height: 250px">
-		      <div class="card-body">
-		        <h5 class="card-title">VIETINBANK</h5>
-		        <div class="card-text">STK: 102873396890</div>
-		        <div>CTK: TRAN DANH LINH</div>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-    </div>
+        <c:set var="typeOfTour" value="${typeOfTour}" />
+        <c:if test="${typeOfTour eq 'economy'}">
+        	 <h3 class="mt-3">Kênh thanh toán:</h3>
+	        <div class="row row-cols-1 row-cols-lg-4 g-4 mb-3">
+			  <div class="col">
+			    <div class="card h-60">
+			      <img src="images/QRBIDV.JPG" class="card-img-top" alt="..." style="height: 250px">
+			      <div class="card-body">
+			        <h5 class="card-title">BIDV</h5>
+			        <div >STK: 4430394543</div>
+			        <div >CTK: TRAN MANH DAT</div>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col">
+			    <div class="card h-60">
+			      <img src="images/QRMB.jpeg" class="card-img-top" alt="..." style="height: 250px">
+			      <div class="card-body">
+			        <h5 class="card-title">MB</h5>
+			        <div>STK: 0827666910</div>
+			        <div >CTK: TRAN MANH DAT</div>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col">
+			    <div class="card h-60">
+			      <img src="images/QRTECHCOMBANK.jpg" class="card-img-top" alt="..." style="height: 250px">
+			      <div class="card-body">
+			        <h5 class="card-title">TECHCOMBANK</h5>
+			        <div>STK: 1903 9944 7520 18</div>
+			        <div>CTK: PHAN VIET HOANG</div>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col">
+			    <div class="card h-60">
+			      <img src="images/QRVIETINBANK.jpg" class="card-img-top" alt="..." style="height: 250px">
+			      <div class="card-body">
+			        <h5 class="card-title">VIETINBANK</h5>
+			        <div class="card-text">STK: 102873396890</div>
+			        <div>CTK: TRAN DANH LINH</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+        </c:if>
+	  </div>	   
+	 
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
