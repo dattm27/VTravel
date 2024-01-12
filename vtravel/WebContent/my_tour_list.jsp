@@ -60,7 +60,7 @@
 		    <a  id="KenhThanhToanTab" class="nav-link" onclick="showTab('KenhThanhToan')">Thanh toán</a>
 		  </li>
 		</ul>
-		
+		<!-- Danh sách các tour phổ thông đã đặt -->
 	<div class="ml-5 mr-5">
 		<div id="TourPhoThong" class="tab-content" style="display: block;" >
 			<h3 class="">Tour phổ thông</h3>
@@ -102,6 +102,7 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- Danh sách các tour tuỳ chọn đã đặt -->
 		<div id="TourTuyChon" class="tab-content" style="display: none;">
 			<h3>Tour tuỳ chọn</h3>
 			<table id="InfoTable"  class="table" >
@@ -114,6 +115,7 @@
 						<th> Ngày kết thúc</th>
 						<th>Ngày đặt</th>
 						<th>Chi tiết</th>
+						<th>Thành tiền</th>
 						<th>Trạng thái</th>
 				
 					</tr>
@@ -128,12 +130,21 @@
 							<td>${customTour.startDate}</td>
 							<td>${customTour.endDate}</td>
 							<td>${customTour.createdDate}</td>
-							<td> <c:if test="${customTour.status ne 'Đang chờ'}">
-							   <a class="link" onclick="openPopup('${customTour.note}')">Mô tả chi tiết</a>
-							  </c:if>
-							  <c:if test="${customTour.status eq 'Đang chờ'}">
-							    Chưa có
-							  </c:if>
+							<td> 
+								<c:if test="${customTour.status ne 'Đang chờ'}">
+							   		<a class="link" onclick="openPopup('${customTour.note}')">Mô tả chi tiết</a>
+								 </c:if>
+								  <c:if test="${customTour.status eq 'Đang chờ'}">
+								    Chưa có
+								  </c:if>
+							</td>
+							<td>
+								<c:if test="${customTour.status ne 'Đang chờ'}">
+							   		<fmt:formatNumber type="number" maxFractionDigits="2" value="${customTour.price}" />
+								 </c:if>
+								<c:if test="${customTour.status eq 'Đang chờ'}">
+									Chưa có
+								</c:if>
 							</td>
 							<td id="status_${customTour.ID}">${customTour.status}</td>
 				 		
