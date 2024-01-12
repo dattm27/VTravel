@@ -27,14 +27,14 @@
 	    <!-- Phần bên phải với form nhập thông tin -->
 	    <div class="col-md-7">
 	      <h3 class="mt-3" >Nhập thông tin chuyến đi của bạn</h3>
-	      <form action="TourControllerServlet" method ="POST" >
+	      <form action="TourControllerServlet" method ="POST"  onsubmit="return confirmSubmit()">
 	       	<input type="hidden" name="command" value="REQUEST_CUSTOM_TOUR">
 	       	<!-- Lấy ID của user đang đăng nhâp -->
 	       	<c:set var="userID" value="${sessionScope.ID}" />
 	       	<input type="hidden" name= "userID" value="${userID}"/>
 	        
 	        <div class="form-group">
-			    <label for="destination">Địa điểm:</label>
+			    <label for="destination">Địa điểm</label>
 			    <select class="form-control" id="destinationSelect" name="destination" required onchange="checkOtherOption()">
 			        <!-- Add your list of places as options -->
 			        <option value="Nha Trang">Nha Trang</option>
@@ -67,7 +67,7 @@
 	        
 	         <!-- Phần chọn ngày bắt đầu, kết thúc và xử lý ngày hợp lệ -->
 	         <div class="form-group">
-	            <label for="start_date">Ngày bắt đầu:</label>
+	            <label for="start_date">Ngày bắt đầu</label>
 	            <input type="date" class="form-control" id="start_date" name="start_date"  
 	              title="Ngày bắt đầu sau hiện tại tối thiểu 1 tuần" required >
 	              <small class="form-text text-muted">Nhập ngày bắt đầu trước ngày đặt tối thiểu 7 ngày</small>
@@ -104,8 +104,9 @@
           	</div>
 	        <div class="form-group">
 	                <label for="number_of_travaller" style="font-size:17px">Số lượng người</label>
-	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "1"
-	                title = "Số lượng du khách tối thiểu là 1">
+	                <input type="number" class="form-control" id="number_of_traveller" name="number_of_traveller" required min = "10"
+	                title = "Số lượng du khách tối thiểu là 10">
+	                <small class="form-text text-muted">Số lượng khách tối thiểu: 10</small>
 		     </div>
 			<div class="form-group">
 				<label for="note">Mô tả:</label>
@@ -118,8 +119,21 @@
 					for="agree" > Tôi đồng ý với các điều khoản và chính sách </label>
 			
 			</div>
-			<button type="submit" class="btn btn-primary">Gửi</button>
+			<c:set var="status" value="${sessionScope.status}" />
+			<button type="submit" class="btn btn-primary" ${status eq 'disabled' ? 'disabled' : ''}>Gửi</button>
+			<c:if test="${status eq 'disabled'}">
+					<div class="text-muted font-italic">Tài khoản bị vô hiệu</div>
+			</c:if>
 	      </form>
+	      <script>
+			function confirmSubmit() {
+			    if (confirm("Bạn chắc chắn muốn gửi form đăng ký?")) {
+			        return true; // Cho phép gửi form nếu người dùng chọn OK
+			    } else {
+			        return false; // Ngăn chặn gửi form nếu người dùng chọn Cancel
+			    }
+			}
+			</script>
 	    </div>
 	  </div>
 	</div>
