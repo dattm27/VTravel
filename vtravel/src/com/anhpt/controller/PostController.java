@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns={"/post-management","/add-post"})
+@WebServlet(urlPatterns={"/post-management"})
 //Khắc phục không sử dụng được getParamter khi gửi form dưới dạng multipart/form-data
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 maxFileSize = 1024 * 1024 * 10, // 10MB
@@ -54,7 +54,7 @@ public class PostController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
         String command = request.getParameter("command");
-        if(command == null) command  = "false";
+        if(command == null) command  = "GET_ALL_POSTS";
         switch (command) {
             case "GET_ALL_POSTS":
                 getAllPosts(request, response);
@@ -116,8 +116,7 @@ public class PostController extends HttpServlet {
     // Add other methods as needed
     private void addPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	String user_id = request.getParameter("user_id");
-        request.setAttribute("user_id", user_id);
+
         request.getRequestDispatcher("/add-post.jsp").forward(request, response);
     }
 	protected void editPost(HttpServletRequest request, HttpServletResponse response)
@@ -193,10 +192,24 @@ public class PostController extends HttpServlet {
 	    }
         // Thực hiện cập nhật dữ liệu trong database
         boolean updateSuccess = PostDAO.updatePost(postId, postName, shortDescription, uniqueFileName, content);
-
+        
+        Post post = new Post();
+        post.setPost_name(postName);
+        post.setShort_description(shortDescription);
+        post.setContent(content);
+        post.setImage(uniqueFileName);
+        
         try {        	
-        	getAllPosts(request, response);
-
+	        if (updateSuccess) {
+			    request.setAttribute("message", "update_successfully");
+			    request.setAttribute("postUP", post);
+			    // gửi đến JSP
+				RequestDispatcher dispatcher = request.getRequestDispatcher("edit-post.jsp");
+				dispatcher.forward(request, response);
+	        } else {
+	            // Gửi phản hồi lỗi về trình duyệt (ví dụ: "error")
+	            response.getWriter().write("error");
+	        }
         }catch (Exception exc) {
 	    	exc.printStackTrace();
 	    }

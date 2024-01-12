@@ -16,33 +16,54 @@
         <div class="p-4 bg-light">
             <h1 class="mb-4">Thông tin người dùng</h1>
             <form>
-                <div class="form-group">
-                    <label for="editUsername">Username:</label>
-                    <input type="text" id="editUsername" name="username" class="form-control" />
+               	<div class="row">
+               		<div class="col-md-6">            
+		                <div class="form-group">
+		                    <label for="editFullname">Fullname:</label>
+		                    <input type="text" id="editFullname" name="fullname" class="form-control" />
+		                </div>
+	                </div>
+	                <div class="col-md-6"> 
+		                <div class="form-group">
+		                    <label for="editEmail">Email:</label>
+		                    <input type="text" id="editEmail" name="email" class="form-control" />
+		                </div>
+	                </div>
                 </div>
-                <div class="form-group">
-                    <label for="editFullname">Fullname:</label>
-                    <input type="text" id="editFullname" name="fullname" class="form-control" />
+		                
+               	<div class="row">
+               		<div class="col-md-6">
+		                <div class="form-group">
+		                    <label for="editUsername">Username:</label>
+		                    <input type="text" id="editUsername" name="username" class="form-control" />
+		                </div>
+	                </div>
+	                <div class="col-md-6">
+		                <div class="form-group">
+		                    <label for="editPhoneNumber">Số điện thoại:</label>
+		                    <input type="text" id="editPhoneNumber" name="phoneNumber" class="form-control" />
+		                </div>
+	                </div>
                 </div>
-                <div class="form-group">
-                    <label for="editEmail">Email:</label>
-                    <input type="text" id="editEmail" name="email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="editPhoneNumber">Số điện thoại:</label>
-                    <input type="text" id="editPhoneNumber" name="phoneNumber" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="editPassword">Password:<span class="small text-muted" id="passwordHint">
-                        (Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số)</span></label>
-                    <input type="password" id="editPassword" name="password" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="editRole">Vai trò:</label>
-                    <select id="editRole" name="role" class="form-control">
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
+
+               	<div class="row">
+               		<div class="col-md-6">		                
+		                <div class="form-group">
+		                    <label for="editPassword">Password:</label>
+		                    <input type="password" id="editPassword" name="password" class="form-control" />
+		                    <span class="small text-muted" id="passwordHint">
+		                        (Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số)</span>
+		                </div>
+	                </div>
+	                <div class="col-md-6">	
+		                <div class="form-group">
+		                    <label for="editRole">Vai trò:</label>
+		                    <select id="editRole" name="role" class="form-control">
+		                        <option value="admin">Admin</option>
+		                        <option value="user">User</option>
+		                    </select>
+		                </div>
+	                </div>
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary" onclick="submitForm()">Xác nhận</button>

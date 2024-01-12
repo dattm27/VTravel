@@ -18,19 +18,36 @@
 <body>
 	<!--Thêm navbar -->
 	<jsp:include page="navbar.jsp" />
+	
+	<!-- Phần pop up-->
+	<div id="popup" class="popup" style="display: none">
+		<div class="iframe-container">
+			<!-- nút đóng -->
+			<button type="button" class="btn btn-primary btn-circle close-icon"
+				data-dismiss="modal" onclick="hidePopup()">
+				<i class="fas fa-times"></i>
+			</button> 
+			<!-- iframe để hiển thị trang khác trong pop up -->
+			<iframe id="popup-iframe" src="" width="100%" height="650px"></iframe>
+		</div>
+	</div>
+	
     <div class="ml-5 mr-5">
-        <a href="home.jsp" class="btn btn-primary mb-2">Trang chủ</a>
         <h3>Danh sách bài viết</h3>
-
+		
+		<c:url var="ADD_POST" value ="post-management">
+ 				<c:param name="command" value="ADD"/>				 				
+		</c:url>
+		
         <div class="mb-3">
-            <button class="btn btn-info mr-2" onclick = "loadPosts()">Tải DS bài viết</button>
-            <button class="btn btn-primary" onclick = "addPost()">Thêm bài viết mới</button>
+            <button class="btn btn-primary mb-2 btn-sm" onclick = "loadPosts()">Tải DS bài viết</button>
+            <button class="btn btn-success mb-2 btn-sm" onclick = "showPopup('${ADD_POST}')">Thêm bài viết mới</button>
         </div>
 
 			<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
 		    <!-- Chọn số bản ghi mỗi trang -->
-		    <div class="input-group col-md-4 mb-3 ">
+		    <div class="input-group col-md-3 mb-3 ">
 			    <div class="input-group-prepend">
 			        <label for="recordsPerPage" class="input-group-text">Số bản ghi/trang:</label>
 			        <select class="custom-select" id="recordsPerPage" onchange="changeRecordsPerPage()">
@@ -41,9 +58,15 @@
 			        </select>
 			    </div>
 		  	</div>
+		  	
+			<!-- Nút phân trang -->
+			 <div id="pagination">
+			    <button onclick="previousPage()" class="btn btn-md btn-outline-primary">Previous Page</button>
+			    <span id="currentPage">1</span>
+			    <button onclick="nextPage()" class="btn btn-md btn-outline-primary">Next Page</button>
+			</div> 
 			
-			
-		    <div class="input-group mb-3 col-md-4 ml-auto " >
+		    <div class="input-group mb-3 col-md-3 ml-auto " >
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" >Tìm kiếm</span>
 			  </div>
@@ -87,7 +110,11 @@
 		                </td>
 		                <td>${post.post_date}</td>
 		                <td>
-		                    <button class="btn btn-warning" onclick="editPost(${post.id})">Sửa</button>
+		                	<c:url var="UPDATE_POST" value ="post-management">
+				 				<c:param name="command" value="EDIT"/>
+				 				<c:param name="id" value="${post.id}"/>				 				
+		 					</c:url>
+		                    <button class="btn btn-warning" onclick="showPopup('${UPDATE_POST}')">Sửa</button>
 		                    <button class="btn btn-secondary" onclick="deletePost(${post.id})">Xóa</button>
 		                </td>
 		            </tr>
@@ -107,15 +134,6 @@
 		        <iframe id="popup-iframe" src="" width="100%" height="650px"></iframe>
 		    </div>
 		</div>
-		
-		
-		
-		<!-- Nút phân trang -->
-		 <div id="pagination">
-		    <button onclick="previousPage()" class="btn btn-sm btn-outline-primary">Previous Page</button>
-		    <span id="currentPage">1</span>
-		    <button onclick="nextPage()" class="btn btn-sm btn-outline-primary">Next Page</button>
-		</div> 
 		
 		<!-- Truyền giá trị PROPOSAL_LIST.size() vào một thuộc tính HTML -->
 		<div id="proposalListSize" data-size="${postList.size()}"></div>

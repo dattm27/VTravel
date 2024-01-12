@@ -14,10 +14,59 @@
 </head>
 <body>
 	<!--Thêm navbar -->
-	<jsp:include page="navbar.jsp" />
+
     <div class="container mt-4">
-        <h3>Chỉnh Sửa Thông Tin Bài Viết</h3>
-        
+         <%
+		String Message = (String) request.getAttribute("message");
+	 	
+	 	if (Message != null) {
+			
+		%>
+			<h3 class= "text-success">Chỉnh sửa bài viết thành công</h3>
+				<!-- tạo link gửi yêu cầu hiển thị danh sách  -->
+			<c:url var="TOURS_MANAGEMENT" value="post-management"> </c:url>
+		<form id="editPostForm" enctype="multipart/form-data">
+			<!-- Thêm thẻ input hidden để lưu trữ tên file ảnh hiện tại -->
+			<input type="hidden" id="editCurrentImage" name="currentImage" value="${postUP.image}">
+			
+            <div class="form-group">
+                <label for="editPostName">Tên Bài Viết:</label>
+                <input type="text" class="form-control" id="editPostName" name="post_name" value="${postUP.post_name}" readonly="readonly">
+            </div>
+            
+            <div class="form-group">
+                <label for="editShortDescription">Tóm tắt:</label>
+                <input type="text" class="form-control" id="editShortDescription" name="short_description" value="${postUP.short_description}" readonly="readonly">
+            </div>
+
+			<div class="form-group">
+				<label for="imageUpload" id="imageUpload">Tải lên ảnh:</label>
+				<div class="custom-file">
+					<input type="hidden" name = "oldImage" id = "oldImage" value= "${postUP.image}"/>
+					<input type="file" class="custom-file-input" id="image"
+						name="image" readonly="readonly"> <label class="custom-file-label"
+						for="image" id="fileUpload">${postUP.image.substring(postUP.image.indexOf('_') + 1, postUP.image.indexOf('_') + 1 + Math.min(30, postUP.image.length() - postUP.image.indexOf('_') - 1))}</label>
+				</div>
+			</div>
+
+            <!-- Phần mô tả chi tiết -->
+            <div class="form-group">
+                <label for="editContent">Mô tả chi tiết:</label>
+                <textarea id="editContentTextarea" class="form-control" readonly="readonly" name="content">${postUP.content}</textarea>
+                <script>
+                    ClassicEditor
+                        .create(document.querySelector('#editContentTextarea'))
+                        .catch(error => {
+                            console.error(error);
+                        });
+                </script>
+            </div>
+        </form>
+		<a class = "btn btn-primary ml-1" href="${TOURS_MANAGEMENT}" target="_parent" >Tải lại DS</a>
+		<%} 
+	 	
+	 	else {%>
+        <h3 class= "text-success">Chỉnh sửa thông tin bài viết</h3>
         <!-- Form chỉnh sửa bài viết -->
         <form id="editPostForm" action="post-management" method="POST" id="updateForm" enctype="multipart/form-data">
         	<input type="hidden" name="command" value="UPDATE">
@@ -78,6 +127,7 @@
             <!-- Nút Hủy -->
             <a class="btn btn-secondary" href="post-management?command=GET_ALL_POSTS">Hủy</a>
         </form>
+        <%} %>
     </div>
 	
 

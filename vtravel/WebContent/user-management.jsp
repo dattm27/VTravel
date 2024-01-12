@@ -76,9 +76,9 @@
 			    <label class="input-group-text" for="Filter">Lọc</label>
 			  </div>
 			  <select class="custom-select" id="Filter" onchange="filterByStatus()">
-			    <option selected value="Chọn trạng thái" disabled>Chọn trạng thái</option>
-			    <option value="admin">admin</option>
-			    <option value="user">user</option>
+			    <option selected value="Chọn trạng thái" disabled>Chọn vai trò</option>
+			    <option value="admin">ADMIN</option>
+			    <option value="user">USER</option>
 			    <option value ="Chọn trạng thái">Tất cả </option>
 			  </select>
 		</div>
@@ -168,10 +168,10 @@
                         var currentStatus = statusElement.text();
                         if(currentStatus === "disabled"){
                         	var newStatus = "active";
-                        	alert("Mở thành công."  );
+                        	alert("Mở thành công.");
                         }else{
                         	var newStatus = "disabled";
-                        	alert("Khóa thành công. " );
+                        	alert("Khóa thành công.");
                         }
                         statusElement.text(newStatus);
                     }
