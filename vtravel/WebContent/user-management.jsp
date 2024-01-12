@@ -168,10 +168,10 @@
                         var currentStatus = statusElement.text();
                         if(currentStatus === "disabled"){
                         	var newStatus = "active";
-                        	alert("Mở thành công.");
+                        	alert("Mở thành công."  );
                         }else{
                         	var newStatus = "disabled";
-                        	alert("Khóa thành công.");
+                        	alert("Khóa thành công. " );
                         }
                         statusElement.text(newStatus);
                     }
