@@ -45,7 +45,8 @@
 			<div class = "col"><strong>ID:</strong> ${tour.ID}</div>
 			<div class = "col"><strong>Ngày bắt đầu:</strong> ${tour.startDate} </div>
 			<div class = "col"><strong>Ngày kết thúc:</strong> ${tour.endDate} </div>
-			<div class = "col"><strong>Giá:</strong>${tour.price} </div>
+			<div class = "col"><strong>Giá: </strong><fmt:formatNumber type="number" maxFractionDigits="2"
+									value="${tour.price}" /> VNĐ</div>
 		</div>
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">

@@ -16,17 +16,21 @@
                 <h1 class="display-1 text-success ">&#10003;</h1>
                 <h4 class="card-title mt-3">Đặt Tour Thành Công!</h4>
                 <p class="card-text">Cảm ơn bạn đã đặt tour.</p>
-                <p> Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+                <p class = "text-primary"> Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
                 <div class="mt-4">
                     <c:url var = "Home" value = "WelcomeControllerServlet">
                     </c:url>
                     <a href="${Home}" class="btn btn-primary">Về Trang Chủ</a>
-                    <a href="#" class="btn btn-success">Xem Danh Sách Đặt Tour</a>
+                    <c:url var = "LIST_MY_TOUR" value = "TourControllerServlet">
+                    	<c:param name = "command" value = "LIST_MY_TOUR"/>
+                    	<c:param name = "ID" value = "${ID}"/>
+                    </c:url>
+                    <a href="${LIST_MY_TOUR}" class="btn btn-success">Xem Danh Sách Đặt Tour</a>
                 </div>
             </div>
         </div>
         <h3 class="mt-3">Kênh thanh toán:</h3>
-        <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+        <div class="row row-cols-1 row-cols-lg-4 g-4 mb-3">
 		  <div class="col">
 		    <div class="card h-60">
 		      <img src="images/QRBIDV.JPG" class="card-img-top" alt="..." style="height: 250px">
