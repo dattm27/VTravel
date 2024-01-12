@@ -15,7 +15,7 @@
   	<link rel="stylesheet" href="css/pop-up.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   	
-   <!-- script phân trang, tìm kiếm -->
+   <!-- script xử lý thao tác -->
  	<script src="js/custom_tour_management.js"></script>   
 	
  
