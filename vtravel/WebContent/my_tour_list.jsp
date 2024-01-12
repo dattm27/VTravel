@@ -51,13 +51,13 @@
 	</div>
 		<ul class="ml-5 mb-3 nav nav-pills">
 		  <li class="nav-item">
-		    <a id="TourPhoThongTab" class="nav-link active" href="#" onclick="showTab('TourPhoThong')">Tour phổ thông</a>
+		    <a id="TourPhoThongTab" class="nav-link active"  onclick="showTab('TourPhoThong')">Tour phổ thông</a>
 		  </li>
 		  <li class="nav-item">
-		    <a id="TourTuyChonTab"  class="nav-link" href="#" onclick="showTab('TourTuyChon')">Tour tuỳ chọn</a>
+		    <a id="TourTuyChonTab"  class="nav-link" onclick="showTab('TourTuyChon')">Tour tuỳ chọn</a>
 		  </li>
 		  <li class="nav-item">
-		    <a  id="KenhThanhToanTab" class="nav-link" href="#" onclick="showTab('KenhThanhToan')">Thanh toán</a>
+		    <a  id="KenhThanhToanTab" class="nav-link" onclick="showTab('KenhThanhToan')">Thanh toán</a>
 		  </li>
 		</ul>
 		
@@ -194,9 +194,11 @@
 					</div>
 				</div>
 			</div>
+			<p><strong>Nội dung chuyển khoản:</strong> Mã đơn SĐT</p>
 			<div class="alert alert-danger" role="alert">
 			  Trong 24 giờ kể từ khi thanh toán, nhân viên Viet Travel sẽ kiểm tra tài khoản và xác nhận "Đã thanh toán" cho đơn đặt của bạn.
 			</div>
+			
 		</div>
 		</div>
 		
