@@ -166,11 +166,11 @@
 
                     if (statusElement.length) {
                         var currentStatus = statusElement.text();
-                        if(currentStatus === "disable"){
+                        if(currentStatus === "disabled"){
                         	var newStatus = "active";
                         	alert("Mở thành công.");
                         }else{
-                        	var newStatus = "disable";
+                        	var newStatus = "disabled";
                         	alert("Khóa thành công.");
                         }
                         statusElement.text(newStatus);

@@ -100,7 +100,7 @@ public class AccountDAO {
                 if ("disable".equals(status)) {
                     updateQuery = "UPDATE account SET status = 'active' WHERE id = ?";
                 } else {
-                    updateQuery = "UPDATE account SET status = 'disable' WHERE id = ?";
+                    updateQuery = "UPDATE account SET status = 'disabled' WHERE id = ?";
                 }
 
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
