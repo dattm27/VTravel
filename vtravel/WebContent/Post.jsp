@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>V Travel - Bài viết</title>
-<!-- bootstrap css -->
-<link rel="stylesheet"
+	<!-- bootstrap css -->
+	<link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -33,7 +33,7 @@
 			</div>
 			</div>
 			<c:forEach items="${POST_LIST}" var="post">
-				<div class="media mt-3 mb-3" style="max-width: 100%;"  data-search-1="${post.name}" data-search-2="${post.shortDescription}">
+				<div class="media mt-3 mb-3 row-item" style="max-width: 100%;"  data-search-1="${post.name}" data-search-2="${post.shortDescription}">
 					<div class="row g-0">
 						<c:url var="POST_DETAIL" value="PostControllerServlet">
 							<c:param name="command" value="POST_DETAIL" />
@@ -57,6 +57,7 @@
 		</div>
 	</main>
 	<!-- Javascript xử lý  tìm kiếm -->
+	 <script src="js/pagination_and_search.js"></script> 
 	
 </body>
 </html>
