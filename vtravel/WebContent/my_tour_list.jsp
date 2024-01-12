@@ -45,19 +45,19 @@
 		  <div class="input-group-prepend">
 		    <span class="input-group-text" >Tìm kiếm</span>
 		  </div>
-		  <input type="text" class="form-control" id="searchInput" name="search" placeholder="VD: Nha Trang"   oninput="searchData('data-search-1','data-search-2')">
+		  <input type="text" class="form-control" id="searchInput" name="search" placeholder="VD: Nha Trang"    oninput="searchData('data-search-1','data-search-2')">
 		</div>
 		
 	</div>
 		<ul class="ml-5 mb-3 nav nav-pills">
 		  <li class="nav-item">
-		    <a id="TourPhoThongTab" class="nav-link active"  onclick="showTab('TourPhoThong')">Tour phổ thông</a>
+		    <a id="TourPhoThongTab" class="nav-link active"  onclick="showTab('TourPhoThong');searchData('data-search-1','data-search-2')">Tour phổ thông</a>
 		  </li>
 		  <li class="nav-item">
-		    <a id="TourTuyChonTab"  class="nav-link" onclick="showTab('TourTuyChon')">Tour tuỳ chọn</a>
+		    <a id="TourTuyChonTab"  class="nav-link" onclick="showTab('TourTuyChon');searchData('data-search-1','data-search-2')">Tour tuỳ chọn</a>
 		  </li>
 		  <li class="nav-item">
-		    <a  id="KenhThanhToanTab" class="nav-link" onclick="showTab('KenhThanhToan')">Thanh toán</a>
+		    <a  id="KenhThanhToanTab" class="nav-link" onclick="showTab('KenhThanhToan');searchData('data-search-1','data-search-2')">Thanh toán</a>
 		  </li>
 		</ul>
 		<!-- Danh sách các tour phổ thông đã đặt -->
@@ -80,7 +80,7 @@
 				</thead>
 				<tbody id="InfoBody">
 					<c:forEach items="${myBookings}" var="booking" varStatus="loopStatus">
-						<tr class="row-item" data-search-1="${booking.userFullname}"
+						<tr class="row-item" data-search-1="${booking.tourName}"
 							data-search-2="${booking.userFullname}"
 							status="${tempProposal.status}">
 							<td>${booking.ID}</td>
@@ -122,7 +122,7 @@
 				</thead>
 				<tbody id="InfoBody">
 					<c:forEach items="${myCustomTours}" var="customTour" varStatus="loopStatus">
-						<tr class="row-item" data-search-1="${tempProposal.ordererFullname}" data-search-2="${tempProposal.destination}">
+						<tr class="row-item" data-search-1="${customTour.destination}" data-search-2="${tempProposal.destination}">
 							<td>${customTour.ID}</td>
 							<td>${customTour.destination}</td>
 						
@@ -215,6 +215,9 @@
 		
 	<script>
 	    function showTab(tabId) {
+	    	//xoá ô tìm kiếm
+			document.getElementById("searchInput").value = "";
+	 
 	    	//bỏ active khỏi các thẻ khác
 	    	var tabLinks = document.getElementsByClassName('nav-link');
 	    	
@@ -232,6 +235,7 @@
 	        }
 	        // Hiển thị tab-content tương ứng với tab được chọn
 	        document.getElementById(tabId).style.display = 'block';
+	       
 	    }
 	    function openPopup(note) {
 	    	  // Hiển thị popup
@@ -243,5 +247,7 @@
 	    	  iframe.src = "data:text/html;charset=utf-8," + encodedNote;;
 	    	}
 	</script>
+	<!-- tìm kiếm -->
+	<script src="js/pagination_and_search.js"></script>  
 </body>
 </html>
