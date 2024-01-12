@@ -62,7 +62,11 @@
 					  	<c:param name="userID" value="${sessionScope.ID}"/>
 					  </c:url>
 					  <div class="card-footer">
-					    	<a href="${CREATE_BOOKING_FORM}" class="btn btn-primary">Đặt vé ngay</a>
+					    	<c:set var="status" value="${sessionScope.status}" />
+					    	<a href="${CREATE_BOOKING_FORM}" class="btn btn-primary ${status eq 'disabled' ? ' disabled' : ''}">Đặt vé ngay</a>
+					    	<c:if test="${status eq 'disabled'}">
+								<div class="text-muted font-italic">Tài khoản bị vô hiệu</div>
+							</c:if>
 					    </div>
 					</div>
 				</c:forEach>

@@ -42,8 +42,11 @@
 		  			<c:param name="tourID" value="${tour.ID}"/>
 				  	<c:param name="userID" value="${sessionScope.ID}"/>
 			 	</c:url>
-				<a class="btn btn-primary mt-3" href="${CREATE_BOOKING_FORM}" style="width:100%">Đặt tour ngay</a>
-			
+			 	<c:set var="status" value="${sessionScope.status}" />
+				<a class="btn btn-primary mt-3 ${status eq 'disabled' ? ' disabled' : ''}" href="${CREATE_BOOKING_FORM}" style="width:100%">Đặt tour ngay</a>
+				<c:if test="${status eq 'disabled'}">
+					<div class="text-muted font-italic">Tài khoản bị vô hiệu</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
