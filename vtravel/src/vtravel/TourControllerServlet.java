@@ -275,6 +275,7 @@ public class TourControllerServlet extends HttpServlet {
 			if (orderFeature.equals("3"))
 				kieusapxep = 3;
 		}
+		
 		String so_luong_nguoi = request.getParameter("so_nguoi");
 		int so_nguoi = 0;
 		if (so_luong_nguoi == null || so_luong_nguoi == "")
@@ -283,10 +284,13 @@ public class TourControllerServlet extends HttpServlet {
 			so_nguoi = Integer.parseInt(so_luong_nguoi);
 		// lay danh sach tour tu co so du lieu
 		List<Tour> tourList = tourDbUtil.getFitlerTour(diemmuonden, kieusapxep, minMoney, maxMoney, ngaybatdau, so_nguoi);
-
+//		for(int i = 0 ; i < tourList.size() ; i++) {
+//			System.out.println(tourList.get(i).getName());
+//		}
+		
 		// them danh sach vua lay duoc vao request
 		request.setAttribute("TOUR_LIST", tourList);
-
+		
 		// gửi đến JSP
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/tours_page.jsp");
 		dispatcher.forward(request, response);

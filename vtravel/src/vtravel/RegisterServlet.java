@@ -54,8 +54,6 @@ public class RegisterServlet extends HttpServlet {
 		int validemail = 0;
 		if (!upwd.equals(Reupwd))
 			validPassword = 1;
-		if (umobile.length() != 10)
-			validPhone_numer = -1;
 		if (upwd.length() < 8) {
 			validFormatPassword = 1;
 		}
@@ -85,6 +83,18 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("validPhone_number", validPhone_numer);
 			request.setAttribute("validFormatPassword", validFormatPassword);
 			request.setAttribute("SuccessfullRegister", 0);
+			
+//			thêm lại thông tin người dùng đã nhập cũ
+			request.setAttribute("username", uname);
+			
+			request.setAttribute("fullname", ufullname);
+			
+			request.setAttribute("password", upwd);
+			
+			request.setAttribute("phone_number", umobile);
+			
+			request.setAttribute("email", uemail);
+			
 			dispatcher = request.getRequestDispatcher("register.jsp");
 			dispatcher.forward(request, response);
 
@@ -109,7 +119,13 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("validPhone_number", 0);
 				request.setAttribute("validFormatPassword", 0);
 				request.setAttribute("SuccessfullRegister", rowCount);
-				dispatcher = request.getRequestDispatcher("register.jsp");
+				
+				
+
+				
+				
+				
+				dispatcher = request.getRequestDispatcher("login.jsp");
 				dispatcher.forward(request, response);
 
 

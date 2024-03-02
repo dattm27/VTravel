@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 import vtravel.Booking;
 import vtravel.TourControllerServlet;
-import vtravel.BookedTourService;
 
 
 /**

@@ -21,7 +21,7 @@
     <div class="hero-section">
         <div class="brand-info">
             <h1>V Travel</h1>
-            <p>Slogan của bạn ở đây</p>
+            <p>Du lịch thật dễ dàng</p>
         </div>
         <div class="search-bar">
             <input type="text" class="search-input" placeholder="Tìm kiếm tour du lịch của bạn" name="diemmuonden">

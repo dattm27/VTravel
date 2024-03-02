@@ -353,7 +353,7 @@ public class TourDbUtil {
 			String sql = "SELECT * FROM available_tour where tour_name LIKE \"%" + diemmuonden + "%\""
 					+ "and price >= " + minMoneyString + " and price <= " + maxMoneyString + " and start_date >= \""
 					+ date_start + "\" " + " and start_date >= \"" + dateString +"\"" 
-					+ " and max_number_tourist - booked >= " + so_nguoi_String
+					
 					+ " ORDER BY " + orderFeatureString;
 			//System.out.println(sql);
 			myStmt = myConn.createStatement();
