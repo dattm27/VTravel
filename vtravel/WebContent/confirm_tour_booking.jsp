@@ -81,7 +81,7 @@
 					<script>
 					    function confirmSubmit() {
 					        // Sử dụng hàm confirm để hiển thị hộp thoại xác nhận
-					        var confirmResult = confirm("Bạn có chắc chắn muốn xác nhận không?");
+					        var confirmResult = confirm("Bạn có chắc chắn các thông tin là chính xác?");
 					
 					        // Nếu người dùng nhấn "OK", return true để submit form, ngược lại return false
 					        return confirmResult;

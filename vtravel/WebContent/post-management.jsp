@@ -114,8 +114,8 @@
 				 				<c:param name="command" value="EDIT"/>
 				 				<c:param name="id" value="${post.id}"/>				 				
 		 					</c:url>
-		                    <button class="btn btn-warning" onclick="showPopup('${UPDATE_POST}')">Sửa</button>
-		                    <button class="btn btn-secondary" onclick="deletePost(${post.id})">Xóa</button>
+		                    <button class="btn btn-primary btn-sm" onclick="showPopup('${UPDATE_POST}')">Sửa</button>
+		                    <button class="btn btn-danger btn-sm" onclick=" confirmDelete( ${post.id})">Xóa</button>
 		                </td>
 		            </tr>
 		        </c:forEach>
@@ -146,7 +146,16 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
+function confirmDelete( ID) {
+    
+	var confirmMessage = "Bạn có chắc chắn muốn xoá bài viết?";
+    var userConfirmed = confirm(confirmMessage);
 
+    if (userConfirmed) {
+        // Gọi hàm markAsCancelled khi admin đã xác nhận
+        deletePost(ID)
+    }
+}
     function loadPosts() {
     	window.location.href = 'post-management?command=GET_ALL_POSTS';
     }

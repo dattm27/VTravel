@@ -35,8 +35,8 @@
 								    <option value="3">Ngày xuất phát</option>
 								  </select>
 								</div>	 --%>
-								 <select class="custom-select ml-3 mr-3 mb-3" id="inputGroupSelect01" name = "kieu_sap_xep" >
-								    <option selected value="Chọn bộ lọc" disabled><%= request.getParameter("kieu_sap_xep") == null ? "Chọn bộ lọc" : (request.getParameter("kieu_sap_xep").equals("1") ? "Giá tăng dần" : (request.getParameter("kieu_sap_xep").equals("2") ? "Giá giảm dần" : "Ngày xuất phát")) %> </option>
+								 <select class="custom-select ml-3 mr-3 mb-3" id="inputGroupSelect01" name = "kieu_sap_xep"  >
+								    <option selected value="${kieu_sap_xep}" disabled>Chọn </option>
 								    <option value="1">Giá tăng dần</option>
 								    <option value="2">Giá giảm dần</option>
 								    <option value="3">Ngày xuất phát</option>

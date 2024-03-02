@@ -12,9 +12,9 @@
 	<script src="https://cdn.ckeditor.com/ckeditor5/44.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <div class="p-4 ">
-            <h1 class="mb-4">Thêm người dùng mới</h1>
+            <h3 class="mb-4">Thêm người dùng mới</h3>
             <form>
                	<div class="row">
                		<div class="col-md-6">            

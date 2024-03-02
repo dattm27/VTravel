@@ -25,7 +25,7 @@
                     	<c:param name = "command" value = "LIST_MY_TOUR"/>
                     	<c:param name = "ID" value = "${ID}"/>
                     </c:url>
-                    <a href="${LIST_MY_TOUR}" class="btn btn-success">Xem Danh Sách Đặt Tour</a>
+                    <a href="${LIST_MY_TOUR}" class="btn btn-success">Các tour đã đặt</a>
                 </div>
             </div>
         </div>

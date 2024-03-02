@@ -56,7 +56,7 @@ select * from available_tour;
 select cus_tour.id, user_id ,fullname, destination, start_date, end_date, number_of_travellers, note, cus_tour.status, created_date
 from proposal_custom_tour as cus_tour join account on cus_tour.user_id = account.id;
 
-
+select * from post;
 update available_tour
 set booked = 1
 where id = 5;
@@ -65,6 +65,13 @@ UPDATE available_tour
 SET booked = 0
 WHERE booked IS NULL;
 
-select user_id, tour_id, number_tourist, note, booking.id, fullname
+select user_id, tour_id, number_tourist, note, booking.id, fullname, booking.status, created_date, phone_number
 from booking join account on booking.user_id = account.id
-where booking.toud_id = 5;
+where booking.tour_id = 5;
+
+use vtravel;
+select * from  account;
+
+delete from account 
+where id > 30 
+and id not exists in (select user_id from booking);

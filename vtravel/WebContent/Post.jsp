@@ -40,9 +40,19 @@
 							<c:param name="ID" value="${post.ID}" />
 						</c:url>
 						<div class="col-md-4">
-							<a href="${POST_DETAIL}" style="text-decoration: none;"> <img src="${post.image}"
+							<a href="${POST_DETAIL}" style="text-decoration: none;"> 
+							
+							<c:if test="${post.image ne ''}">
+								<img src="${post.image}"
 								class="align-self-center mr-3" alt="..."
 								style="width: 100%; height: 200px; object-fit: cover;">
+							</c:if>
+							<c:if test="${post.image eq ''}">
+								<img src="images/vietnam.jpg"
+								class="align-self-center mr-3" alt="..."
+								style="width: 100%; height: 200px; object-fit: cover;">
+							
+							</c:if>
 							</a>
 						</div>
 						<div class="col-md-8">

@@ -59,7 +59,7 @@
 		<!-- Phần phân trang và tìm kiếm -->
 		<div class="row">
 		    <!-- Chọn số bản ghi mỗi trang -->
-		    <div class="input-group col-md-4 mb-3 ">
+		    <div class="input-group col-md-3 mb-3 ">
 			    <div class="input-group-prepend">
 			        <label for="recordsPerPage" class="input-group-text">Số bản ghi/trang:</label>
 			        <select class="custom-select" id="recordsPerPage" onchange="changeRecordsPerPage()">
@@ -70,20 +70,25 @@
 			        </select>
 			    </div>
 			  </div>
-			
-		<div class="input-group col-md-3 mb-3  ">
+		<!-- Nút phân trang -->
+		 <div id="pagination">
+		    <button onclick="previousPage()" class="btn btn-outline-primary">Previous Page</button>
+		    <span id="currentPage">1</span>
+		    <button onclick="nextPage()" class="btn  btn-outline-primary">Next Page</button>
+		</div> 
+		<div class="input-group col-md-3 mb-3  ml-auto  ">
 			  <div class="input-group-prepend">
 			    <label class="input-group-text" for="Filter">Lọc</label>
 			  </div>
 			  <select class="custom-select" id="Filter" onchange="filterByStatus()">
 			    <option selected value="Chọn trạng thái" disabled>Chọn vai trò</option>
-			    <option value="admin">ADMIN</option>
-			    <option value="user">USER</option>
+			    <option value="admin">Admin</option>
+			    <option value="user">User</option>
 			    <option value ="Chọn trạng thái">Tất cả </option>
 			  </select>
 		</div>
 			
-		    <div class="input-group mb-3 col-md-4 ml-auto " >
+		    <div class="input-group mb-3 col-md-3" >
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" >Tìm kiếm</span>
 			  </div>
@@ -120,7 +125,7 @@
 			 				<c:param name="userId" value="${account.id}"/>				 				
 			 			</c:url>
 		                   <button class="btn btn-link text-info p-0" onclick="showPopup('${DETAIL_USER}')">
-		                       Mô tả chi tiết
+		                     Chi tiết
 		                   </button>
 		               </td>
 		               <td>
@@ -130,7 +135,7 @@
 		 			</c:url>
 		      				<button class="btn btn-primary btn-sm" onclick="showPopup('${UPDATE_USER}')">Sửa</button>		                
 		                <button class="btn btn-warning btn-sm" onclick="lockAccount(${account.id})">Mở/khóa</button>
-		                <button class="btn btn-danger btn-sm" onclick="deleteAccount(${account.id})">Xóa</button>
+		                <button class="btn btn-danger btn-sm" onclick="confirmDelete(${account.id})">Xóa</button>
 		            </td>
 		           </tr>
 		       </c:forEach>
@@ -139,12 +144,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 		
-		<!-- Nút phân trang -->
-		 <div id="pagination">
-		    <button onclick="previousPage()" class="btn btn-sm btn-outline-primary">Previous Page</button>
-		    <span id="currentPage">1</span>
-		    <button onclick="nextPage()" class="btn btn-sm btn-outline-primary">Next Page</button>
-		</div> 
+		
 		
 		<!-- Truyền giá trị PROPOSAL_LIST.size() vào một thuộc tính HTML -->
 		<div id="proposalListSize" data-size="${accountList.size()}"></div>
@@ -183,6 +183,16 @@
                 alert("Lỗi khi gọi servlet lock.");
             }
         });
+    }
+    function confirmDelete( ID) {
+       
+    	var confirmMessage = "Bạn có chắc chắn muốn xoá người dùng ?";
+        var userConfirmed = confirm(confirmMessage);
+
+        if (userConfirmed) {
+            // Gọi hàm markAsCancelled khi admin đã xác nhận
+            deleteAccount(ID)
+        }
     }
 
     function deleteAccount(userId) {

@@ -81,10 +81,12 @@
 								<c:param name="command" value="LIST_ALL_CUSTOM_TOUR_REQUEST" />
 							</c:url>
 							<a class="dropdown-item" href="${LIST_ALL_CUSTOM_TOUR_REQUEST}">Quản lý custom tour</a> 
-							 
 							
+							<c:url var="POSTS_MANAGEMENT" value="post-management">
+								<c:param name="command" value="GET_ALL_POSTS" />
+							</c:url>
 							<a
-								class="dropdown-item" href="#">Quản lý bài viết</a>
+								class="dropdown-item" href="${POSTS_MANAGEMENT}">Quản lý bài viết</a>
 							<div class="dropdown-divider"></div>
 							<!-- tạo xử lý yêu cầu đăng xuất  -->
 							<c:url var="LOG_OUT" value="SessionControllerServlet">

@@ -1202,7 +1202,7 @@ như anh hùng dân tộc Đinh Bộ Lĩnh, Lê Hoàn, Lê Đại Hành,", "
     <h3>Những điều lưu ý</h3>
     Mùa mưa ở Ninh Bình từ tháng 5 – tháng 9 nên bạn nhớ mang theo dù khi đi du lịch, còn mùa đông (tháng 12 – tháng 1)
     thì nên mang theo áo ấm vì mua đông miền Bắc khá lạnh và buốt.
-    </pre>", "2023-12-10 20:30:00"),
+    </pre>", "2023-12-10 20:30:00")
     (6, "Kinh nghiệm du lịch Huế", "Thành phố Huế nằm trên dải đất miền Trung được biết đến với Quần thể Di tích Cố đô Huế - Di
 sản Văn hóa Thế giới và Nhã nhạc Cung đình Huế - Kiệt tác phi vật thể và truyền miệng của nhân loại. Ngoài ra, Huế còn
 nổi tiếng với những lăng tẩm, món ăn ngon và làng nghề truyền thống lâu đầu.", "

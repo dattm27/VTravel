@@ -22,13 +22,13 @@
                 		<div class="col-md-6">
 		                    <div class="form-group">
 		                        <label for="editUserId">ID tài khoản:</label>
-		                        <input type="text" id="editUserId" name="userId" class="form-control" value="${accountUP.id}" readonly="readonly" />
+		                        <input type="text" id="editUserId" name="userId" class="form-control" value="${accountUP.id}" readonly="readonly"  />
 		                    </div>
 	                    </div>
 	                    <div class="col-md-6">
 		                    <div class="form-group">
 		                        <label for="editFullname">Fullname:</label>
-		                        <input type="text" id="editFullname" name="fullname" class="form-control" value="${accountUP.fullname}"  />
+		                        <input type="text" id="editFullname" name="fullname" class="form-control" value="${accountUP.fullname}" required />
 		                    </div>
 	                    </div>
 	                </div>
@@ -37,7 +37,7 @@
                     	<div class="col-md-6">
 		                    <div class="form-group">
 		                        <label for="editEmail">Email:</label>
-		                        <input type="text" id="editEmail" name="email" class="form-control" value="${accountUP.email}" readonly="readonly" />
+		                        <input type="text" id="editEmail" name="email" class="form-control" value="${accountUP.email}" readonly="readonly"  />
 		                    </div>
 	                    </div>
 	                    <div class="col-md-6">
@@ -52,13 +52,13 @@
 	                	<div class="col-md-6">
 			                <div class="form-group">
 		                        <label for="editUsername">Username:</label>
-		                        <input type="text" id="editUsername" name="username" class="form-control" value="${accountUP.username}"  />
+		                        <input type="text" id="editUsername" name="username" class="form-control" value="${accountUP.username}" required />
 		                    </div>
 	                    </div>
 	                    <div class="col-md-6">
 		                    <div class="form-group">
 		                    <label for="editPassword">Password:</label>
-		                    <input type="password" id="editPassword" name="password" class="form-control" />
+		                    <input type="password" id="editPassword" name="password" class="form-control" value=${accountUP.password } pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
 		                    <span class="small text-muted" id="passwordHint">
 		                        (Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số)</span>
 		                </div>
@@ -66,16 +66,19 @@
                     </div>
                     
                     <div class="row">
-                    	<div class="col-md-6">
-		                    <div class="form-group">
-		                        <label for="editRole">Vai trò:</label>
-		                        <input type="text" id="editRole" name="role" class="form-control" value="${accountUP.role}"  />
-		                    </div>
-	                    </div>
+                    	<div class="col-md-6">	
+			                <div class="form-group">
+			                    <label for="editRole">Vai trò:</label>
+			                    <select id="editRole" name="role" class="form-control">
+			                        <option value="admin">Admin</option>
+			                        <option value="user">User</option>
+			                    </select>
+			                </div>
+		                </div>
 	                    <div class="col-md-6">
 		                    <div class="form-group">
 		                        <label for="editStatus">Trạng thái:</label>
-		                        <input type="text" id="editStatus" name="status" class="form-control" value="${accountUP.status}"  />
+		                        <input type="text" id="editStatus" name="status" class="form-control" value="${accountUP.status}" disabled  />
 		                    </div>
 	                    </div>
                     </div>
@@ -95,8 +98,8 @@
         function checkPassword() {
             var password = document.getElementById('editPassword').value;
             // Sử dụng biểu thức chính quy để kiểm tra mật khẩu
-            var pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
+            //var pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+			var pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}";
             if (!pattern.test(password)) {
                 document.getElementById('passwordHint').style.color = 'red';
                 return false;
@@ -116,18 +119,18 @@
             var password = document.getElementById('editPassword').value;
             var role = document.getElementById('editRole').value;
             var status = document.getElementById('editStatus').value;
-            var validPassword = checkPassword();
-
+           // var validPassword = checkPassword();
+/* 
             if (!validPassword) {
                 alert('Mật khẩu không đúng định dạng. Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.');
                 return;
-            }
+            } */
 
-            // Kiểm tra nếu có bất kỳ ô nào trống thì hiển thị thông báo
+           /*  // Kiểm tra nếu có bất kỳ ô nào trống thì hiển thị thông báo
             if (!username || !email || !fullname || !phone_number || !password || !role) {
                 alert('Vui lòng điền đầy đủ thông tin.');
                 return;
-            }
+            } */
 
             // Gọi hàm savePost với các tham số đã lấy được
             saveUser(id,username, fullname, email, phone_number, password,role,status);
